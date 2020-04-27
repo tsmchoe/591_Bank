@@ -1,11 +1,13 @@
-public class Position {
+public class BoughtStock {
+    private Stock stock;
     private double avgCost;
     private int share;
     private double equity;
     private double currentPrice;
     private double totalValue;
 
-    public Position(double cost, int share) {
+    public BoughtStock(Stock stock, double cost, int share) {
+        this.setStock(stock);
         this.setAvgCost(cost);
         this.setShare(share);
         this.setEquity(avgCost * share);
@@ -43,6 +45,14 @@ public class Position {
         this.equity = equity;
     }
 
+    public Stock getStock() {
+        return stock;
+    }
+
+    private void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
 	public double getTotalValue() {
 		return this.totalValue;
 	}
@@ -53,6 +63,12 @@ public class Position {
 
 	public void updatePrice(double newPrice) {
         this.currentPrice = newPrice;
+	}
+
+	public double getProfit(int shareToSell) {
+        
+        return currentPrice * shareToSell;
+
 	}
 
 

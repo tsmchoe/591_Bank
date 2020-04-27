@@ -1,9 +1,14 @@
 //Allows the user to enter the app
 public abstract class User {
-	public int id;
-	public String username;
-	public String password;
-	public User(int id, String username, String password) {
+	private String firstName;
+	private String lastName;
+	private int id;
+	private String username;
+	private String password;
+	
+	public User(String fistName, String lastName, int id, String username, String password) {
+		this.firstName = fistName;
+		this.lastName = lastName;
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -26,5 +31,9 @@ public abstract class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String toString() {
+		return firstName + " " + lastName;
 	}
 }
