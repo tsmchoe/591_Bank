@@ -34,7 +34,7 @@ public class StockMarket {
     }
 
     public void customer_sellStock(SecurityAccount account, Stock stock, int share) {
-        account.sellStock(stock);
+        account.sellStock(stock, share);
         stock.increaseShare(share);
     }
 }
