@@ -1,24 +1,23 @@
+import java.util.ArrayList;
 
-//allows the user to use the app as a Bank Manager
-import java.util.*;
 public class Bank_Manager extends User {
-	public Bank_Manager(String firstName, String lastName, int id, String username, String password) {
-		super(firstName, lastName, id, username, password);
+	public Bank_Manager(String userID, String fistName, String lastName, String username, String password,
+			double balance) {
+		super(userID, fistName, lastName, username, password, balance);
+		// TODO Auto-generated constructor stub
 	}
 
-	public Scanner sc;
-	public void seeAccounts(){
-		
+	// Get all the transactions that happend on a particular date
+	public ArrayList<Transaction> getDailyReports(String date) {
+		ArrayList<Transaction> transactions = new ArrayList<>();
+		//query all trasactions with the date
+			//transactions.add(new Transaction(String transactionID, String userid, Account account, double amount, Currency currency, String date))
+		return transactions;
 	}
-	
-	public boolean loanApproval(Loan amount, Account account) {
-		// System.out.println();
-		// System.out.println("Will you approve the loan?");
-		// boolean x = sc.nextBoolean();
-		// if(x == true) {
-		// 	//let the loan get approved
-		// }
-		return true;
-		
+
+	@Override
+	public double getBalance() {
+		return balance;
 	}
+
 }

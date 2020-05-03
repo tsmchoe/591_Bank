@@ -1,42 +1,40 @@
 
 public class Loan {
-	protected int id;
-	protected int userId;
+	protected String loanId;
+	protected String userId;
 	protected double amount;
-	protected boolean collateral;
+	protected String collateral;
 	protected String loan_date;
 	protected String payment_date;
-	public Loan(int id, int userId, double amount, boolean collateral, String loan_date, String payment_date) {
-		this.id = id;
+
+	public Loan(String loanId, String userId, double amount, String collateral, String loan_date, String payment_date) {
+		this.loanId = loanId;
 		this.userId = userId;
 		this.amount = amount;
 		this.collateral = collateral;
 		this.loan_date = loan_date;
 		this.payment_date = payment_date;
 	}
+
 	//Setter and getter
-	public int getLoanID() {
-		return id;
-	}
-	public void setLoanID(int id) {
-		this.id = id;
-	}
-	public int getUser() {
+	public String getUser() {
 		return userId;
 	}
-	public void setUser(int userId) {
+
+	private void setUser(String userId) {
 		this.userId = userId;
 	}
+	
 	public double getAmount() {
 		return amount;
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public boolean getCollateral() {
+	public String getCollateral() {
 		return collateral;
 	}
-	public void setCollateral(boolean collateral) {
+	private void setCollateral(String collateral) {
 		this.collateral = collateral;
 	}
 	public String getLoanDate() {

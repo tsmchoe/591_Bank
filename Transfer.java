@@ -1,14 +1,15 @@
 
 public class Transfer extends Transaction {
-    private Account transferedToAccount;
+    private String transferedToAccountID;
 
-    public Transfer(String userid, Account account, double amount, Currency currency, Account transferedToAccount) {
-        super(userid, account, amount, currency);
-        this.transferedToAccount = transferedToAccount;
-    }
+    public Transfer(String transactionID, String userid, String accountId, double amount, String currency,
+            String date, String transferedToAccountID) {
+        super(transactionID, userid, accountId, amount, currency, date);
+        this.transferedToAccountID = transferedToAccountID;
+    }   
 
     public String toString() {
-        return account + " transfer " + amount + " " + currency + " to " + transferedToAccount;
+        return userid + " transfer " + amount + " " + currency + " from " + accountId + " to " + transferedToAccountID + " on " + date;
     }
 
 }
