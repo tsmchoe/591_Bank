@@ -1,35 +1,54 @@
-//Allows the user to enter the app
 public abstract class User {
-	private String firstName;
-	private String lastName;
-	private int id;
-	private String username;
-	private String password;
-	
-	public User(String fistName, String lastName, int id, String username, String password) {
-		this.firstName = fistName;
+	protected String userID;
+	protected String firstName;
+	protected String lastName;
+	protected String username;
+	protected String password;
+	protected double balance;
+
+	public User(String userID, String fistName, String lastName, String username, String password, double balance) {
+		setUserID(userID);
+		setFirstname(fistName);
+		setLastname(lastName);
+		setUsername(username);
+		setPassword(password);
+		setBalance(balance);
+	}
+
+	public abstract double getBalance();
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	// Getters and Setters
+	public String getUserID() {
+		return userID;
+	}
+
+	private void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+
+	private void setFirstname(String firstName) {
+		this.firstName = firstName;
+	}
+
+	private void setLastname(String lastName) {
 		this.lastName = lastName;
-		this.id = id;
-		this.username = username;
-		this.password = password;
 	}
-	//Setter and getter
-	public int getID() {
-		return id;
-	}
-	public void setID(int id) {
-		this.id = id;
-	}
+
 	public String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
+	private void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	private void setPassword(String password) {
 		this.password = password;
 	}
 

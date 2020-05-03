@@ -1,17 +1,40 @@
+//used for recording transactions
 public abstract class Transaction {
     protected String userid;
     protected double amount;
-    protected Currency currency;
-    protected Account account;
+    protected String currency;
+    protected String accountId;
+    protected String date;
+    protected String transactionID;
 
-    public Transaction(String userid, Account account, double amount, Currency currency) {
+    public Transaction(String transactionID, String userid, String accountId, double amount, String currency,
+            String date) {
+        setTransactionID(transactionID);
         setUserid(userid);
-        setAccount(account);
+        setAccountId(accountId);
         setAmount(amount);
         setCurrency(currency);
+        setDate(date);
+
     }
 
-    public String getUserid() {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTransactionID() {
+		return transactionID;
+	}
+
+	public void setTransactionID(String transactionID) {
+		this.transactionID = transactionID;
+	}
+
+	public String getUserid() {
         return userid;
     }
 
@@ -19,19 +42,19 @@ public abstract class Transaction {
         this.userid = userid;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getAccountId() {
+        return accountId;
     }
 
-    private void setAccount(Account account) {
-        this.account = account;
+    private void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    private void setCurrency(Currency currency) {
+    private void setCurrency(String currency) {
         this.currency = currency;
     }
 
