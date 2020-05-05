@@ -3,7 +3,7 @@ package bank;
 
 public class CheckingsAccount extends Account {
 
-    public CheckingsAccount(String accountID, double initial_deposit, String userID, Currency currency) {
+    public CheckingsAccount(int accountID, double initial_deposit, int userID, Currency currency) {
         super(accountID, initial_deposit, userID, currency);
     }
 
@@ -34,7 +34,7 @@ public class CheckingsAccount extends Account {
     }
 
     @Override
-    public void transfer(double amt, Currency currency, String accountID) {
+    public void transfer(double amt, Currency currency, int accountID) {
         //query to see if the accountID the user wants to transfer to exits, if so:
         double amtConverted = this.currency.convert(currency, amt);
         double newBalance = getBalance() - amtConverted;

@@ -2,16 +2,16 @@ package bank;
 
 //used for recording transactions
 public abstract class Transaction {
-    protected String userid;
+    protected int userid;
     protected double amount;
     protected String currency;
-    protected String accountId;
+    protected int accountId;
     protected String date;
-    protected String transactionID;
+    protected int transactionID;
 
 
     //Add transaction type to database in transaction table
-    public Transaction(String transactionID, String userid, String accountId, double amount, String currency,
+    public Transaction(int transactionID, int userid, int accountId, double amount, String currency,
             String date) {
         setTransactionID(transactionID);
         setUserid(userid);
@@ -30,27 +30,27 @@ public abstract class Transaction {
         this.date = date;
     }
 
-    public String getTransactionID() {
+    public int getTransactionID() {
 		return transactionID;
 	}
 
-	public void setTransactionID(String transactionID) {
+	public void setTransactionID(int transactionID) {
 		this.transactionID = transactionID;
 	}
 
-	public String getUserid() {
+	public int getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 
-    public String getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    private void setAccountId(String accountId) {
+    private void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 

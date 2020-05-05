@@ -51,6 +51,10 @@ public class Loan {
 		this.payment_date = payment_date;
 	}
 
+	public int getLoanID(){
+		return this.loanId;
+	}
+
 	public String toString(){
 		String ret = "loandId: " + loanId + " " + "userIdL: "+ userId + " " + "amount: " + amount + " " + "colalteral: " + collateral + " " + "loan_date" + loan_date + " " + "payment_date:" + payment_date;
 		return ret;
