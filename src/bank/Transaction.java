@@ -9,8 +9,8 @@ public abstract class Transaction {
 
 
     //Add transaction type to database in transaction table
-    public Transaction(int transactionID, int userid, int accountId, double amount, int currency,
-            int date) {
+    public Transaction(int transactionID, int userid, int accountId, double amount, String currency,
+            String date) {
         setTransactionID(transactionID);
         setUserid(userid);
         setAccountId(accountId);

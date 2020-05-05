@@ -31,16 +31,16 @@ public class LoginControl {
 
 	public void LoginAction()
 	{
-		if (Login.text1.equals(User.getUsername()) && Login.text2.equals(User.getPassword()))
-		{
-			CustSaveAccount page=new CustSaveAccount(Login);
-            Login.setVisible(false);
-            page.setVisible(true);
-		}
-		else
-		{
-			Login.setMsgLabel("Not a Verified User");
-		}
+		//if (Login.text1.equals(User.getUsername()) && Login.text2.equals(User.getPassword()))
+		//{
+			//CustSaveAccount page=new CustSaveAccount(Login);
+           // Login.setVisible(false);
+          //  page.setVisible(true);
+		//}
+		//else
+		//{
+			//Login.setMsgLabel("Not a Verified User");
+		//}
 		
 	}
 
