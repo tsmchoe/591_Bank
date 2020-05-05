@@ -1,10 +1,26 @@
 package src.bank;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class Currency {
     private CurrencyType currentCurrency;
-    private static Map<String, CurrencyType> convertToCurrencyType = Map.of("USD", CurrencyType.USD, "EURO", CurrencyType.EURO, "CNY", CurrencyType.CNY);
+    private static Map<String, CurrencyType> convertToCurrencyType = getconvertToCurrencyType();
     private static Map<CurrencyType, Double> ratesToUSD = Map.of(CurrencyType.USD, 1.0, CurrencyType.EURO, 1.08, CurrencyType.CNY, 0.14);
+
+
+    
+
+
+
+    public static Map<String, CurrencyType> getconvertToCurrencyType() {
+        Map<String, CurrencyType>  ret = new HashMap<>();
+        ret.put("USD", CurrencyType.USD);
+        ret.put("EURO", CurrencyType.EURO);
+        ret.put("CNY", CurrencyType.CNY);
+        return ret;
+    }
+
 
     public Currency(String currrency) {
         this.currentCurrency = convertToCurrencyType.get(currrency.toUpperCase());
