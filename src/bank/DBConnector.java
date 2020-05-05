@@ -218,6 +218,100 @@ public class DBConnector{
         return ret;
     }
 
+<<<<<<< HEAD
+=======
+    public void updateBalanceCheckings(int accountID, double newBalance){
+        try{
+            String query = "UPDATE CheckingsAccount set balance= ? WHERE accountID= ?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,newBalance);
+            this.preparedStatement.setInt(2,accountID);
+            this.preparedStatement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("balance update for account " + accountID);
+        }
+    }
+
+    public void updateBalanceSavings(int accountID, double newBalance){
+        try{
+            String query = "UPDATE SavingsAccount set balance= ? WHERE accountID= ?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,newBalance);
+            this.preparedStatement.setInt(2,accountID);
+            this.preparedStatement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("balance update for account " + accountID);
+        }
+    }
+
+    public void insertNewAccount(CheckingsAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new CheckingsAccount");
+        }
+    }
+
+    public void insertNewAccount(SavingsAccount account){
+        try{
+            String query = "INSERT INTO SavingsAccount(accountID,balance,userID,currency,interestRate) " +
+        "VALUES(?,?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+        this.preparedStatement.setDouble(5, account.getInterest_rate());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SavingsAccount");
+        }
+    }
+
+    public void insertNewAccount(SecurityAccount account){
+        try{
+            String query = "INSERT INTO SecurityAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SecurityAccount");
+        }
+    }
+
+
+>>>>>>> queries2
     private void readDataBase(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -252,14 +346,27 @@ public class DBConnector{
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        //dbc.readDataBase();
+        dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         //dbc.checkUserByUsername("firstUser");
+<<<<<<< HEAD
         //dbc.getTransactionsByUser(12);
+=======
+        //dbc.updateBalanceCheckings(1,1500);
+        //dbc.updateBalanceSavings(42,7200);
+        //CheckingsAccount newCheckingsTest = new CheckingsAccount(34, 500, 12, new Currency("USD"));
+        //dbc.insertNewAccount(newCheckingsTest);
+        //SavingsAccount newSavingsTest = new SavingsAccount(35, 2000, 12, new Currency("USD"), .02);
+        //dbc.insertNewAccount(newSavingsTest);
+        //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
+        //dbc.insertNewAccount(newSecurityTest);
+        
+
+>>>>>>> queries2
     }
 
 

@@ -1,4 +1,4 @@
-//package bank;
+package src.bank;
 public class Bank {
     
 }
