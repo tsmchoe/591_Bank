@@ -32,20 +32,28 @@ public class StockMarket {
         setTotal_stock_num(getTotal_stock_num() + 1);
     }
 
-    public void updateStock(int stockId, double newPrice) {
-        //Update the price in database to newPrice
-        //
+    public void updateStockPrice(int stockId, double newPrice) {
+        //Stock seletec = getStockwithid(stockId);
+        //selected.setCurrenPrice(newPrice)
         //
     }
 
-    public void customer_buyStock(SecurityAccount account, Stock stock, int share, double cost) {
-        account.buyStock(stock, cost, share);
-        stock.decreaseShare(share);
+    public void updateShare(int stockId, int newShare) {
+        //Stock seletec = getStockwithid(stockId);
+        //selected.setShare(newShare)
+        //
     }
 
-    public void customer_sellStock(SecurityAccount account, Stock stock, int share) {
-        account.sellStock(stock, share);
-        stock.increaseShare(share);
+    public void customer_buyStock(int accountId, Stock stock, int share, double cost) {
+        //select the account with accountid
+        // account.buyStock(stock, cost, share);
+        // selected.setShare(selected.getShare()-share);
+    }
+
+    public void customer_sellStock(int accountId, Stock stock, int share) {
+        //select the account with accountid
+        // account.sellStock(stock, share);
+        // selected.setShare(selected.getShare()-share);
     }
 
 
