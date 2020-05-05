@@ -1,3 +1,5 @@
+package bank;
+
 //used for recording transactions
 public abstract class Transaction {
     protected String userid;

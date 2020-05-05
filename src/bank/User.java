@@ -1,3 +1,6 @@
+
+package bank;
+
 public abstract class User {
 	protected String userID;
 	protected String firstName;

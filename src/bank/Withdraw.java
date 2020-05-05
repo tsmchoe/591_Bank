@@ -1,3 +1,5 @@
+package bank;
+
 public class Withdraw extends Transaction {
     public Withdraw(String transactionID, String userid, String accountId, double amount, String currency,
             String date) {

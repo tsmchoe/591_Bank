@@ -1,21 +1,21 @@
 package bank.views;
 
-import javax.swing.*;
 import java.awt.*;
- 
-public class CustWithdraw extends JDialog{
+import java.awt.event.*;
+import javax.swing.*;
 
+public class CustTransfer extends JDialog {
     private static final long serialVersionUID = 1L;
     private JPanel amount = new JPanel(new GridBagLayout());
     private JLabel script;
     private JTextField entry;
     private JButton submit;
-    
-    public CustWithdraw(JPanel parent){
+
+    public CustTransfer(){
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
-        script = new JLabel("Enter how much you want to withdraw:");
+        script = new JLabel("Enter how much you want to transfer to new Account:");
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 2;
@@ -35,7 +35,8 @@ public class CustWithdraw extends JDialog{
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);
-        setTitle("Withdraw");
+        setTitle("Transfer");
 
     }
+    //create a new security account
 }

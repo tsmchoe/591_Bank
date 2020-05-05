@@ -1,10 +1,11 @@
-package control;
+package bank.control;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import views.*;
+import bank.*;
+import bank.views.*;
 
 public class LoginControl {
 

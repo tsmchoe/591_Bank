@@ -1,4 +1,4 @@
-package views;
+package bank.views;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,6 +13,8 @@ public class CustCheckAccount extends JDialog {
     private JMenu m1 = new JMenu("Profile");
     private JMenu m3 = new JMenu("Loans");
     private JMenu m4 = new JMenu("Transactions");
+    private JMenuItem request = new JMenuItem("Request");
+    private JMenuItem view = new JMenuItem("See All");
     private JMenuItem deposit = new JMenuItem("Deposit");
     private JMenuItem withdrawl = new JMenuItem("Withdrawl");
 
@@ -38,11 +40,22 @@ public class CustCheckAccount extends JDialog {
             }
         );
 
+        request.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    LoanReq loan = new LoanReq(parent);
+                    loan.setVisible(true);
+                }
+            }
+        );
+
         mb.add(m1);
         mb.add(m3);
+        m3.add(request);
         mb.add(m4);
         m4.add(deposit);
         m4.add(withdrawl);
+        m4.add(view);
         JLabel user = new JLabel("Welcome:");
         JLabel balance = new JLabel("Here is your current balance:");
         balanceCheck.setLayout(new BoxLayout(balanceCheck, BoxLayout.PAGE_AXIS));

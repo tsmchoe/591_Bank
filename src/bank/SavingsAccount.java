@@ -1,3 +1,5 @@
+package bank;
+
 public class SavingsAccount extends Account {
     private double interest_rate;
 

@@ -1,9 +1,11 @@
-package views;
+package bank.views;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
+import bank.*;
 
-public class LoginView extends JDialog {
+public class LoginView extends JDialog implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel Login = new JPanel(new GridBagLayout());
@@ -11,7 +13,7 @@ public class LoginView extends JDialog {
     private JButton Submit = new JButton("Submit");
     protected JTextField text1, text2;
 
-    public LoginView() {
+    public LoginView(Frame parent) {
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
@@ -44,7 +46,7 @@ public class LoginView extends JDialog {
 
 
         JPanel panel = new JPanel();
-        //Submit.addActionListener(this);
+        Submit.addActionListener(this);
         panel.add(Submit);
         getContentPane().add(script, BorderLayout.PAGE_START);
         getContentPane().add(Login, BorderLayout.CENTER);
@@ -58,11 +60,11 @@ public class LoginView extends JDialog {
         return Submit;
     }
 
-    /*public void actionPerformed(ActionEvent ae){
+    public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        Boolean right = validated(text1, text2);
-        if (right == true) {
+        Boolean right = true;//validated(value1, value2);
+        if (value1.equals("hi") && value2.equals("hi")) {
             CustSaveAccount page=new CustSaveAccount(Login);
             Login.setVisible(false);
             page.setVisible(true);
@@ -71,9 +73,10 @@ public class LoginView extends JDialog {
             JLabel label = new JLabel("Failed");
         }
     }
-    private boolean validated(JTextField text1, JTextField text2){
-        if (User.getUsername().equals(text1) && User.getPassword().equals(text2)) {
-
+    /*private boolean validated(String text1, String text2){
+        User u = new User("null","null", "null", text1, text2, 0.0);
+        if (u.getUsername().equals(text1) && u.getPassword().equals(text2)) {
+            return true;
         }
         return false;
 

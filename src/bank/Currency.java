@@ -1,3 +1,5 @@
+package bank;
+
 import java.util.Map;
 
 public class Currency {

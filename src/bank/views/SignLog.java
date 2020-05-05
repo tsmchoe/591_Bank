@@ -1,9 +1,9 @@
-package views;
+package bank.views;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import control.*;
+import bank.control.*;
  
 public class SignLog {
     final static JFrame frame = new JFrame("Bank Demo");
@@ -18,7 +18,8 @@ public class SignLog {
             log.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                    LoginControl logger = new LoginControl();
+                    LoginDemo logger = new LoginDemo(frame);
+                    logger.setVisible(true);
                     frame.setVisible(false);
                     }
                 }

@@ -1,3 +1,4 @@
+package bank;
 
 public class Loan {
 	protected int loanId;

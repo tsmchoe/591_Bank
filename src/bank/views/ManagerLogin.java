@@ -1,4 +1,4 @@
-package views;
+package bank.views;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -48,21 +48,19 @@ public class ManagerLogin extends JDialog implements ActionListener {
         getContentPane().add(Login, BorderLayout.CENTER);
         getContentPane().add(panel, BorderLayout.PAGE_END);
         setSize(400,400);
-        setTitle("Manager LOGIN FORM");
+        setTitle("Manager Login");
 
     }
 
     public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        if (value1.equals("roseindia") && value2.equals("roseindia")) {
-            NextPage page=new NextPage();
-            JLabel label = new JLabel("Welcome:"+value1);
-            page.getContentPane().add(label);
+        if (value1.equals("cpk") && value2.equals("cs591bank!")) {
+            ManagerAccount page=new ManagerAccount(Login);
             page.setVisible(true);
         }
         else{
-            JLabel label = new JLabel("Failed");
+            JOptionPane.showMessageDialog(null, "ERROR.getMessage()");
         }
     }
 }

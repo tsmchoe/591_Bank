@@ -1,9 +1,10 @@
 package bank.views;
 
-import javax.swing.*;
 import java.awt.*;
- 
-public class CreateAccount extends JDialog {
+import java.awt.event.*;
+import javax.swing.*;
+
+public class CustProfile extends JDialog {
 
     private static final long serialVersionUID = 1L;
     private final JPanel panel = new JPanel();
@@ -18,12 +19,10 @@ public class CreateAccount extends JDialog {
     private JTextField emailer = new JTextField(40);
     private JLabel password = new JLabel("Password");
     private JPasswordField passworder = new JPasswordField(20);
-    private JButton bu1 = new JButton("Create Checking Account");
-    private JButton bu2 = new JButton("Create Savings Account");
+    private JButton bu1 = new JButton("Update Profile");
     private JPanel buttons = new JPanel();
 
-
-    public CreateAccount(Frame parent){
+    public CustProfile() {
         super();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         firstname.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -48,13 +47,9 @@ public class CreateAccount extends JDialog {
         passworder.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(passworder);
         buttons.add(bu1);
-        buttons.add(bu2);
         getContentPane().add(panel);
         getContentPane().add(buttons, BorderLayout.PAGE_END);
         setSize(400,400);
-        setTitle("Create Account");
-
-
-        
+        setTitle("Update Account");
     }
 }

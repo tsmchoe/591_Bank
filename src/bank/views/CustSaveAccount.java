@@ -1,4 +1,4 @@
-package views;
+package bank.views;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,10 @@ public class CustSaveAccount extends JDialog {
     private JMenu m2 = new JMenu("Stocks");
     private JMenu m3 = new JMenu("Loans");
     private JMenu m4 = new JMenu("Transactions");
+    private JMenuItem update = new JMenuItem("Update Profile");
+    private JMenuItem transfer = new JMenuItem("Transfer to Savings");
     private JMenuItem request = new JMenuItem("Request");
+    private JMenuItem stock = new JMenuItem("See Stock Market");
     private JMenuItem view = new JMenuItem("See All");
     private JMenuItem deposit = new JMenuItem("Deposit");
     private JMenuItem withdrawl = new JMenuItem("Withdrawl");
@@ -47,9 +50,45 @@ public class CustSaveAccount extends JDialog {
                 }
             }
         );
+        update.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    CustProfile up = new CustProfile();
+                    up.setVisible(true);
+                }
+            }
+        );
+        transfer.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    CustTransfer tra = new CustTransfer();
+                    tra.setVisible(true);
+                }
+            }
+        );
+        stock.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    StockViewCust st = new StockViewCust();
+                    st.setVisible(true);
+                }
+            }
+        );
+        view.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    CustTransactions st = new CustTransactions();
+                    st.setVisible(true);
+                }
+            }
+        );
+
 
         mb.add(m1);
+        m1.add(update);
         mb.add(m2);
+        m2.add(stock);
+        m2.add(transfer);
         mb.add(m3);
         m3.add(request);
         mb.add(m4);

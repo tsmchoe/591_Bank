@@ -1,4 +1,4 @@
-package views;
+package bank.views;
 
 import java.awt.*;
 import javax.swing.*;
