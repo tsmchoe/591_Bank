@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public class Fees {
     final static double OPENNING_FEE = 1;
     final static double CLOSING_FEE = 1;

@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public enum CurrencyType {
     USD,
     EURO,

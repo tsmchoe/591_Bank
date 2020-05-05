@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public class CheckingsAccount extends Account {
 
     public CheckingsAccount(int accountID, double initial_deposit, int userID, Currency currency) {

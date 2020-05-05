@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public class Deposit extends Transaction {
 
     public Deposit(int transactionID, int userid, int accountId, double amount, String currency, String date) {

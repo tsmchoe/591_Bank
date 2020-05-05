@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public class BoughtStock {
     private Stock stock;
     private double avgCost;

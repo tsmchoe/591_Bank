@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,7 +37,7 @@ public class DBConnector{
         return myConnection;
     }
 
-    public ArrayList<Loan> getAllUserLoans(int userID){
+   /*  public ArrayList<Loan> getAllUserLoans(int userID){
         ArrayList<Loan> ret = new ArrayList<Loan>();
         try{
             this.statement = this.connect.createStatement();
@@ -74,9 +74,9 @@ public class DBConnector{
         return ret;
 
 
-    }
+    } */
 
-    public void insertNewLoan(Loan loan){
+    /* public void insertNewLoan(Loan loan){
         try{
             String query = "INSERT INTO Loan(loanID,userID,collateral,loan_date,payment_date,amount) "
             + "VALUES(?,?,?,?,?,?)";
@@ -101,9 +101,9 @@ public class DBConnector{
         finally{
             System.out.println("done");
         }
-    }
+    } */
 
-    public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
+    /* public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
         ArrayList<Transaction> ret = new ArrayList<Transaction>();
         try{
             
@@ -139,7 +139,7 @@ public class DBConnector{
                 }
 
             }
-        }
+        } 
         catch(SQLException e){
             e.printStackTrace();
         }
@@ -147,7 +147,7 @@ public class DBConnector{
             System.out.println("done");
         }
         return ret;
-    }
+    }*/
     
     public boolean checkUserByUsername(String user_name){
         boolean ret = false;
@@ -208,7 +208,7 @@ public class DBConnector{
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        //dbc.readDataBase();
+        dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);

@@ -1,4 +1,4 @@
-package src.bank;
+//package src.bank;
 public class Loan {
 	protected int loanId;
 	protected int userId;

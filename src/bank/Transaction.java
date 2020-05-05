@@ -1,4 +1,4 @@
-package src.bank;
+//package bank;
 //used for recording transactions
 public abstract class Transaction {
     protected int userid;
