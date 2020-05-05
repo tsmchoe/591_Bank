@@ -208,7 +208,7 @@ public class DBConnector{
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        //dbc.readDataBase();
+        dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);
