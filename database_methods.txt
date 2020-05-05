@@ -20,3 +20,5 @@ void insertNewAccount(SavingsAccount account)// inserts a new SavingsAccount
 void insertNewAccount(SecurityAccount account)// inserts a new SecurityAccount
 
 ArrayList<Transaction> getDailyTransactions(String date)// returns an ArrayList of all the transactions on a particular day.
+
+ArrayList<CheckingsAccount> getCheckingAccountByUser(int userID) //returns an ArrayList of all the checking accounts for a particular user.

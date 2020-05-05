@@ -299,11 +299,8 @@ public class DBConnector{
                 int userID = this.resultSet.getInt("userID");
                 String currency = this.resultSet.getString("currency");
 
-                //CurrencyType currency;
-                //if(currenct)
-                // c = new Currency(currencyType);
-
-                // newAccount = new CheckingsAccount(accountID,balance,userID,currency);
+                newAccount = new CheckingsAccount(accountID,balance,userID,new Currency(currency));
+                ret.add(newAccount);
             }
 
         }catch(SQLException e)
