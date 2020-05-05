@@ -8,7 +8,7 @@ public abstract class Transaction {
     protected String transactionID;
 
 
-    //Add transaction type to database in transaction table
+    //Add transaction type to database in transaction table, amount
     public Transaction(String transactionID, String userid, String accountId, double amount, String currency,
             String date) {
         setTransactionID(transactionID);

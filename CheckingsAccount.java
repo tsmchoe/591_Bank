@@ -15,7 +15,7 @@ public class CheckingsAccount extends Account {
         double newBalance = getBalance() + amtConverted;
         //add the amt to balance in account in database
 
-        //Add the new Depostion() to trasaction table in dabatase
+        //Add the new Deposit() to trasaction table in dabatase
 
     }
 
