@@ -6,7 +6,6 @@ public class Stock {
     private String name;
     private double currentPrice;
     private int total_share;
-    private ArrayList<SecurityAccount> subscribers = new ArrayList<>();
 
     public Stock(int stockid, String name, double currentPrice, int init_share) {
         this.stockid = stockid;
@@ -19,15 +18,11 @@ public class Stock {
         return total_share;
     }
 
-    public void decreaseShare(int amount) {
-        this.total_share -= amount;
+    public void setShare(int newShare) {
+        this.total_share = newShare;
+        UpdateStock();
+
     }
-
-    public void increaseShare(int amount) {
-        this.total_share += amount;
-
-	}
-
 
     public int getId() {
         return this.stockid;
@@ -51,15 +46,15 @@ public class Stock {
 
     public void setCurrentPrice(double newPrice) {
         this.currentPrice = newPrice;
+        UpdateStock();
     }
 
-    public void subscribe(SecurityAccount account) {
-        this.subscribers.add(account);
-    } 
 
-    public ArrayList<SecurityAccount> getAllSubscribers() {
-        return this.subscribers;
+    //Called after a field is updated, need to update the database
+    private void UpdateStock() {
+        //update the stock in the database with Stock(stockid, name currentPrice, total_share)
     }
+
 
 
     //Update Price
@@ -68,11 +63,23 @@ public class Stock {
         updatePriceChange(newPrice);
     }
 
+    //update the subscribers of price change
     private void updatePriceChange(double newPrice) {
+        ArrayList<SecurityAccount> subscribers = getAllSubscribers();
         for(SecurityAccount account: subscribers) {
             account.receive_updatePrice(this, newPrice);
         }
     }
+
+
+    //Get all security accounts who bought the stock
+    private ArrayList<SecurityAccount> getAllSubscribers() {
+        ArrayList<SecurityAccount> ret = null;
+        /// query database using this.stockid, 
+        // add new SecurityAccount()
+        ///
+        return ret;
+    }   
 
 
 
