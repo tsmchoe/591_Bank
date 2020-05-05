@@ -20,7 +20,7 @@ public class SecurityAccount extends Account {
             this.allStocks.get(stock).buyMore(cost, share);
 
         } else {
-            this.allStocks.put(stock, new BoughtStock(stock, cost, share));
+            this.allStocks.put(stock, new BoughtStock(1, cost, share));
         }
 
     }

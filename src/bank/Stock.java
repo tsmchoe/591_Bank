@@ -2,14 +2,14 @@
 import java.util.ArrayList;
 
 public class Stock {
-    private int id;
+    private int stockid;
     private String name;
     private double currentPrice;
     private int total_share;
     private ArrayList<SecurityAccount> subscribers = new ArrayList<>();
 
-    public Stock(int id, String name, double currentPrice, int init_share) {
-        this.id = id;
+    public Stock(int stockid, String name, double currentPrice, int init_share) {
+        this.stockid = stockid;
         this.name = name;
         this.currentPrice = currentPrice;
         this.total_share = init_share;
@@ -30,11 +30,11 @@ public class Stock {
 
 
     public int getId() {
-        return this.id;
+        return this.stockid;
     }
 
     public void setId(int new_id) {
-        this.id = new_id;
+        this.stockid = new_id;
     }
 
     public String getName() {

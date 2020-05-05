@@ -1,14 +1,14 @@
 //package src.bank;
 public class BoughtStock {
-    private Stock stock;
+    private int stockid;
     private double avgCost;
     private int share;
     private double equity;
     private double currentPrice;
     private double totalValue;
 
-    public BoughtStock(Stock stock, double cost, int share) {
-        this.setStock(stock);
+    public BoughtStock(int stockid, double cost, int share) {
+        this.setStock(stockid);
         this.setAvgCost(cost);
         this.setShare(share);
         this.setEquity(avgCost * share);
@@ -46,12 +46,12 @@ public class BoughtStock {
         this.equity = equity;
     }
 
-    public Stock getStock() {
-        return stock;
+    public int getStock() {
+        return stockid;
     }
 
-    private void setStock(Stock stock) {
-        this.stock = stock;
+    private void setStock(int stockid) {
+        this.stockid = stockid;
     }
 
 	public double getTotalValue() {
