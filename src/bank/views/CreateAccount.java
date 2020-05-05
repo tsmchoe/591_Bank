@@ -1,6 +1,7 @@
+package views;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
  
 public class CreateAccount extends JDialog {
 

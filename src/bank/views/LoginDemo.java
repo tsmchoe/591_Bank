@@ -1,3 +1,5 @@
+package views;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -27,7 +29,7 @@ public class LoginDemo extends JDialog{
         customer.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    LoginView login = new LoginView(panel);
+                    LoginView login = new LoginView();
                     panel.setVisible(false);
                     login.setVisible(true);
                     }

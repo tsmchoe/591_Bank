@@ -1,16 +1,17 @@
+package views;
+
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
-public class LoginView extends JDialog implements ActionListener {
+public class LoginView extends JDialog {
 
     private static final long serialVersionUID = 1L;
     private JPanel Login = new JPanel(new GridBagLayout());
     private JLabel script = new JLabel("Sign in Valued Customer!");
     private JButton Submit = new JButton("Submit");
-    private JTextField text1, text2;
+    protected JTextField text1, text2;
 
-    public LoginView(Frame parent) {
+    public LoginView() {
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
@@ -43,7 +44,7 @@ public class LoginView extends JDialog implements ActionListener {
 
 
         JPanel panel = new JPanel();
-        Submit.addActionListener(this);
+        //Submit.addActionListener(this);
         panel.add(Submit);
         getContentPane().add(script, BorderLayout.PAGE_START);
         getContentPane().add(Login, BorderLayout.CENTER);
@@ -53,10 +54,15 @@ public class LoginView extends JDialog implements ActionListener {
 
     }
 
-    public void actionPerformed(ActionEvent ae){
+    public JButton getLogButton(){
+        return Submit;
+    }
+
+    /*public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        if (value1.equals("roseindia") && value2.equals("roseindia")) {
+        Boolean right = validated(text1, text2);
+        if (right == true) {
             CustSaveAccount page=new CustSaveAccount(Login);
             Login.setVisible(false);
             page.setVisible(true);
@@ -65,5 +71,12 @@ public class LoginView extends JDialog implements ActionListener {
             JLabel label = new JLabel("Failed");
         }
     }
+    private boolean validated(JTextField text1, JTextField text2){
+        if (User.getUsername().equals(text1) && User.getPassword().equals(text2)) {
+
+        }
+        return false;
+
+    }*/
 
 }
