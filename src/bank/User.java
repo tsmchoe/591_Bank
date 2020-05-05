@@ -1,4 +1,4 @@
-//package src.bank;
+package src.bank;
 public abstract class User {
 	protected int userID;
 	protected String firstName;
