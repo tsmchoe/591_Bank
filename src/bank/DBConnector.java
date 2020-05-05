@@ -37,7 +37,7 @@ public class DBConnector{
         return myConnection;
     }
 
-   /*  public ArrayList<Loan> getAllUserLoans(int userID){
+     public ArrayList<Loan> getAllUserLoans(int userID){
         ArrayList<Loan> ret = new ArrayList<Loan>();
         try{
             this.statement = this.connect.createStatement();
@@ -74,9 +74,9 @@ public class DBConnector{
         return ret;
 
 
-    } */
+    } 
 
-    /* public void insertNewLoan(Loan loan){
+     public void insertNewLoan(Loan loan){
         try{
             String query = "INSERT INTO Loan(loanID,userID,collateral,loan_date,payment_date,amount) "
             + "VALUES(?,?,?,?,?,?)";
@@ -90,9 +90,6 @@ public class DBConnector{
             Date payment_date = Date.valueOf(loan.getPaymentDate());
             this.preparedStatement.setDate(5,payment_date);
             this.preparedStatement.setDouble(6,loan.getAmount());
-            //this.statement = this.connect.createStatement();
-            //this.statement.executeUpdate("insert into `CS591-bank`.Loan" + 
-              //                              "VALUES(2,12, 'house', '2020-5-04', '2022-5-04', 5000.0");
             this.preparedStatement.execute();
         }
         catch(SQLException e){
@@ -101,9 +98,9 @@ public class DBConnector{
         finally{
             System.out.println("done");
         }
-    } */
+    } 
 
-    /* public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
+     public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
         ArrayList<Transaction> ret = new ArrayList<Transaction>();
         try{
             
@@ -121,6 +118,7 @@ public class DBConnector{
                 String transactionType = this.resultSet.getString("transactionType");
                 int transferAccountID = this.resultSet.getInt("transferAccountID");
                 
+                System.err.println(transactionID);
                 Transaction userTransactionByDate;
                 if(transactionType.equals("deposit")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
@@ -146,8 +144,9 @@ public class DBConnector{
         finally{
             System.out.println("done");
         }
+        System.out.println(ret);
         return ret;
-    }*/
+    }
     
     public boolean checkUserByUsername(String user_name){
         boolean ret = false;
@@ -208,13 +207,13 @@ public class DBConnector{
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        dbc.readDataBase();
+        //dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
-        dbc.checkUserByUsername("firstUser");
+        //dbc.checkUserByUsername("firstUser");
     }
 
 
