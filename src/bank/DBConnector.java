@@ -1,4 +1,4 @@
-//package src.bank;
+package src.bank;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -172,6 +172,38 @@ public class DBConnector{
         }
         return ret;
     }
+    public void updateBalanceCheckings(int accountID, double newBalance){
+        try{
+            String query = "UPDATE CheckingsAccount set balance= ? WHERE accountID= ?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,newBalance);
+            this.preparedStatement.setInt(2,accountID);
+            this.preparedStatement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("balance update for account " + accountID);
+        }
+    }
+
+    public void updateBalanceSavings(int accountID, double newBalance){
+        try{
+            String query = "UPDATE SavingsAccount set balance= ? WHERE accountID= ?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,newBalance);
+            this.preparedStatement.setInt(2,accountID);
+            this.preparedStatement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("balance update for account " + accountID);
+        }
+    }
+
 
     private void readDataBase(){
         try{
@@ -207,13 +239,15 @@ public class DBConnector{
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        //dbc.readDataBase();
+        dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         //dbc.checkUserByUsername("firstUser");
+        //dbc.updateBalanceCheckings(1,1500);
+        //dbc.updateBalanceSavings(42,7200);
     }
 
 
