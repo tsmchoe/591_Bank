@@ -10,3 +10,13 @@ void insertNewLoan(Loan loan)// adds a loan to the database
 ArrayList<Transaction> getUserTransaction_Date(int userID, String date)// returns the transactions for a user on a particular date
 
 boolean checkUserByUsername(String user_name)// returns a boolean indicating whether or not the username is in the Users table.
+
+void updateBalance(int accountID, String accountType, double newBalance)// upadates the balance field for an account.
+
+void insertNewAccount(CheckingsAccount account)// inserts a new CheckingsAccount
+
+void insertNewAccount(SavingsAccount account)// inserts a new SavingsAccount
+
+void insertNewAccount(SecurityAccount account)// inserts a new SecurityAccount
+
+ArrayList<Transaction> getDailyTransactions(String date)// returns an ArrayList of all the transactions on a particular day.

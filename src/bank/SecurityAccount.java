@@ -10,7 +10,7 @@ public class SecurityAccount extends Account {
     private double cash;
     private double unrealized_profit;
 
-    public SecurityAccount(String accountID, double balance, String userID, Currency currency) {
+    public SecurityAccount(int accountID, double balance, int userID, Currency currency) {
         super(accountID, balance, userID, currency);
     }
 
@@ -103,7 +103,7 @@ public class SecurityAccount extends Account {
     }
 
     @Override
-    public void transfer(double amt, Currency currency, String accountID) {
+    public void transfer(double amt, Currency currency, int accountID) {
         //query to see if the accountID the user wants to transfer to exits, if so:
 
         

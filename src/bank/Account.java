@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 public abstract class Account {
-    protected String accountID;
+    protected int accountID;
     protected double balance;
-    protected String userID;
+    protected int userID;
     protected Currency currency;
 
-    public Account(String accountID, double balance, String userID, Currency currency) {
+    public Account(int accountID, double balance, int userID, Currency currency) {
         this.accountID = accountID;
         this.balance = balance;
         this.userID = userID;
@@ -17,7 +17,7 @@ public abstract class Account {
 
     public abstract void withdraw(double amt, Currency currency);
 
-    public abstract void transfer(double amt, Currency currency, String accountID);
+    public abstract void transfer(double amt, Currency currency, int accountID);
 
     //view transaction made by this account on a particular date
     public ArrayList<Transaction> getAllTransactions(String date) {
@@ -35,7 +35,7 @@ public abstract class Account {
 
     //getters and setters
 
-    public String getAccountID() {
+    public int getAccountID() {
         return accountID;
     }
 
@@ -43,7 +43,7 @@ public abstract class Account {
         return balance;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 

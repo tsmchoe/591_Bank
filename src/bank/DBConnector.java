@@ -89,9 +89,7 @@ public class DBConnector{
             Date payment_date = Date.valueOf(loan.getPaymentDate());
             this.preparedStatement.setDate(5,payment_date);
             this.preparedStatement.setDouble(6,loan.getAmount());
-            //this.statement = this.connect.createStatement();
-            //this.statement.executeUpdate("insert into `CS591-bank`.Loan" + 
-              //                              "VALUES(2,12, 'house', '2020-5-04', '2022-5-04', 5000.0");
+           
             this.preparedStatement.execute();
         }
         catch(SQLException e){
@@ -102,14 +100,65 @@ public class DBConnector{
         }
     }
 
-    public void insertNewCheckingsAccountAccount(CheckingsAccount account){
-        String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+    public void insertNewAccount(CheckingsAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
         "VALUES(?,?,?,?)";
 
         this.preparedStatement = this.connect.prepareStatement((query));
-        this.prepareStatement.setInt(1,account.get)
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new CheckingsAccount");
+        }
     }
 
+    public void insertNewAccount(SavingsAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency,interestRate) " +
+        "VALUES(?,?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+        this.preparedStatement.setDouble(5, account.getInterest_rate());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SavingsAccount");
+        }
+    }
+
+    public void insertNewAccount(SecurityAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SecurityAccount");
+        }
+    }
+
+    
     public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
         ArrayList<Transaction> ret = new ArrayList<Transaction>();
         try{
@@ -156,6 +205,49 @@ public class DBConnector{
         return ret;
     }
     
+    public ArrayList<Transaction> getDailyTransactions(String date){
+        ArrayList<Transaction> ret = new ArrayList<Transaction>();
+        try{
+            this.statement = this.connect.createStatement();
+            Date transactionDate = Date.valueOf(date);
+            this.resultSet = this.statement.executeQuery("Select * FROM `CS591-bank`.Transactions WHERE Transactions.transaction_date='" + transactionDate +"')");
+
+            while(this.resultSet.next()){
+                int transactionID  = this.resultSet.getInt("transactionID");
+                int userID = this.resultSet.getInt("userID");
+                int accountID = this.resultSet.getInt("accountID");
+                Date transaction_date = this.resultSet.getDate("transaction_date");
+                double amount = this.resultSet.getDouble("amount");
+                String currency = this.resultSet.getString("currency");
+                String transactionType = this.resultSet.getString("transactionType");
+                int transferAccountID = this.resultSet.getInt("transferAccountID");
+                
+                Transaction userTransactionByDate;
+                if(transactionType.equals("deposit")){
+                    userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("withdrawl")){
+                    userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("transfer")){
+                    userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString(), transferAccountID);
+                    ret.add(userTransactionByDate);
+                }
+
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Daily transaction query");
+        }
+        return ret;
+    }
     public boolean checkUserByUsername(String user_name){
         boolean ret = false;
 
@@ -195,6 +287,34 @@ public class DBConnector{
         }
     }
 
+    public ArrayList<CheckingsAccount> getCheckingAccountByUser(int user_ID){
+        ArrayList<CheckingsAccount> ret = new ArrayList<CheckingsAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM `CS591-bank`.CheckingsAccount WHERE CheckingsAccount.userID=" + user_ID);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+
+                //CurrencyType currency;
+                //if(currenct)
+                // c = new Currency(currencyType);
+
+                // newAccount = new CheckingsAccount(accountID,balance,userID,currency);
+            }
+
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }finally{
+            System.out.println("Retrieved checkingsAccounts by users");
+            
+    }
+    return ret;
+}
 
 
     private void readDataBase(){
@@ -228,6 +348,7 @@ public class DBConnector{
             System.out.println("Password: " + password);
         }
     }
+
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
