@@ -1,13 +1,13 @@
 package src.bank;
 public abstract class User {
-	protected String userID;
+	protected int userID;
 	protected String firstName;
 	protected String lastName;
 	protected String username;
 	protected String password;
 	protected double balance;
 
-	public User(String userID, String fistName, String lastName, String username, String password, double balance) {
+	public User(int userID, String fistName, String lastName, String username, String password, double balance) {
 		setUserID(userID);
 		setFirstname(fistName);
 		setLastname(lastName);
@@ -23,11 +23,11 @@ public abstract class User {
 	}
 
 	// Getters and Setters
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	private void setUserID(String userID) {
+	private void setUserID(int userID) {
 		this.userID = userID;
 	}
 

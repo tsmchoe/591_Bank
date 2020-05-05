@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Customer extends User {
 
 
-	public Customer(String userID, String fistName, String lastName, String username, String password, double balance) {
+	public Customer(int userID, String fistName, String lastName, String username, String password, double balance) {
 		super(userID, fistName, lastName, username, password, balance);
 	}
 

@@ -2,10 +2,9 @@ package src.bank;
 import java.util.ArrayList;
 
 public class Bank_Manager extends User {
-	public Bank_Manager(String userID, String fistName, String lastName, String username, String password,
+	public Bank_Manager(int userID, String fistName, String lastName, String username, String password,
 			double balance) {
 		super(userID, fistName, lastName, username, password, balance);
-		// TODO Auto-generated constructor stub
 	}
 
 	// Get all the transactions that happend on a particular date

@@ -9,13 +9,8 @@ public abstract class Transaction {
     protected int transactionID;
 
 
-<<<<<<< HEAD:Transaction.java
-    //Add transaction type to database in transaction table, amount
-    public Transaction(String transactionID, String userid, String accountId, double amount, String currency,
-=======
     //Add transaction type to database in transaction table
     public Transaction(int transactionID, int userid, int accountId, double amount, String currency,
->>>>>>> 3a6a6d5ee78ce9ad97adb019a8fec44183624aa0:src/bank/Transaction.java
             String date) {
         setTransactionID(transactionID);
         setUserid(userid);
