@@ -1,4 +1,4 @@
-package bank.views;
+package src.bank.views;
 
 import java.awt.*;
 import java.awt.event.*;
