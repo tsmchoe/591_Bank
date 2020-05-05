@@ -271,7 +271,7 @@ public class DBConnector{
 
     public void insertNewAccount(SavingsAccount account){
         try{
-            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency,interestRate) " +
+            String query = "INSERT INTO SavingsAccount(accountID,balance,userID,currency,interestRate) " +
         "VALUES(?,?,?,?,?)";
 
         this.preparedStatement = this.connect.prepareStatement((query));
@@ -291,7 +291,7 @@ public class DBConnector{
 
     public void insertNewAccount(SecurityAccount account){
         try{
-            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+            String query = "INSERT INTO SecurityAccount(accountID,balance,userID,currency) " +
         "VALUES(?,?,?,?)";
 
         this.preparedStatement = this.connect.prepareStatement((query));
@@ -352,9 +352,13 @@ public class DBConnector{
         //dbc.checkUserByUsername("firstUser");
         //dbc.updateBalanceCheckings(1,1500);
         //dbc.updateBalanceSavings(42,7200);
-        CheckingsAccount newCheckingsTest = new CheckingsAccount(34, 500, 12, new Currency("USD"));
-        dbc.insertNewAccount(newCheckingsTest);
-        SavingsAccount newSavingsTest = new SavingsAccount(35, 2000, 12, new Currency("USD"), .02);
+        //CheckingsAccount newCheckingsTest = new CheckingsAccount(34, 500, 12, new Currency("USD"));
+        //dbc.insertNewAccount(newCheckingsTest);
+        //SavingsAccount newSavingsTest = new SavingsAccount(35, 2000, 12, new Currency("USD"), .02);
+        //dbc.insertNewAccount(newSavingsTest);
+        //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
+        //dbc.insertNewAccount(newSecurityTest);
+        
 
     }
 
