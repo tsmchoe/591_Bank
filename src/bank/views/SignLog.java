@@ -18,7 +18,8 @@ public class SignLog {
             log.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                    LoginControl logger = new LoginControl();
+                    LoginDemo logger = new LoginDemo(frame);
+                    logger.setVisible(true);
                     frame.setVisible(false);
                     }
                 }
