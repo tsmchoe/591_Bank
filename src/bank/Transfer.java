@@ -1,9 +1,9 @@
-
+package src.bank;
 public class Transfer extends Transaction {
-    private String transferedToAccountID;
+    private int transferedToAccountID;
 
-    public Transfer(String transactionID, String userid, String accountId, double amount, String currency,
-            String date, String transferedToAccountID) {
+    public Transfer(int transactionID, int userid, int accountId, double amount, String currency,
+            String date, int transferedToAccountID) {
         super(transactionID, userid, accountId, amount, currency, date);
         this.transferedToAccountID = transferedToAccountID;
     }   

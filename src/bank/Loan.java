@@ -1,13 +1,13 @@
-
+package src.bank;
 public class Loan {
-	protected String loanId;
-	protected String userId;
+	protected int loanId;
+	protected int userId;
 	protected double amount;
 	protected String collateral;
 	protected String loan_date;
 	protected String payment_date;
 
-	public Loan(String loanId, String userId, double amount, String collateral, String loan_date, String payment_date) {
+	public Loan(int loanId, int userId, double amount, String collateral, String loan_date, String payment_date) {
 		this.loanId = loanId;
 		this.userId = userId;
 		this.amount = amount;
@@ -17,11 +17,11 @@ public class Loan {
 	}
 
 	//Setter and getter
-	public String getUser() {
+	public int getUser() {
 		return userId;
 	}
 
-	private void setUser(String userId) {
+	private void setUser(int userId) {
 		this.userId = userId;
 	}
 	
@@ -48,5 +48,14 @@ public class Loan {
 	}
 	public void setPaymentDate(String payment_date) {
 		this.payment_date = payment_date;
+	}
+
+	public int getLoanID(){
+		return this.loanId;
+	}
+
+	public String toString(){
+		String ret = "loandId: " + loanId + " " + "userIdL: "+ userId + " " + "amount: " + amount + " " + "colalteral: " + collateral + " " + "loan_date" + loan_date + " " + "payment_date:" + payment_date;
+		return ret;
 	}
 }

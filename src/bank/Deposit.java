@@ -1,7 +1,7 @@
-
+package src.bank;
 public class Deposit extends Transaction {
 
-    public Deposit(String transactionID, String userid, String accountId, double amount, String currency, String date) {
+    public Deposit(int transactionID, int userid, int accountId, double amount, String currency, String date) {
         super(transactionID, userid, accountId, amount, currency, date);
     }
 

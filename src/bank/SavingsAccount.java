@@ -1,7 +1,8 @@
+package src.bank;
 public class SavingsAccount extends Account {
     private double interest_rate;
 
-    public SavingsAccount(String accountID, double initial_deposit, String userID, Currency currency,
+    public SavingsAccount(int accountID, double initial_deposit, int userID, Currency currency,
             double interest_rate) {
         super(accountID, initial_deposit, userID, currency);
         setInterest_rate(interest_rate);
@@ -47,7 +48,7 @@ public class SavingsAccount extends Account {
 
     //Customer must maitain a minimum balance in savings acount
     @Override
-    public void transfer(double amt, Currency currency, String accountID) {
+    public void transfer(double amt, Currency currency, int accountID) {
         //query to see if the accountID the user wants to transfer to exits, if so:
         //if the target can be found:
         

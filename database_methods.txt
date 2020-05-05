@@ -1,0 +1,12 @@
+/*
+NOTE ALL ids in the database are ints
+Any date passed as a string must be in the format "YYYY-MM-DD"
+*/
+
+ArrayList<Loans> getAllUserLoans(int userID){} //returns an array list of all of the loans a user.
+
+void insertNewLoan(Loan loan)// adds a loan to the database
+
+ArrayList<Transaction> getUserTransaction_Date(int userID, String date)// returns the transactions for a user on a particular date
+
+boolean checkUserByUsername(String user_name)// returns a boolean indicating whether or not the username is in the Users table.
