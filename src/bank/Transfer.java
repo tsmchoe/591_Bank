@@ -1,6 +1,5 @@
 package src.bank;
 public class Transfer extends Transaction {
-    private int transferedToAccountID;
 
     public Transfer(int transactionID, int userid, int accountId, double amount, String currency,
             String date, int transferedToAccountID) {

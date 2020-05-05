@@ -7,6 +7,7 @@ public abstract class Transaction {
     protected int accountId;
     protected String date;
     protected int transactionID;
+    protected int transferedToAccountID;
 
 
     //Add transaction type to database in transaction table
@@ -67,6 +68,10 @@ public abstract class Transaction {
 
     private void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public int getTransferAccountID() {
+        return transferedToAccountID;
     }
 
 }

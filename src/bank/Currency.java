@@ -3,10 +3,11 @@ import java.util.Map;
 
 public class Currency {
     private CurrencyType currentCurrency;
+    private static Map<String, CurrencyType> convertToCurrencyType = Map.of("USD", CurrencyType.USD, "EURO", CurrencyType.EURO, "CNY", CurrencyType.CNY);
     private static Map<CurrencyType, Double> ratesToUSD = Map.of(CurrencyType.USD, 1.0, CurrencyType.EURO, 1.08, CurrencyType.CNY, 0.14);
 
-    public Currency(CurrencyType currrency) {
-        this.currentCurrency = currrency;
+    public Currency(String currrency) {
+        this.currentCurrency = convertToCurrencyType.get(currrency.toUpperCase());
     }
 
     public double getRatetoUSD(CurrencyType currency) {
