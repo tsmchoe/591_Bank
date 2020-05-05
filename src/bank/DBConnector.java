@@ -204,6 +204,64 @@ public class DBConnector{
         }
     }
 
+    public void insertNewAccount(CheckingsAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new CheckingsAccount");
+        }
+    }
+
+    public void insertNewAccount(SavingsAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency,interestRate) " +
+        "VALUES(?,?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+        this.preparedStatement.setDouble(5, account.getInterest_rate());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SavingsAccount");
+        }
+    }
+
+    public void insertNewAccount(SecurityAccount account){
+        try{
+            String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.preparedStatement.setInt(1,account.getAccountID());
+        this.preparedStatement.setDouble(2, account.getBalance());
+        this.preparedStatement.setInt(3, account.getUserID());
+        this.preparedStatement.setString(4, account.getCurrency());
+
+        this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Inserted new SecurityAccount");
+        }
+    }
+
 
     private void readDataBase(){
         try{
