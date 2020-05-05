@@ -207,7 +207,7 @@ public class DBConnector{
         }
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         //dbc.readDataBase();
         //dbc.getAllUserLoans(12);
@@ -216,7 +216,7 @@ public class DBConnector{
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         dbc.checkUserByUsername("firstUser");
-    }
+    }*/
 
 
 }

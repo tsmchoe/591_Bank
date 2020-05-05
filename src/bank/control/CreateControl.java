@@ -1,10 +1,10 @@
-package control;
+package bank.control;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import views.*;
+import bank.views.*;
 
 public class CreateControl {
 
@@ -20,6 +20,6 @@ public class CreateControl {
 
 	public void initController()
 	{
-		loginView.getLogButton().addActionListener(l -> Login());
+		//loginView.getLogButton().addActionListener(l -> Login());
 	}
 }

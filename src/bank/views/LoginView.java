@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import bank.*;
 
-public class LoginView extends JDialog implements ActionListener {
+public class LoginView extends JDialog implements ActionListener{
 
     private static final long serialVersionUID = 1L;
     private JPanel Login = new JPanel(new GridBagLayout());
@@ -13,7 +13,7 @@ public class LoginView extends JDialog implements ActionListener {
     private JButton Submit = new JButton("Submit");
     protected JTextField text1, text2;
 
-    public LoginView(Frame parent) {
+    public LoginView() {
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
@@ -56,21 +56,31 @@ public class LoginView extends JDialog implements ActionListener {
 
     }
 
-    public JButton getLogButton(){
+    /*public JButton getLogButton(){
         return Submit;
     }
+    public String getUsername(){
+        return text1.getText();
+    }
+    public String getPassword(){
+        return text2.getText();
+    }*/
+
 
     public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        Boolean right = true;//validated(value1, value2);
-        if (value1.equals("hi") && value2.equals("hi")) {
+        DBConnector dbc = new DBConnector();
+		Boolean x =	dbc.checkUserByUsername(value1);
+        if (x == true) {
+            System.out.println("Logged in");
             CustSaveAccount page=new CustSaveAccount(Login);
             Login.setVisible(false);
             page.setVisible(true);
         }
         else{
-            JLabel label = new JLabel("Failed");
+            System.out.println("Failed");
+            JOptionPane.showMessageDialog(null, "not authorized");
         }
     }
     /*private boolean validated(String text1, String text2){

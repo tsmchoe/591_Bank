@@ -3,7 +3,7 @@ package bank.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import bank.control.*;
+
  
 public class SignLog {
     final static JFrame frame = new JFrame("Bank Demo");

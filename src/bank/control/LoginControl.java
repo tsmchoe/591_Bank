@@ -10,16 +10,13 @@ import bank.views.*;
 public class LoginControl {
 
 	private LoginView Login;
+	private JPanel parent;
 
 	public LoginControl() {
-		/*Login =  new LoginView();
-		parentPanel = PanelData.getParentPanel();
-		parentPanel.removeAll();
-		parentPanel.revalidate();
-		parentPanel.repaint();
-		parentPanel.add(loginView, BorderLayout.CENTER);
-
-		Login.setVisible(true);*/
+		Login = new LoginView();
+		parent = new JPanel();
+		parent.add(Login);
+		Login.setVisible(true);
 
 		initController();
 	}
@@ -27,22 +24,23 @@ public class LoginControl {
 	public void initController()
 	{
 		Login.getLogButton().addActionListener(x -> LoginAction());
-		//loginView.getLoginManagerButton().addActionListener(l -> loginManager());
 	}
 
 	public void LoginAction()
 	{
-		//if (Login.text1.equals(User.getUsername()) && Login.text2.equals(User.getPassword()))
-		//{
-			//CustSaveAccount page=new CustSaveAccount(Login);
-           // Login.setVisible(false);
-          //  page.setVisible(true);
-		//}
-		//else
-		//{
-			//Login.setMsgLabel("Not a Verified User");
-		//}
-		
+		String user_name = Login.getUsername();
+		String password = Login.getPassword();
+		DBConnector dbc = new DBConnector();
+		boolean x =	dbc.checkUserByUsername(user_name);
+		if (x == true){
+			CustSaveAccount page=new CustSaveAccount(parent);
+            parent.setVisible(false);
+            page.setVisible(true);
+		}
+		else{
+
+		}
+
 	}
 
 }

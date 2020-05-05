@@ -3,6 +3,8 @@ package bank.views;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.*;
+import bank.*;
 
 public class ManagerAccount extends JDialog {
 
@@ -13,6 +15,7 @@ public class ManagerAccount extends JDialog {
     private JMenu m1 = new JMenu("Profile");
     private JMenu m2 = new JMenu("Stocks");
     private JMenu m3 = new JMenu("Daily Report");
+    private JMenuItem logO = new JMenuItem("Log Out");
     private JMenuItem search = new JMenuItem("Search Customer");
     private JMenuItem list = new JMenuItem("Stock List");
     private JMenuItem update = new JMenuItem("Update Stock Prices");
@@ -57,6 +60,7 @@ public class ManagerAccount extends JDialog {
 
         mb.add(m1);
         m1.add(search);
+        m1.add(logO);
         mb.add(m2);
         m2.add(list);
         m2.add(update);

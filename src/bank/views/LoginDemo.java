@@ -3,6 +3,7 @@ package bank.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import bank.control.*;
  
 public class LoginDemo extends JDialog{
 
@@ -29,9 +30,9 @@ public class LoginDemo extends JDialog{
         customer.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    LoginView login = new LoginView(panel);
-                    panel.setVisible(false);
+                    LoginView login = new LoginView();
                     login.setVisible(true);
+                    panel.setVisible(false);
                     }
                 }
             );
