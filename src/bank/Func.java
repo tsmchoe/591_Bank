@@ -1,4 +1,4 @@
-//package src.bank;
+package src.bank;
 
 public class Func {
     private static int id_counter;

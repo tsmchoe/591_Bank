@@ -1,4 +1,4 @@
-//package src.bank;
+package src.bank;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -173,6 +173,51 @@ public class DBConnector{
         return ret;
     }
 
+    public ArrayList<Transaction> getTransactionsByUser(int user_id){
+        ArrayList<Transaction> ret = new ArrayList<Transaction>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("Select * FROM `CS591-bank`.Transactions WHERE Transactions.userID=" + user_id);
+            System.out.println(this.resultSet);
+            while(this.resultSet.next()){
+                int transactionID  = this.resultSet.getInt("transactionID");
+                int userID = this.resultSet.getInt("userID");
+                int accountID = this.resultSet.getInt("accountID");
+                Date transaction_date = this.resultSet.getDate("transaction_date");
+                double amount = this.resultSet.getDouble("amount");
+                String currency = this.resultSet.getString("currency");
+                String transactionType = this.resultSet.getString("transactionType");
+                int transferAccountID = this.resultSet.getInt("transferAccountID");
+                
+                Transaction userTransactionByDate;
+                if(transactionType.equals("deposit")){
+                    userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("withdrawl")){
+                    userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("transfer")){
+                    userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString(), transferAccountID);
+                    ret.add(userTransactionByDate);
+                }
+
+            }
+        } 
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("done");
+        }
+        System.out.println(ret);
+        return ret;
+    }
+
     private void readDataBase(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -214,6 +259,7 @@ public class DBConnector{
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         //dbc.checkUserByUsername("firstUser");
+        //dbc.getTransactionsByUser(12);
     }
 
 

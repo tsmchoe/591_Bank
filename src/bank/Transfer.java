@@ -1,4 +1,4 @@
-//package src.bank;
+package src.bank;
 public class Transfer extends Transaction {
 
     public Transfer(int transactionID, int userid, int accountId, double amount, String currency,
