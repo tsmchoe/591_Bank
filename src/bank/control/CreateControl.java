@@ -20,6 +20,6 @@ public class CreateControl {
 
 	public void initController()
 	{
-		loginView.getLogButton().addActionListener(l -> Login());
+		//loginView.getLogButton().addActionListener(l -> Login());
 	}
 }

@@ -102,6 +102,14 @@ public class DBConnector{
         }
     }
 
+    public void insertNewCheckingsAccountAccount(CheckingsAccount account){
+        String query = "INSERT INTO CheckingsAccount(accountID,balance,userID,currency) " +
+        "VALUES(?,?,?,?)";
+
+        this.preparedStatement = this.connect.prepareStatement((query));
+        this.prepareStatement.setInt(1,account.get)
+    }
+
     public ArrayList<Transaction> getUserTransactions_Date(int user_id,String date){
         ArrayList<Transaction> ret = new ArrayList<Transaction>();
         try{
@@ -172,6 +180,22 @@ public class DBConnector{
         }
         return ret;
     }
+
+    public void updateBalance(int accountID, String accountType, double newBalance){
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("UPDATE CS591-bank`." + accountType + " set balance=" + newBalance + " WHERE accountID=" + accountID);
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("balance update for account " + accountID);
+        }
+    }
+
+
 
     private void readDataBase(){
         try{
