@@ -21,6 +21,8 @@ public abstract class Transaction {
 
     }
 
+
+    //getters and setters
     public String getDate() {
         return date;
     }

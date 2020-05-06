@@ -3,7 +3,9 @@ import java.util.Map;
 
 public class Currency {
     private CurrencyType currentCurrency;
+    //Convert String presentation of currency to currencyType
     private static Map<String, CurrencyType> convertToCurrencyType = getconvertToCurrencyType();
+    //ratio of convert currency to usd
     private static Map<CurrencyType, Double> ratesToUSD = get_ratesToUSD();
 
 
@@ -38,6 +40,7 @@ public class Currency {
         ratesToUSD.put(currency, rate);
     }
 
+    //calculate amount if wer to convert the currency to desired currency
     public double convert(Currency ToCurrency, double amount) {
         CurrencyType ToCurrencyType = ToCurrency.getCurrencyType();
         if (currentCurrency == CurrencyType.USD) {
