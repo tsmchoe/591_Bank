@@ -54,7 +54,7 @@ public class Customer extends User {
 	
 	//creates a new loan
 	public void createNewLoan(int userId, double amount, String collateral) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//Getting current date
 		Calendar cal = Calendar.getInstance();
 		Calendar calDue = Calendar.getInstance();

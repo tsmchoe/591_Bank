@@ -404,12 +404,10 @@ public class DBConnector{
                 String currency = this.resultSet.getString("currency");
                 String transactionType = this.resultSet.getString("transactionType");
                 int transferAccountID = this.resultSet.getInt("transferAccountID");
-                
-                System.out.println(transaction_date);
                 Transaction userTransactionByDate;
                 if(transactionType.equals("deposit")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
-                    transaction_date.toString());
+                    transaction_date);
                     ret.add(userTransactionByDate);
                 }
                 else if(transactionType.equals("withdrawl")){
@@ -430,7 +428,6 @@ public class DBConnector{
         }finally{
             System.out.println("Daily transaction query");
         }
-        System.out.println(ret);
         return ret;
     }
 
