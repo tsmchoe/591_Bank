@@ -28,6 +28,7 @@ public class SavingsAccount extends Account {
         //add the amt to balance in account in database
         db.updateBalanceSavings(accountID, newBalance);
         db.insertTransaction(new Deposit(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "DEPOSIT");
+        db.increaseBankBalance(Fees.TRANSACTION_FEE);
 
     }
 
@@ -42,6 +43,7 @@ public class SavingsAccount extends Account {
             //decrease the balance in database by amtConverted
             db.updateBalanceSavings(accountID, newBalance);
             db.insertTransaction(new Withdraw(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "WITHDRAW");
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
 
 
@@ -58,6 +60,7 @@ public class SavingsAccount extends Account {
             target.deposit(amt, currency);
             Transfer t = new Transfer(Func.generate_id(), userID, this.accountID, amtConvertedUser, currency.toString(), accountID);
             db.insertTransaction(t);
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
 
 

@@ -122,6 +122,7 @@ public class SecurityAccount extends Account implements Observer{
         double newBalance = getBalance() + amtConverted;
         db.updateBalanceSecurity(accountID, newBalance);
         db.insertTransaction(new Deposit(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "DEPOSIT");
+        db.increaseBankBalance(Fees.TRANSACTION_FEE);
 
     }
 
@@ -133,6 +134,7 @@ public class SecurityAccount extends Account implements Observer{
         if(newBalance >= 0) {
             db.updateBalanceSecurity(accountID, newBalance);
             db.insertTransaction(new Withdraw(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "WITHDRAW");
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
     }
 
@@ -147,6 +149,7 @@ public class SecurityAccount extends Account implements Observer{
             target.deposit(amt, currency);
             Transfer t = new Transfer(Func.generate_id(), userID, this.accountID, amtConvertedUser, currency.toString(), accountID);
             db.insertTransaction(t);
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
 
 
