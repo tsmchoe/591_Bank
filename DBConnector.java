@@ -627,6 +627,8 @@ public class DBConnector{
         //dbc.addStockToStockMarket(stockTest);
         //dbc.getAvailableStockByID(45);
         //dbc.updateStockInStock_Market(58, 2800, 19);
+        Customer cust = new Customer(58, "Fred", "Winkle", "fwinkle", "fwinkle!", 0);
+        dbc.insertNewCustomer(cust);
         
 
     }
