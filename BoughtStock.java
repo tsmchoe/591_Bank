@@ -25,10 +25,12 @@ public class BoughtStock {
         this.share += share;
         this.avgCost = this.equity/this.share;
         this.totalValue = this.currentPrice * this.share;
+        updateBoughtStock();
     }
 
 	public void updatePrice(double newPrice) {
         this.currentPrice = newPrice;
+        updateBoughtStock();
 	}
 
     //Calculate profit if were to sell this many share at the current price

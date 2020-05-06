@@ -56,10 +56,9 @@ public class SavingsAccount extends Account {
         double amtConvertedUser = this.currency.convert(currency, amt);
         double newBalance = getBalance() - amtConvertedUser;
         if(newBalance >= Fees.SAVINGS_MINIMUM_BALANCE) { 
-    
             db.updateBalanceSavings(accountID, newBalance);
-            //increase this amount in target's balance in database
-            // TARGETUSER.deposit(amt, currency);
+            SavingsAccount target = db.getSavingsAccountByAccountID(accountID).get(0);
+            target.deposit(amt, currency);
             //Add the new Transer() to trasaction table in dabatase
         }
 

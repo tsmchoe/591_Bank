@@ -20,20 +20,20 @@ public class SecurityAccount extends Account {
     public void buyStock(int stockId, double cost, int share) {
         Stock market_stock = db.getAvailableStockByID(stockId);
         int shares_in_market = market_stock.getTotal_share();
-        if(shares_in_market <= share) {
-            double total_cost = cost*share;
-            if(total_cost <= balance) {
-            //     if(BoughtStock exists) {
-            //         Select BoughtStock in database,
-            //         boughtStock.buyMore(cost, share);
-            //     } else {
-            //         Create new BoughtStock(int stockid, String name, double currentPrice, int share, double cost);
-            //     }
-            //     stock.setShare(market_stock.getTotalShare()-share);
-            //     this.balance -= total_cost;
-            //     updateAccount();
-            // }
-        }
+        // if(shares_in_market <= share) {
+        //     double total_cost = cost*share;
+        //     if(total_cost <= balance) {
+        //     //     if(BoughtStock exists) {
+        //     //         Select BoughtStock in database,
+        //     //         boughtStock.buyMore(cost, share);
+        //     //     } else {
+        //     //         Create new BoughtStock(int stockid, String name, double currentPrice, int share, double cost);
+        //     //     }
+        //     //     stock.setShare(market_stock.getTotalShare()-share);
+        //     //     this.balance -= total_cost;
+        //     //     db.updateBalanceSecurity(accountID, balance);
+        //     // }
+        // }
 
     }
 
@@ -50,7 +50,7 @@ public class SecurityAccount extends Account {
             // } else if(share == stock.getShare()) {
             //     // remove BoughtStock with stockId in database
             // } 
-            // updateAccount();
+                // db.updateBalanceSecurity(accountID, balance);
 
         // }
     }
@@ -98,8 +98,8 @@ public class SecurityAccount extends Account {
         //convert the amt to deposit to security accounts' default currency;
         double amtConverted = this.currency.convert(currency, amt);
         //add the amt to balance in account in database
-
-        //Add the new Deposti() to trasaction table in dabatase
+        
+        //Add the new Deposit() to trasaction table in dabatase
 
     }
 
@@ -119,15 +119,11 @@ public class SecurityAccount extends Account {
 
     @Override
     public void transfer(double amt, Currency currency, int accountID) {
-        //query to see if the accountID the user wants to transfer to exits, if so:
-
-        
         double amtConvertedUser = this.currency.convert(currency, amt);
         if(getBalance() - amtConvertedUser >= 0) {
             // decrease this amount in user's balance in database
-            // increase this amount in target's balance in database
-            // double amtConvertedTarget = TARGETUSER.getCurrency().convert(currency, amt)
-
+            SecurityAccount target = db.getSecurityAccountByAccountID(accountID).get(0);
+            target.deposit(amt, currency);
             // Add the new Transer() to trasaction table in dabatase
 
         }
