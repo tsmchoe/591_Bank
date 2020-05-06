@@ -1,14 +1,17 @@
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime;    
+import java.text.SimpleDateFormat;
+import java.util.Calendar; 
 public class Customer extends User {
 	DBConnector db;
+
+
 
 
 	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
 		super(userID, firstName, lastName, username, password, balance);
 		db = new DBConnector();
 	}
+
 
 	public Customer(String firstName, String lastName, String username, String password, double balance) {
 		super(Func.generate_id(), firstName, lastName, username, password, balance);
@@ -56,44 +59,34 @@ public class Customer extends User {
 	}
 
 	public void createNewLoan(int userId, double amount, String collateral) {
-		// DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-		// LocalDateTime now = LocalDateTime.now(); 
-		// Loan newLoan = new Loan(Func.generate_id(), amount, collateral, now.toString(), );
-		// DBConnector.insertNewLoan(newLoan);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		//Getting current date
+		Calendar cal = Calendar.getInstance();
+		Calendar calDue = Calendar.getInstance();
+		calDue.add(Calendar.YEAR, 2);
+		Loan newLoan = new Loan(Func.generate_id(), userId, amount, collateral, sdf.format(cal.getTime()), sdf.format(calDue.getTime()));
+		db.insertNewLoan(newLoan);
 	}
 
 
-	//SELECT, This is purely for the purpose of displaying if user choose to display it
-	public ArrayList<CheckingsAccount> getAllCheckings() {
-		ArrayList<CheckingsAccount> checkingsAccount = new ArrayList<>();
-		// load all checkingsAccount that belong to this user from database
-			// query using this.userID
-			// checkingsAccount.add(new CheckingsAccount(String accountID, double initial_deposit, String userID, Currency currency));
 
+	public ArrayList<CheckingsAccount> getAllCheckings() {
+		ArrayList<CheckingsAccount> checkingsAccount = db.getCheckingsAccountByUser(this.userID);
 		return checkingsAccount;
 	}
 
 	public ArrayList<SavingsAccount> getAllSavings() {
-		ArrayList<SavingsAccount> savingsAccount = new ArrayList<>();
-		// load all savingsAccount that belong to this user from database
-			// query using this.userID
-			// savingsAccount.add(SavingsAccount(String accountID, double initial_deposit, String userID, Currency currency, double interest_rate));
+		ArrayList<SavingsAccount> savingsAccount = db.getSavingsAccountByUser(this.userID);
 		return savingsAccount;
 	}
 
 	public ArrayList<SecurityAccount> getAllSecurities() {
-		ArrayList<SecurityAccount> securityAccounts = new ArrayList<>();
-		// load all securityAccount that belong to this user from database
-			//query using this.userID
-			//securityAccounts.add(new SecurityAccount());
+		ArrayList<SecurityAccount> securityAccounts = db.getSecutrityAccountByUser(this.userID);
 		return securityAccounts;
 	}
 
 	public ArrayList<Loan> getAllLoans() {
-		ArrayList<Loan> loans = new ArrayList<>();
-		// load all loans that belong to this user from database
-			//query using this.userID
-			//loans.add(new Loan(String loanId, String userId, double amount, String collateral, String loan_date, String payment_date));
+		ArrayList<Loan> loans = db.getAllUserLoans(this.userID);
 		return loans;
 	}
 
@@ -139,7 +132,6 @@ public class Customer extends User {
 	//Called when a fee is charged(for example, closing/openning account)
 	public void decreaseBalance(double amt) {
 		balance -= amt;
-		//update database;
 	}
 
 
