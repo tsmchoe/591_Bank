@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 
-public class SecurityAccount extends Account{// implements Observer{
+public class SecurityAccount extends Account implements Observer{
     private double unrealized_profit;
     private double cash;
     DBConnector db;
@@ -119,7 +119,7 @@ public class SecurityAccount extends Account{// implements Observer{
     public void deposit(double amt, Currency currency) {
         //convert the amt to deposit to security accounts' default currency;
         double amtConverted = this.currency.convert(currency, amt);
-        double newBalance = getBalance() + amtConverted;
+        double newBalance = this.getBalance() + amtConverted;
         db.updateBalanceSecurity(accountID, newBalance);
         db.insertTransaction(new Deposit(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "DEPOSIT");
         db.increaseBankBalance(Fees.TRANSACTION_FEE);

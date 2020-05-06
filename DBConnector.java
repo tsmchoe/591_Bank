@@ -225,8 +225,8 @@ public class DBConnector{
         try{
             this.statement = this.connect.createStatement();
             this.resultSet = this.statement.executeQuery("Select * FROM `CS591-bank`.Transactions WHERE Transactions.userID=" + user_id);
-            System.out.println(this.resultSet);
             while(this.resultSet.next()){
+                System.out.println("hello");
                 int transactionID  = this.resultSet.getInt("transactionID");
                 int userID = this.resultSet.getInt("userID");
                 int accountID = this.resultSet.getInt("accountID");
@@ -988,8 +988,9 @@ public class DBConnector{
         //dbc.updateBalanceSecurity(54, 700);
         //dbc.increaseBankBalance(1250);
         //dbc.decreaseBankBalance(1250);
-        Transaction testTransaction = new Deposit(1, 72, 72, 200, "USD");
-        dbc.insertTransaction(testTransaction, "deposit");
+        //Transaction testTransaction = new Deposit(1, 72, 72, 200, "USD");
+        //dbc.insertTransaction(testTransaction, "deposit");
+        dbc.getTransactionsByUser(12);
 
 
         

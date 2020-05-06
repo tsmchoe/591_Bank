@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 //Represents stock in the stock market
-public class Stock{// implements Subject {
+public class Stock implements Subject {
     private int stockid;
     private String name;
     private double currentPrice;

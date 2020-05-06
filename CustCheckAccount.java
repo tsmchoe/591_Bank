@@ -74,7 +74,7 @@ public class CustCheckAccount extends JDialog {
         m4.add(view);
         m4.add(view);
         JLabel user = new JLabel("Welcome: " + cust.firstName);
-        JLabel balance = new JLabel("Here is your current balance: $" + String.valueOf(cust.balance));
+        JLabel balance = new JLabel("Here is your current balance: $" + String.valueOf(cust.getAllCheckings().get(0).getBalance()));
         balanceCheck.setLayout(new BoxLayout(balanceCheck, BoxLayout.PAGE_AXIS));
         Box account = Box.createVerticalBox();
         balanceCheck.add(account);
