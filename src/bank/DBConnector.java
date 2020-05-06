@@ -358,6 +358,12 @@ public class DBConnector{
         //dbc.insertNewAccount(newSavingsTest);
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
+<<<<<<< HEAD
+=======
+        //dbc.getDailyTransactions("2020-05-04");
+        //dbc.getSecutrityAccountByUser(12);
+
+>>>>>>> queries2
         
 
     }
