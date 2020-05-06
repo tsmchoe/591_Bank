@@ -4,6 +4,7 @@ import java.util.Calendar;
 public class Customer extends User {
 	DBConnector db;
 
+
 	//If were to load a customer
 	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
 		super(userID, firstName, lastName, username, password, balance);

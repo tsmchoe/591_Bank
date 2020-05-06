@@ -10,11 +10,12 @@ public class CustSaveAccount extends JDialog {
     private JPanel balanceCheck = new JPanel();
     private JMenuBar mb = new JMenuBar(); 
     private JMenu m1 = new JMenu("Profile");
-    private JMenu m2 = new JMenu("Stocks");
+    private JMenu m2 = new JMenu("Securities");
     private JMenu m3 = new JMenu("Loans");
     private JMenu m4 = new JMenu("Transactions");
     private JMenuItem update = new JMenuItem("Update Profile");
-    private JMenuItem transfer = new JMenuItem("Transfer to Savings");
+    private JMenuItem list = new JMenuItem("See Other Accounts");
+    private JMenuItem transfer = new JMenuItem("Transfer to Securities");
     private JMenuItem request = new JMenuItem("Request");
     private JMenuItem stock = new JMenuItem("See Stock Market");
     private JMenuItem view = new JMenuItem("See All");
@@ -27,7 +28,7 @@ public class CustSaveAccount extends JDialog {
         deposit.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustDeposit dep = new CustDeposit(parent);
+                    CustDeposit dep = new CustDeposit();
                     dep.setVisible(true);
                 }
             }
@@ -85,6 +86,7 @@ public class CustSaveAccount extends JDialog {
 
         mb.add(m1);
         m1.add(update);
+        m1.add(list);
         mb.add(m2);
         m2.add(stock);
         m2.add(transfer);

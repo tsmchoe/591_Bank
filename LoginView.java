@@ -13,7 +13,7 @@ public class LoginView extends JDialog implements ActionListener{
     private String[] accountType = {"Checking", "Savings"};
     private JComboBox checkSave;
     private String choice;
-    //private var.get(0)
+
 
 
     public LoginView() {
@@ -59,23 +59,19 @@ public class LoginView extends JDialog implements ActionListener{
         cs.gridwidth = 2;
         Login.add(text2, cs);
 
-
-        checkSave.addActionListener(
-            new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    checkSave = (JComboBox)e.getSource();
-                    choice = (String)checkSave.getSelectedItem();
-                }
-            }
-        );
-
         checkSave = new JComboBox(accountType);
         cs.gridx = 1;
         cs.gridy = 3;
         cs.gridwidth = 2;
         Login.add(checkSave, cs);
 
-
+        checkSave.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    choice = (String)checkSave.getSelectedItem();
+                }
+            }
+        );
 
         JPanel panel = new JPanel();
         Submit.addActionListener(this);
@@ -120,13 +116,5 @@ public class LoginView extends JDialog implements ActionListener{
             JOptionPane.showMessageDialog(null, "not authorized");
         }
     }
-    /*private boolean validated(String text1, String text2){
-        User u = new User("null","null", "null", text1, text2, 0.0);
-        if (u.getUsername().equals(text1) && u.getPassword().equals(text2)) {
-            return true;
-        }
-        return false;
-
-    }*/
 
 }

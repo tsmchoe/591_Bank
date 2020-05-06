@@ -66,6 +66,7 @@ public class ManagerAccount extends JDialog {
         m3.add(report);
         JLabel user = new JLabel("Welcome:");
         JLabel balance = new JLabel("Here are all your customers:");
+        String[] listCat = {};
         JTable customerList = new JTable();        
         JScrollPane scrollPane = new JScrollPane();
         Dimension d = customerList.getPreferredSize();

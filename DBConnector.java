@@ -655,8 +655,9 @@ public class DBConnector{
                 double purchasedPrice = this.resultSet.getDouble("purchasedPrice");
                 String name = this.resultSet.getString("name");
                 int accountID = this.resultSet.getInt("accountID");
+                int shares = this.resultSet.getInt("shares")
 
-                BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice, 1,name,accountID);
+                BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice,shares,name,accountID);
                 ret.add(stockDB);
             }
         }catch(SQLException e){
@@ -683,14 +684,15 @@ public class DBConnector{
 
     public void insertNewBoughtStock(BoughtStock stock){
         try{
-            String query = "INSERT INTO Stocks(stockID,name,current_price,accountID,purchasedPrice)" + 
-            "VALUES(?,?,?,?,?)";
+            String query = "INSERT INTO Stocks(stockID,name,current_price,accountID,purchasedPrice,shares)" + 
+            "VALUES(?,?,?,?,?,?)";
             this.preparedStatement = this.connect.prepareStatement(query);
             this.preparedStatement.setInt(1,stock.getID());
             this.preparedStatement.setString(2,stock.getName());
             this.preparedStatement.setDouble(3,stock.getCurrrent_price());
             this.preparedStatement.setInt(4,stock.getAccount());
             this.preparedStatement.setDouble(5, stock.getAvgCost());
+            this.preparedStatement.setInt(6,stock.getShare());
 
             this.preparedStatement.execute();
         }catch(SQLException e){
@@ -713,6 +715,33 @@ public class DBConnector{
             System.out.println("updateBoughtStock query complete");
         }
     }
+
+    public Customer getCustomerByUserID(int user_ID){
+        Customer ret = new Customer(0,"","","","",0);
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Users WHERE userID=" + user_ID + " AND userType='customer'");
+            
+            while(this.resultSet.next()){
+                int userID = this.resultSet.getInt("userID");
+                String username = this.resultSet.getString("username");
+                String password =this.resultSet.getString("password");
+                String firstname =this.resultSet.getString("firstName");
+                String lastname = this.resultSet.getString("lastName");
+                double balance = this.resultSet.getDouble("balance");
+
+                Customer customerDB = new Customer(userID, firstname, lastname, username, password, balance);
+
+                ret = customerDB;
+            }
+        }catch(SQLException e){
+                e.printStackTrace();
+        }finally{
+                System.out.println("getCustomerbyUserID query complete");
+            }
+            return ret;
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         //dbc.readDataBase();
@@ -743,7 +772,8 @@ public class DBConnector{
         //dbc.deleteStockByAccountStock(60, 3);
         //BoughtStock testBoughtStock = new BoughtStock(53, 250, 1, "kdfjkd", 52);
         //dbc.insertNewBoughtStock(testBoughtStock);
-        dbc.updateBoughtStock(53,1000);
+        //dbc.updateBoughtStock(53,1000);
+        //dbc.getCustomerByUserID(58);
 
 
         
