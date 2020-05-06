@@ -27,7 +27,7 @@ public class SavingsAccount extends Account {
         double newBalance = balance + amtConverted;
         //add the amt to balance in account in database
         db.updateBalanceSavings(accountID, newBalance);
-        //Add the new Deposit() to trasaction table in database
+        db.insertTransaction(new Deposit(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "DEPOSIT");
 
     }
 
@@ -41,7 +41,7 @@ public class SavingsAccount extends Account {
         if(newBalance >= Fees.SAVINGS_MINIMUM_BALANCE) {
             //decrease the balance in database by amtConverted
             db.updateBalanceSavings(accountID, newBalance);
-            //Add the new Withdraw() to trasaction table in dabatase
+            db.insertTransaction(new Withdraw(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "WITHDRAW");
         }
 
 
@@ -50,17 +50,14 @@ public class SavingsAccount extends Account {
     //Customer must maitain a minimum balance in savings acount
     @Override
     public void transfer(double amt, Currency currency, int accountID) {
-        //query to see if the accountID the user wants to transfer to exits, if so:
-        //if the target can be found:
-        
         double amtConvertedUser = this.currency.convert(currency, amt);
         double newBalance = getBalance() - amtConvertedUser;
         if(newBalance >= Fees.SAVINGS_MINIMUM_BALANCE) { 
-    
-            db.updateBalanceSavings(accountID, newBalance);
-            //increase this amount in target's balance in database
-            // TARGETUSER.deposit(amt, currency);
-            //Add the new Transer() to trasaction table in dabatase
+            db.updateBalanceSavings(this.accountID, newBalance);
+            SavingsAccount target = db.getSavingsAccountByAccountID(this.accountID).get(0);
+            target.deposit(amt, currency);
+            Transfer t = new Transfer(Func.generate_id(), userID, this.accountID, amtConvertedUser, currency.toString(), accountID);
+            db.insertTransaction(t);
         }
 
 

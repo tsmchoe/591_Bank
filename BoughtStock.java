@@ -7,6 +7,7 @@ public class BoughtStock {
     private double totalValue;
     private String name;
     private int accountID;
+    private DBConnector db;
 
     public BoughtStock(int stockid, double cost, int share, String name, int accountID) {
         this.setStock(stockid);
@@ -15,26 +16,38 @@ public class BoughtStock {
         this.setEquity(avgCost * share);
         this.setName(name);
         this.setAccount(accountID);
+        this.db = new DBConnector();
     }
 
+    //If the account already owns a stock, we need to increase the share and updare avgCost
     public void buyMore(double cost, int share) {
         this.equity += cost * share;
         this.share += share;
         this.avgCost = this.equity/this.share;
         this.totalValue = this.currentPrice * this.share;
+        updateBoughtStock();
     }
 
 	public void updatePrice(double newPrice) {
         this.currentPrice = newPrice;
-	}
+        updateBoughtStock();
+    }
+    
+    public void updateShare(int newShare) {
+        this.share = newShare;
+        updateBoughtStock();
+    }
 
+    //Calculate profit if were to sell this many share at the current price
 	public double getProfit(int shareToSell) {
         return currentPrice * shareToSell;
     }
     
-    // public void updateBoughtStock() {
+    //Update the database with newPrice/share
+    public void updateBoughtStock() {
+        db.updateBoughtStock(stockid, currentPrice, share);
 
-    // }
+    }
 
 
     //Getters and Setters

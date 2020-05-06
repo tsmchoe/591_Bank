@@ -5,14 +5,13 @@ public class Customer extends User {
 	DBConnector db;
 
 
-
-	//for DB user;
+	//If were to load a customer
 	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
 		super(userID, firstName, lastName, username, password, balance);
 		db = new DBConnector();
 	}
 
-
+	//If were to create a new customer
 	public Customer(String firstName, String lastName, String username, String password, double balance) {
 		super(Func.generate_id(), firstName, lastName, username, password, balance);
 		db = new DBConnector();
@@ -32,6 +31,7 @@ public class Customer extends User {
 
 	}
 
+	//creates a saving account
 	public void createNewSavings(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SAVINGS_MINIMUM_BALANCE) {
 			//store savings account in database, include interest rate as a field, can use Fees.SAVINGS_INTEREST
@@ -41,13 +41,15 @@ public class Customer extends User {
 
 	}
 
+	//creates a securitys account
 	public void createNewSecurity(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SECURITY_OPEN_LIMIT) {
 			SecurityAccount newSecurity = new SecurityAccount(Func.generate_id(), initial_deposit, userID, currency);
 			db.insertNewAccount(newSecurity);
 		}
 	}
-
+	
+	//creates a new loan
 	public void createNewLoan(int userId, double amount, String collateral) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		//Getting current date
@@ -59,7 +61,7 @@ public class Customer extends User {
 	}
 
 
-
+	//getters
 	public ArrayList<CheckingsAccount> getAllCheckings() {
 		ArrayList<CheckingsAccount> checkingsAccount = db.getCheckingsAccountByUser(this.userID);
 		return checkingsAccount;
