@@ -702,7 +702,7 @@ public class DBConnector{
         }
     }
 
-    public void updateBoughtStock(int stockID, int currentPrice, int newShares){
+    public void updateBoughtStock(int stockID, double currentPrice, int newShares){
         try{
             String query = "UPDATE Stocks set current_price=?, shares=? WHERE stockID=?";
             this.preparedStatement = this.connect.prepareStatement(query);
