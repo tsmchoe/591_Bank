@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class SignLog {
     final static JFrame frame = new JFrame("Bank Demo");
     final static JLabel welcome = new JLabel("Welcome to the Bank App");
+    static Customer cust = new Customer(0, "Tim", "Choe", "tchoe", "kcc", 100.00);
     
     public static void main(String arg[]) {
         try {
@@ -19,7 +20,7 @@ public class SignLog {
             log.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                    CustDeposit logger = new CustDeposit();
+                    CustTransactions logger = new CustTransactions(cust);
                     logger.setVisible(true);
                     frame.setVisible(false);
                     }

@@ -1,7 +1,10 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 public class CustSaveAccount extends JDialog {
 
@@ -17,18 +20,18 @@ public class CustSaveAccount extends JDialog {
     private JMenuItem list = new JMenuItem("See Other Accounts");
     private JMenuItem transfer = new JMenuItem("Transfer to Securities");
     private JMenuItem request = new JMenuItem("Request");
-    private JMenuItem stock = new JMenuItem("See Stock Market");
+    private JMenuItem stock = new JMenuItem("Go to Securities Account");
     private JMenuItem view = new JMenuItem("See All");
     private JMenuItem deposit = new JMenuItem("Deposit");
     private JMenuItem withdrawl = new JMenuItem("Withdrawl");
 
-    public CustSaveAccount(JPanel parent){
+    public CustSaveAccount(Customer cust){
         super();
         setTitle("Bank App");
         deposit.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustDeposit dep = new CustDeposit();
+                    CustDeposit dep = new CustDeposit(cust);
                     dep.setVisible(true);
                 }
             }
@@ -36,7 +39,7 @@ public class CustSaveAccount extends JDialog {
         withdrawl.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustWithdraw with = new CustWithdraw(parent);
+                    CustWithdraw with = new CustWithdraw(cust);
                     with.setVisible(true);
                 }
             }
@@ -45,7 +48,7 @@ public class CustSaveAccount extends JDialog {
         request.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    LoanReq loan = new LoanReq(parent);
+                    LoanReq loan = new LoanReq(cust);
                     loan.setVisible(true);
                 }
             }
@@ -53,7 +56,7 @@ public class CustSaveAccount extends JDialog {
         update.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustProfile up = new CustProfile();
+                    CustProfile up = new CustProfile(cust);
                     up.setVisible(true);
                 }
             }
@@ -61,7 +64,7 @@ public class CustSaveAccount extends JDialog {
         transfer.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustTransfer tra = new CustTransfer();
+                    CustTransfer tra = new CustTransfer(cust);
                     tra.setVisible(true);
                 }
             }
@@ -69,8 +72,14 @@ public class CustSaveAccount extends JDialog {
         stock.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    StockViewCust st = new StockViewCust();
-                    st.setVisible(true);
+                    ArrayList<SecurityAccount> secCust = cust.getAllSecurities();
+                    if(secCust.size() > 0){
+                        StockViewCust st = new StockViewCust();
+                        st.setVisible(true);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Don't have a security account!");
+                    }
                 }
             }
         );
@@ -96,8 +105,8 @@ public class CustSaveAccount extends JDialog {
         m4.add(deposit);
         m4.add(withdrawl);
         m4.add(view);
-        JLabel user = new JLabel("Welcome:");
-        JLabel balance = new JLabel("Here is your current balance:");
+        JLabel user = new JLabel("Welcome: " + cust.firstName);
+        JLabel balance = new JLabel("Here is your current balance: $" + String.valueOf(cust.balance));
         balanceCheck.setLayout(new BoxLayout(balanceCheck, BoxLayout.PAGE_AXIS));
         Box account = Box.createVerticalBox();
         balanceCheck.add(account);

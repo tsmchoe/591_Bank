@@ -34,24 +34,24 @@ public abstract class User {
 	}
 
 
-	private void setFirstname(String firstName) {
+	public void setFirstname(String firstName) {
 		this.firstName = firstName;
 	}
 
-	private void setLastname(String lastName) {
+	public void setLastname(String lastName) {
 		this.lastName = lastName;
 	}
 
 	public String getUsername() {
 		return username;
 	}
-	private void setUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
 		return password;
 	}
-	private void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

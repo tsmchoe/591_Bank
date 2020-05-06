@@ -7,49 +7,51 @@ import java.awt.event.*;
 public class LoanReq extends JDialog{
 
     private static final long serialVersionUID = 1L;
-    private JPanel amount = new JPanel(new GridBagLayout());
+    private JPanel amount = new JPanel();
     private JLabel script;
     private JTextField entry;
     private JButton submit;
-    private Customer cust;
-    private LoginView login = new LoginView();
+    private String[] accountType = {"USD", "EURO", "CNY"};
+    private JComboBox checkSave;
+    private String choice;
     
-    public LoanReq(JPanel parent){
+    public LoanReq(Customer cust){
         super();
-        GridBagConstraints cs = new GridBagConstraints();
-        cs.fill = GridBagConstraints.HORIZONTAL;
+        amount.setLayout(new BoxLayout(amount, BoxLayout.Y_AXIS));
         script = new JLabel("Submit a Loan request amount:");
-        cs.gridx = 0;
-        cs.gridy = 0;
-        cs.gridwidth = 2;
-        amount.add(script, cs);
-
+        script.setAlignmentX(Component.CENTER_ALIGNMENT);
+        amount.add(Box.createRigidArea(new Dimension(0,10)));
+        amount.add(script);
         entry = new JTextField(40);
-        cs.gridx = 1;
-        cs.gridy = 0;
-        cs.gridwidth = 2;
-        amount.add(entry, cs);
-
+        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
+        amount.add(entry);
         JLabel col = new JLabel("Enter Collateral:");
-        cs.gridx = 0;
-        cs.gridy = 1;
-        cs.gridwidth = 1;
-        amount.add(col, cs);
-
+        col.setAlignmentX(Component.CENTER_ALIGNMENT);
+        amount.add(col);
         JTextField kac = new JTextField(40);
-        cs.gridx = 1;
-        cs.gridy = 1;
-        cs.gridwidth = 2;
-        amount.add(kac, cs);
+        kac.setAlignmentX(Component.CENTER_ALIGNMENT);
+        amount.add(kac);
+        checkSave = new JComboBox(accountType);
+        checkSave.setAlignmentX(Component.CENTER_ALIGNMENT);
+        amount.add(checkSave);
+
 
         submit = new JButton("Submit");
+
+        checkSave.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    choice = (String)checkSave.getSelectedItem();
+                }
+            }
+        );
 
         submit.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     String x = entry.getText();
                     Double loanAmount = Double.parseDouble(x);
-                    cust.createNewLoan("userId", loanAmount, kac.getText(), "loan_date", "payment_date");
+                    cust.createNewLoan(cust.userID, loanAmount, kac.getText());
                     setVisible(false);
                 }
             }
