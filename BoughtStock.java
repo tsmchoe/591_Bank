@@ -31,7 +31,12 @@ public class BoughtStock {
 	public void updatePrice(double newPrice) {
         this.currentPrice = newPrice;
         updateBoughtStock();
-	}
+    }
+    
+    public void updateShare(int newShare) {
+        this.share = newShare;
+        updateBoughtStock();
+    }
 
     //Calculate profit if were to sell this many share at the current price
 	public double getProfit(int shareToSell) {
