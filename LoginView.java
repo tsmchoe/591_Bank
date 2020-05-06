@@ -2,6 +2,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class LoginView extends JDialog implements ActionListener{
 
@@ -97,16 +98,21 @@ public class LoginView extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
+        int value3 = Integer.parseInt(text3.getText());
         DBConnector dbc = new DBConnector();
-		boolean x = dbc.checkUserByUsername(value1);
+        boolean x = dbc.checkUserByUsername(value1);
+        Customer cust = dbc.getCustomerByUserID(value3);
+        ArrayList<CheckingsAccount> custCheck = cust.getAllCheckings();
+        ArrayList<SavingsAccount> custSave = cust.getAllSavings();
+        //ArrayList<SecurityAccount> custSec = cust.getAllSecurities(); 
         if (x == true) {
             System.out.println("Logged in");
-            if (choice.equals("Savings")){
-                CustSaveAccount page=new CustSaveAccount(Login);
+            if (choice.equals("Savings") && custSave.size() > 0){
+                CustSaveAccount page=new CustSaveAccount(cust);
                 page.setVisible(true);
             }
-            else if(choice.equals("Checking")){
-                CustCheckAccount page=new CustCheckAccount(Login);
+            else if(choice.equals("Checking") && custCheck.size() > 0){
+                CustCheckAccount page=new CustCheckAccount(cust);
                 page.setVisible(true);
             }
             Login.setVisible(false);

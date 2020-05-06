@@ -2,6 +2,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
  
 public class CustWithdraw extends JDialog{
@@ -11,11 +12,12 @@ public class CustWithdraw extends JDialog{
     private JLabel script;
     private JTextField entry;
     private JButton submit;
-    private String[] accountType = {"USD", "EURO", "CNY"};
-    private JComboBox checkSave;
-    private String choice;
+    private String[] payType = {"USD", "EURO", "CNY"};
+    private String[] accountType = {"Checking", "Savings", "Security"};
+    private JComboBox checkSave, newPower;
+    private String choice,move;
     
-    public CustWithdraw(){
+    public CustWithdraw(Customer cust){
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
@@ -31,15 +33,21 @@ public class CustWithdraw extends JDialog{
         cs.gridwidth = 3;
         amount.add(entry, cs);
 
-        checkSave = new JComboBox(accountType);
+        checkSave = new JComboBox(payType);
         cs.gridx = 1;
         cs.gridy = 2;
         cs.gridwidth = 2;
         amount.add(checkSave, cs);
 
-        submit = new JButton("Submit");
+        newPower = new JComboBox(accountType);
         cs.gridx = 1;
         cs.gridy = 3;
+        cs.gridwidth = 2;
+        amount.add(newPower, cs);
+
+        submit = new JButton("Submit");
+        cs.gridx = 1;
+        cs.gridy = 4;
         cs.gridwidth = 1;
         amount.add(submit, cs);
 
@@ -51,10 +59,34 @@ public class CustWithdraw extends JDialog{
                 }
             }
         );
+        newPower.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    move = (String)newPower.getSelectedItem();
+                }
+            }
+        );
 
         submit.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    double x = Double.parseDouble(entry.getText());
+                    Currency newCurr = new Currency(choice);
+                    ArrayList<SavingsAccount> saveCurr = cust.getAllSavings();
+                    ArrayList<CheckingsAccount> checkCurr = cust.getAllCheckings();
+                    ArrayList<SecurityAccount> secCurr = cust.getAllSecurities();
+                    if(saveCurr.size() > 0 && move.equals("Saving")){
+                        saveCurr.get(0).withdraw(x, newCurr);
+                    }
+                    else if(checkCurr.size() > 0 && move.equals("Checking")){
+                        checkCurr.get(0).withdraw(x, newCurr);
+                    }
+                    else if(secCurr.size() > 0 && move.equals("Security")){
+                        secCurr.get(0).withdraw(x, newCurr);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Nothing to withdraw from");
+                    }
                     //Create Deposit
                    //Account acc = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), choice, date);
                     setVisible(false);

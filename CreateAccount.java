@@ -57,7 +57,7 @@ public class CreateAccount extends JDialog {
                     //Customer.createNewCustomer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText());
                     customer = new Customer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
                     customer.createNewCheckings(Double.parseDouble(amounter.getText()), customer.getUserID(), new Currency("USD"));
-                    CustCheckAccount dep = new CustCheckAccount(panel);
+                    CustCheckAccount dep = new CustCheckAccount(customer);
                     setVisible(false);
                     dep.setVisible(true);
                 }
@@ -70,7 +70,7 @@ public class CreateAccount extends JDialog {
                     //Create Customer
                     customer = new Customer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
                     customer.createNewSavings(Double.parseDouble(amounter.getText()), customer.getUserID(), new Currency("USD"));
-                    CustSaveAccount dep = new CustSaveAccount(panel);
+                    CustSaveAccount dep = new CustSaveAccount(customer);
                     setVisible(false);
                     dep.setVisible(true);
                 }
