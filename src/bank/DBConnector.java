@@ -480,7 +480,7 @@ public class DBConnector{
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
         //dbc.getDailyTransactions("2020-05-04");
-        dbc.getSecutrityAccountByUser(12);
+        //dbc.getSecutrityAccountByUser(12);
 
         
     }
