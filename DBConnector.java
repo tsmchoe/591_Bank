@@ -552,6 +552,27 @@ public class DBConnector{
         return ret;
     }
 
+    public void addStockToStockMarket(Stock stock){
+        try{
+            String query = "INSERT INTO Stock_Market(stockID,available_shares,name,current_price)"
+            + "VALUES(?,?,?,?)";
+
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,stock.getId());
+            this.preparedStatement.setInt(2,stock.getTotal_share());
+            this.preparedStatement.setString(3,stock.getName());
+            this.preparedStatement.setDouble(4,stock.getCurrentPrice());
+            this.preparedStatement.execute();
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("inserted new Stock into Stock_Market");
+        }
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         dbc.readDataBase();
@@ -570,7 +591,11 @@ public class DBConnector{
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
         //dbc.getAllStocks();
-        //dbc.getAvailableStockByID(57);
+        dbc.getAvailableStockByID(57);
+        Stock stockTest = new Stock(45, "dkfjlakds", 200.0, 30);
+        dbc.addStockToStockMarket(stockTest);
+
+        dbc.getAvailableStockByID(45);
         
 
     }
