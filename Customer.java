@@ -5,15 +5,26 @@ public class Customer extends User {
 	DBConnector db;
 
 
-	public Customer(int userID, String fistName, String lastName, String username, String password, double balance) {
-		super(userID, fistName, lastName, username, password, balance);
+	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
+		super(userID, firstName, lastName, username, password, balance);
 		db = new DBConnector();
 	}
 
-	public void createNewCustomer(String fistName, String lastName, String username, String password) {
-		Customer newCustomer = new Customer(Func.generate_id(), firstName, lastName, username, password, 0);
-		db.insertNewCustomer(newCustomer);
+	public Customer(String firstName, String lastName, String username, String password, double balance) {
+		super(Func.generate_id(), firstName, lastName, username, password, balance);
+		db = new DBConnector();
+		db.insertNewCustomer(this);
 	}
+
+	/* public static Customer createNewCustomer(String firstName, String lastName, String username, String password) {
+		Customer newCustomer = new Customer(Func.generate_id(), firstName, lastName, username, password);
+		
+		DBConnector db1 = new DBConnector();
+		db1.insertNewCustomer(newCustomer);
+		return newCustomer;
+	} */
+
+	//public Customer(int userID, String firstName, String lastName, String username, String)
 
 	//Get all the transactions made by this user
 	public ArrayList<Transaction> getTransactionsByDate(String date) {
