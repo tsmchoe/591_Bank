@@ -5,12 +5,16 @@ public class BoughtStock {
     private double equity;
     private double currentPrice;
     private double totalValue;
+    private String name;
+    private int accountID;
 
-    public BoughtStock(int stockid, double cost, int share) {
+    public BoughtStock(int stockid, double cost, int share, String name, int accountID) {
         this.setStock(stockid);
         this.setAvgCost(cost);
         this.setShare(share);
         this.setEquity(avgCost * share);
+        this.setName(name);
+        this.setAccount(accountID);
     }
 
     public void buyMore(double cost, int share) {
@@ -68,7 +72,31 @@ public class BoughtStock {
 
 	public double getTotalValue() {
 		return this.totalValue;
-	}
+    }
+    
+    public int getID(){
+        return this.stockid;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public double getCurrrent_price(){
+        return this.currentPrice;
+    }
+
+    public void setAccount(int accountID){
+        this.accountID = accountID;
+    }
+
+    public int getAccount(){
+        return this.accountID;
+    }
 
 
 

@@ -604,9 +604,145 @@ public class DBConnector{
             System.out.println("inserNewCustomer query complete");
         }
     }
+
+    public ArrayList<SecurityAccount> getSecurityAccountByStockID(int stockID){
+        ArrayList<SecurityAccount> ret = new ArrayList<SecurityAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stocks WHERE stockID= " + stockID);
+
+            ArrayList<Integer> accoundIDs = new ArrayList<Integer>();
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                accoundIDs.add(accountID);
+            }
+
+            String query = "SELECT * FROM SecurityAccount WHERE accountID=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            for(Integer id : accoundIDs){
+                this.preparedStatement.setInt(1,id);
+                this.resultSet = this.preparedStatement.executeQuery();
+                this.resultSet.next();
+
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                double cash = this.resultSet.getDouble("cash");
+                double unrealized = this.resultSet.getDouble("unrealized_profit"); 
+
+                SecurityAccount accountDB = new SecurityAccount(id, balance, userID, new Currency(currency));
+                accountDB.setCash(cash);
+                accountDB.setUnrealized_profits(unrealized);
+
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Received Security accounts that own the stock");
+        }
+        return ret;
+    }
+
+    public ArrayList<BoughtStock> getStockByAccountID(int account_id){
+        ArrayList<BoughtStock> ret = new ArrayList<BoughtStock>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stocks WHERE accountID= " + account_id);
+
+            while(this.resultSet.next()){
+                int stockID = this.resultSet.getInt("stockID");
+                double purchasedPrice = this.resultSet.getDouble("purchasedPrice");
+                String name = this.resultSet.getString("name");
+                int accountID = this.resultSet.getInt("accountID");
+
+                BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice, 1,name,accountID);
+                ret.add(stockDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getStockByAccountID complete");
+        }
+        return ret;
+    }
+
+    public void deleteStockByAccountStock(int stock_ID, int account_ID){
+        try{
+            String query = "DELETE FROM Stocks WHERE (stockID=? AND accountID=?)";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,stock_ID);
+            this.preparedStatement.setInt(2,account_ID);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("deleteStockByAccountStock");
+        }
+    }
+
+    public void insertNewBoughtStock(BoughtStock stock){
+        try{
+            String query = "INSERT INTO Stocks(stockID,name,current_price,accountID,purchasedPrice)" + 
+            "VALUES(?,?,?,?,?)";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,stock.getID());
+            this.preparedStatement.setString(2,stock.getName());
+            this.preparedStatement.setDouble(3,stock.getCurrrent_price());
+            this.preparedStatement.setInt(4,stock.getAccount());
+            this.preparedStatement.setDouble(5, stock.getAvgCost());
+
+            this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.print("insertNewBoughtStock query complete");
+        }
+    }
+
+    public void updateBoughtStock(int stockID, int currentPrice){
+        try{
+            String query = "UPDATE Stocks set current_price=? WHERE stockID=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,currentPrice);
+            this.preparedStatement.setInt(2,stockID);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("updateBoughtStock query complete");
+        }
+    }
+
+    public Customer getCustomerByUserID(int user_ID){
+        Customer ret = new Customer(0,"","","","",0);
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Users WHERE userID=" + user_ID + " AND userType='customer'");
+            
+            while(this.resultSet.next()){
+                int userID = this.resultSet.getInt("userID");
+                String username = this.resultSet.getString("username");
+                String password =this.resultSet.getString("password");
+                String firstname =this.resultSet.getString("firstName");
+                String lastname = this.resultSet.getString("lastName");
+                double balance = this.resultSet.getDouble("balance");
+
+                Customer customerDB = new Customer(userID, firstname, lastname, username, password, balance);
+
+                ret = customerDB;
+            }
+        }catch(SQLException e){
+                e.printStackTrace();
+        }finally{
+                System.out.println("getCustomerbyUserID query complete");
+            }
+            return ret;
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
-        dbc.readDataBase();
+        //dbc.readDataBase();
         //dbc.getAllUserLoans(12);
         //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
         //dbc.insertNewLoan(testLoan);
@@ -627,8 +763,17 @@ public class DBConnector{
         //dbc.addStockToStockMarket(stockTest);
         //dbc.getAvailableStockByID(45);
         //dbc.updateStockInStock_Market(58, 2800, 19);
-        Customer cust = new Customer(58, "Fred", "Winkle", "fwinkle", "fwinkle!", 0);
-        dbc.insertNewCustomer(cust);
+        //Customer cust = new Customer(58, "Fred", "Winkle", "fwinkle", "fwinkle!", 0);
+        //dbc.insertNewCustomer(cust);
+        //dbc.getSecurityAccountByStockID(58);
+        //dbc.getStockByAccountID(54);
+        //dbc.deleteStockByAccountStock(60, 3);
+        //BoughtStock testBoughtStock = new BoughtStock(53, 250, 1, "kdfjkd", 52);
+        //dbc.insertNewBoughtStock(testBoughtStock);
+        //dbc.updateBoughtStock(53,1000);
+        //dbc.getCustomerByUserID(58);
+
+
         
 
     }
