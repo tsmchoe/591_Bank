@@ -604,6 +604,44 @@ public class DBConnector{
             System.out.println("inserNewCustomer query complete");
         }
     }
+
+    public ArrayList<SecurityAccount> getSecurityAccountByStockID(int stockID){
+        ArrayList<SecurityAccount> ret = new ArrayList<SecurityAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT acountID FROM Stock WHERE stockID= " + stockID);
+
+            ArrayList<Integer> accoundIDs = new ArrayList<Integer>();
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                accoundIDs.add(accountID);
+            }
+
+            String query = "SELECT * FROM SecurityAccount WHERE accountID=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            for(Integer id : accoundIDs){
+                this.preparedStatement.setInt(1,id);
+                this.resultSet = this.preparedStatement.executeQuery();
+
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                double cash = this.resultSet.getDouble("cash");
+                double unrealized = this.resultSet.getDouble("unrealized_profit"); 
+
+                SecurityAccount accountDB = new SecurityAccount(id, balance, userID, new Currency(currency));
+                accountDB.setCash(cash);
+                accountDB.setUnrealized_profits(unrealized);
+
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Received Security accounts that own the stock");
+        }
+        return ret;
+    }
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         dbc.readDataBase();
