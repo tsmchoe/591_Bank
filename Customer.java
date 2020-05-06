@@ -21,14 +21,14 @@ public class Customer extends User {
 
 	}
 
-	public void createNewSavings(double initial_deposit, String userID, Currency currency) {
+	public void createNewSavings(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SAVINGS_MINIMUM_BALANCE) {
 			//store savings account in database, include interest rate as a field, can use Fees.SAVINGS_INTEREST
 		}
 
 	}
 
-	public void createNewSecurity(double initial_deposit, String userID, Currency currency) {
+	public void createNewSecurity(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SECURITY_OPEN_LIMIT) {
 			//store security account int database table
 		}

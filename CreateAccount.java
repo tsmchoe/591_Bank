@@ -10,17 +10,20 @@ public class CreateAccount extends JDialog {
     private JTextField firster = new JTextField(20);
     private JLabel lastname = new JLabel("Last Name");
     private JTextField laster = new JTextField(20);
-    private JLabel address = new JLabel("Address");
+    private JLabel address = new JLabel("Username");
     private JTextField addresser = new JTextField(40);
 
-    private JLabel email = new JLabel("Email");
-    private JTextField emailer = new JTextField(40);
+    private JLabel amount = new JLabel("Starting Deposit Amount in USD");
+    private JTextField amounter = new JTextField(40);
     private JLabel password = new JLabel("Password");
-    private JPasswordField passworder = new JPasswordField(20);
+    private JTextField passworder = new JTextField(20);
+    private JLabel user = new JLabel("UserID (Must be int)");
+    private JTextField userid = new JTextField(20);
     private JButton bu1 = new JButton("Create Checking Account");
     private JButton bu2 = new JButton("Create Savings Account");
     private JPanel buttons = new JPanel();
 
+    private Customer customer;
 
     public CreateAccount(Frame parent){
         super();
@@ -38,19 +41,25 @@ public class CreateAccount extends JDialog {
         panel.add(address);
         addresser.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(addresser);
-        email.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(email);
-        emailer.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(emailer);
+        amount.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(amount);
+        amounter.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(amounter);
         password.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(password);
         passworder.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(passworder);
+        user.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(user);
+        userid.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(userid);
 
         bu1.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    //Create Customer
+                    //Create Custo
+                    customer = new Customer(Integer.parseInt(user.getText()), firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
+                    customer.createNewCheckings(Double.parseDouble(amounter.getText()), Integer.parseInt(user.getText()), new Currency("USD"));
                     CustCheckAccount dep = new CustCheckAccount(panel);
                     setVisible(false);
                     dep.setVisible(true);
@@ -62,6 +71,8 @@ public class CreateAccount extends JDialog {
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     //Create Customer
+                    customer = new Customer(Integer.parseInt(user.getText()), firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
+                    customer.createNewSavings(Double.parseDouble(amounter.getText()), Integer.parseInt(user.getText()), new Currency("USD"));
                     CustSaveAccount dep = new CustSaveAccount(panel);
                     setVisible(false);
                     dep.setVisible(true);
