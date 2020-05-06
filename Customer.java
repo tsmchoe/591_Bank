@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar; 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Customer extends User {
 	DBConnector db;
 
@@ -124,9 +127,24 @@ public class Customer extends User {
 		return acc;
 	}
 
-	//Called when a fee is charged(for example, closing/openning account)
-	public void decreaseBalance(double amt) {
-		balance -= amt;
+	//Check all the loans that the user have, it is payment day, user pays loan interest
+	public void pay_loan_increase() throws ParseException {
+		for(Loan l: getAllLoans()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String strloanDate = l.getLoanDate();
+			Date loanDate = sdf.parse(strloanDate);
+			Date currentDate = Calendar.getInstance().getTime();
+			// we want the user to pay loan interest every 30 days, here we check if the diff between today and loan date is 30.
+			if((currentDate.getTime() - loanDate.getTime()) % 30 < 1) {
+				//bank gets fee
+				double fee = l.getAmount() * Fees.LOAN_INTEREST;
+				db.increaseBankBalance(fee);
+				//decrease the money in user's checking's account
+				getAllCheckings().get(0).withdraw(fee, new Currency(getAllCheckings().get(0).getCurrency()));
+
+			}
+		}
+
 	}
 
 	public String getFirstName(){
