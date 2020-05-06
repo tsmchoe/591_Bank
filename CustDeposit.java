@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
  
 public class CustDeposit extends JDialog{
 
@@ -30,6 +31,17 @@ public class CustDeposit extends JDialog{
         cs.gridy = 2;
         cs.gridwidth = 1;
         amount.add(submit, cs);
+
+        submit.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    //Create Deposit
+                    CustCheckAccount dep = new CustCheckAccount(parent);
+                    setVisible(false);
+                    dep.setVisible(true);
+                }
+            }
+        );
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);

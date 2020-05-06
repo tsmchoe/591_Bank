@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
  
 public class CreateAccount extends JDialog {
 
@@ -45,8 +46,35 @@ public class CreateAccount extends JDialog {
         panel.add(password);
         passworder.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(passworder);
+
+        bu1.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    //Create Customer
+                    CustCheckAccount dep = new CustCheckAccount(panel);
+                    setVisible(false);
+                    dep.setVisible(true);
+                }
+            }
+        );
+
+        bu2.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    //Create Customer
+                    CustSaveAccount dep = new CustSaveAccount(panel);
+                    setVisible(false);
+                    dep.setVisible(true);
+                }
+            }
+        );
+
+
         buttons.add(bu1);
         buttons.add(bu2);
+
+
+
         getContentPane().add(panel);
         getContentPane().add(buttons, BorderLayout.PAGE_END);
         setSize(400,400);
