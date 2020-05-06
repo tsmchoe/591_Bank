@@ -7,6 +7,10 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
 
+/*This class acts a layer between the database and the backend. 
+//Here the connection to the database is taken care of and all of the queries are provided.
+//The backend utilizes this by constructing an instance of this class.
+The methods of this class are then used to run each of the queries.*/
 public class DBConnector{ 
     private Connection connect = null;
     private Statement statement = null;
@@ -14,6 +18,10 @@ public class DBConnector{
 
     private ResultSet resultSet = null;
 
+    /*Constructor for DBConnector. As a part of the constructor we connect to the database so that each query
+    does not need to make a seperate connection to the database. As a result once an instance is created
+    in the backend instance only needs to make one connection. This should help decrease runtime for our
+    application.*/
     public DBConnector(){
         this.connect = this.getConnection();
     }
@@ -945,57 +953,4 @@ public class DBConnector{
             System.out.println("decreaseBankBalance query complete");
         }
     }
-
-
-    public static void main(String[] args){
-        DBConnector dbc = new DBConnector();
-        //dbc.readDataBase();
-        //dbc.getAllUserLoans(12);
-        //Loan testLoan = new Loan(3,12,10000.0,"test","2020-5-30","2024-5-30");
-        //dbc.insertNewLoan(testLoan);
-        //dbc.getAllUserLoans(12);
-        //dbc.getUserTransactions_Date(12,"2020-05-04");
-        //dbc.checkUserByUsername("firstUser");
-        //dbc.updateBalanceCheckings(1,1500);
-        //dbc.updateBalanceSavings(42,7200);
-        //CheckingsAccount newCheckingsTest = new CheckingsAccount(34, 500, 12, new Currency("USD"));
-        //dbc.insertNewAccount(newCheckingsTest);
-        //SavingsAccount newSavingsTest = new SavingsAccount(35, 2000, 12, new Currency("USD"), .02);
-        //dbc.insertNewAccount(newSavingsTest);
-        //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
-        //dbc.insertNewAccount(newSecurityTest);
-        //dbc.getAllStocks();
-        //dbc.getAvailableStockByID(57);
-        //Stock stockTest = new Stock(45, "dkfjlakds", 200.0, 30);
-        //dbc.addStockToStockMarket(stockTest);
-        //dbc.getAvailableStockByID(45);
-        //dbc.updateStockInStock_Market(58, 2800, 19);
-        //Customer cust = new Customer(58, "Fred", "Winkle", "fwinkle", "fwinkle!", 0);
-        //dbc.insertNewCustomer(cust);
-        //dbc.getSecurityAccountByStockID(58);
-        //dbc.getStockByAccountID(54);
-        //dbc.deleteStockByAccountStock(60, 3);
-        //BoughtStock testBoughtStock = new BoughtStock(53, 250, 1, "kdfjkd", 52);
-        //dbc.insertNewBoughtStock(testBoughtStock);
-        //dbc.updateBoughtStock(53,1000);
-        //dbc.getCustomerByUserID(58);
-        //Deposit depositTest = new Deposit(3, 12, 58, 200, "USD", "2020-05-06");
-        //dbc.insertTransaction(depositTest, "deposit");
-        //Transfer transferTest = new Transfer(4, 12, 58, 200, "USD", "2020-05-06", 67);
-        //dbc.insertTransaction(transferTest);
-        //dbc.getCheckingsAccountByAccountID(1);
-        //dbc.getBoughtStockByStockIDAccountID(58, 54);
-        //dbc.updateBalanceSecurity(54, 700);
-        //dbc.increaseBankBalance(1250);
-        //dbc.decreaseBankBalance(1250);
-        //Transaction testTransaction = new Deposit(1, 72, 72, 200, "USD");
-        //dbc.insertTransaction(testTransaction, "deposit");
-        dbc.getTransactionsByUser(12);
-
-
-        
-
-    }
-
-
 }
