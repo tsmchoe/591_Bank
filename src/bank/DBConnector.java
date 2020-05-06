@@ -389,6 +389,170 @@ public class DBConnector{
         }
     }
 
+    public ArrayList<Transaction> getDailyTransactions(String date){
+        ArrayList<Transaction> ret = new ArrayList<Transaction>();
+        try{
+            this.statement = this.connect.createStatement();
+            Date transactionDate = Date.valueOf(date);
+            this.resultSet = this.statement.executeQuery("Select * FROM `CS591-bank`.Transactions WHERE Transactions.transaction_date='" + transactionDate +"'");
+
+            while(this.resultSet.next()){
+                int transactionID  = this.resultSet.getInt("transactionID");
+                int userID = this.resultSet.getInt("userID");
+                int accountID = this.resultSet.getInt("accountID");
+                String transaction_date = this.resultSet.getString("transaction_date");
+                double amount = this.resultSet.getDouble("amount");
+                String currency = this.resultSet.getString("currency");
+                String transactionType = this.resultSet.getString("transactionType");
+                int transferAccountID = this.resultSet.getInt("transferAccountID");
+                
+                System.out.println(transaction_date);
+                Transaction userTransactionByDate;
+                if(transactionType.equals("deposit")){
+                    userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("withdrawl")){
+                    userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("transfer")){
+                    userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString(), transferAccountID);
+                    ret.add(userTransactionByDate);
+                }
+
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Daily transaction query");
+        }
+        System.out.println(ret);
+        return ret;
+    }
+
+    public ArrayList<CheckingsAccount> getCheckingsAccountByUser(int user_id){
+        ArrayList<CheckingsAccount> ret = new ArrayList<CheckingsAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM `CS591-bank`.CheckingsAccount WHERE CheckingsAccount.userID=" + user_id);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+
+                CheckingsAccount accountDB = new CheckingsAccount(accountID, balance, userID, new Currency(currency));
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Checkings Account by user query complete");
+        }
+        return ret;
+    }
+
+    public ArrayList<SavingsAccount> getSavingsAccountByUser(int user_id){
+        ArrayList<SavingsAccount> ret = new ArrayList<SavingsAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM `CS591-bank`.SavingsAccount WHERE SavingsAccount.userID=" + user_id);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                double ir = this.resultSet.getDouble("interestRate");
+
+                SavingsAccount accountDB = new SavingsAccount(accountID, balance, userID, new Currency(currency),ir);
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Savings Account by user query complete");
+        }
+        return ret;
+    }
+
+    public ArrayList<SecurityAccount> getSecutrityAccountByUser(int user_id){
+        ArrayList<SecurityAccount> ret = new ArrayList<SecurityAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM `CS591-bank`.SecurityAccount WHERE SecurityAccount.userID=" + user_id);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                double cash = this.resultSet.getDouble("cash");
+                double unrealized = this.resultSet.getDouble("unrealized_profit");
+
+                SecurityAccount accountDB = new SecurityAccount(accountID, balance, userID, new Currency(currency));
+                accountDB.setCash(cash);
+                accountDB.setUnrealized_profits(unrealized);
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Savings Account by user query complete");
+        }
+        return ret;
+    }
+
+    public ArrayList<Stock> getAllAvailableStocks(){
+        ArrayList<Stock> ret = new ArrayList<Stock>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stock_Market");
+
+            while(this.resultSet.next()){
+                int stockID = this.resultSet.getInt("stockID");
+                String name = this.resultSet.getString("name");
+                double current_price = this.resultSet.getDouble("current_price");
+                int available_shares = this.resultSet.getInt("available_shares");
+
+                Stock dbStock = new Stock(stockID, name, current_price, available_shares);
+                ret.add(dbStock);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Found all current stocks in the stock market");
+        }
+        System.out.println(ret);
+        return ret;
+    }
+
+    public Stock getAvailableStockByID(int stock_ID){
+        Stock ret = new Stock(0, "", 0, 0);
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stock_Market WHERE stockID=" + stock_ID);
+
+            this.resultSet.next();
+            int stockID = this.resultSet.getInt("stockID");
+            int available_shares = this.resultSet.getInt("available_shares");
+            String name = this.resultSet.getString("name");
+            double current_price = this.resultSet.getDouble("current_price");
+            ret = new Stock(stockID, name, current_price, available_shares);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getAvailalbeStockByID complete");
+        }
+        return ret;
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         dbc.readDataBase();
@@ -406,6 +570,8 @@ public class DBConnector{
         //dbc.insertNewAccount(newSavingsTest);
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
+        //dbc.getAllStocks();
+        //dbc.getAvailableStockByID(57);
         
 
     }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class SecurityAccount extends Account {
     private double unrealized_profit;
+    private double cash;
 
 
     public SecurityAccount(int accountID, double balance, int userID, Currency currency) {
@@ -59,6 +60,13 @@ public class SecurityAccount extends Account {
 	}
 
 
+    public void setUnrealized_profits(double unrealized){
+        this.unrealized_profit = unrealized;
+    }
+
+    public void setCash(double cashAmount){
+        this.cash = cashAmount;
+    }
 
     public double getUnrealized_profit() {
         double ret = balance;
@@ -77,6 +85,7 @@ public class SecurityAccount extends Account {
         return ret;
 
     }
+    
 
     /* In real life, there would be restrictions on how many times a security account can transfer/withdraw, but since it's not
     required in the assignment, we have it the same as in the checkings account(not restriction)
