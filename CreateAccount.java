@@ -17,8 +17,6 @@ public class CreateAccount extends JDialog {
     private JTextField amounter = new JTextField(40);
     private JLabel password = new JLabel("Password");
     private JTextField passworder = new JTextField(20);
-    private JLabel user = new JLabel("UserID (Must be int)");
-    private JTextField userid = new JTextField(20);
     private JButton bu1 = new JButton("Create Checking Account");
     private JButton bu2 = new JButton("Create Savings Account");
     private JPanel buttons = new JPanel();
@@ -50,6 +48,7 @@ public class CreateAccount extends JDialog {
         passworder.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(passworder);
 
+
         bu1.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
@@ -58,7 +57,7 @@ public class CreateAccount extends JDialog {
                     //Customer.createNewCustomer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText());
                     customer = new Customer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText(),0);
 
-                    customer.createNewCheckings(Double.parseDouble(amounter.getText()), Integer.parseInt(user.getText()), new Currency("USD"));
+                    customer.createNewCheckings(Double.parseDouble(amounter.getText()), customer.getUserID(), new Currency("USD"));
                     CustCheckAccount dep = new CustCheckAccount(panel);
                     setVisible(false);
                     dep.setVisible(true);
