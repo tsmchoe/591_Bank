@@ -1,4 +1,4 @@
-
+//Page that allowed customers to buy stocks
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

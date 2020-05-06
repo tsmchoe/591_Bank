@@ -1,4 +1,4 @@
-
+//Allows customer to transfer money from savings to security account
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -64,8 +64,6 @@ public class CustTransfer extends JDialog {
                     else{
                         JOptionPane.showMessageDialog(null,"Nothing to deposit to");
                     }
-                    //Create Deposit
-                   //Account acc = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), choice, date);
                     setVisible(false);
                 }
             }
@@ -76,5 +74,5 @@ public class CustTransfer extends JDialog {
         setTitle("Transfer");
 
     }
-    //create a new security account
+
 }

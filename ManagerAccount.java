@@ -1,4 +1,4 @@
-
+//The manager account - allows the manager to see all that is going on with his customers.
 
 import java.awt.*;
 import java.awt.event.*;

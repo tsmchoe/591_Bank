@@ -1,4 +1,4 @@
-
+//Login page for user
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -85,15 +85,6 @@ public class LoginView extends JDialog implements ActionListener{
         setTitle("Login");
 
     }
-    public String getUsername(){
-        return text1.getText();
-    }
-    public String getPassword(){
-        return text2.getText();
-    }
-    public int getUserId(){
-        return Integer.parseInt(text3.getText());
-    }
 
 
     public void actionPerformed(ActionEvent ae){
@@ -103,16 +94,13 @@ public class LoginView extends JDialog implements ActionListener{
         DBConnector dbc = new DBConnector();
         boolean x = dbc.checkUserByUsername(value1);
         Customer cust = dbc.getCustomerByUserID(value3);
-        ArrayList<CheckingsAccount> custCheck = cust.getAllCheckings();
-        ArrayList<SavingsAccount> custSave = cust.getAllSavings();
-        //ArrayList<SecurityAccount> custSec = cust.getAllSecurities(); 
         if (x == true) {
             System.out.println("Logged in");
-            if (choice.equals("Savings")){// && custSave.size() > 0){
+            if (choice.equals("Savings")){
                 CustSaveAccount page=new CustSaveAccount(cust);
                 page.setVisible(true);
             }
-            else if(choice.equals("Checking")){//custCheck.size() > 0){
+            else if(choice.equals("Checking")){
                 CustCheckAccount page=new CustCheckAccount(cust);
                 page.setVisible(true);
             }

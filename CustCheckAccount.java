@@ -1,3 +1,5 @@
+//Customer Checkings account
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

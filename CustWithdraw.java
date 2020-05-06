@@ -1,4 +1,4 @@
-
+//Allows customer to withdraw from their account
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -87,7 +87,6 @@ public class CustWithdraw extends JDialog{
                     else{
                         JOptionPane.showMessageDialog(null,"Nothing to withdraw from");
                     }
-                    //Create Deposit
                 }
             }
         );

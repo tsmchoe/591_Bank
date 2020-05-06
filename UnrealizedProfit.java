@@ -1,4 +1,4 @@
-
+//Allows customer to see unrealized profit
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

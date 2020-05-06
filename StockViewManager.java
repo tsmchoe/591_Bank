@@ -1,4 +1,4 @@
-
+//Allows manger to see the current stock market
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;

@@ -1,3 +1,4 @@
+//Login page for manager
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

@@ -1,4 +1,4 @@
-
+//Allows customer to request a loan
 
 import javax.swing.*;
 import java.awt.*;

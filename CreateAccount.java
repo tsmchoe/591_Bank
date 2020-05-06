@@ -1,3 +1,4 @@
+//A Form that allows customer to create an account
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

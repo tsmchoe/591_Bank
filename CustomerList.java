@@ -1,3 +1,4 @@
+//Shows the list of accounts the customer has
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;

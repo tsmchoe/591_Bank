@@ -1,4 +1,4 @@
-
+//Allows customer to see stock market from securities account
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;

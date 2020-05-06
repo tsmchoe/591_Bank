@@ -1,4 +1,4 @@
-
+//A  form allowing the manager to enter the date of the transactions he wants to see
 
 import java.awt.*;
 import java.awt.event.*;

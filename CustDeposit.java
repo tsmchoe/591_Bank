@@ -1,3 +1,5 @@
+//Form to let customers deposit money
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

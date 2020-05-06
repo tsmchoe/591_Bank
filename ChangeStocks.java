@@ -1,3 +1,4 @@
+//Page that allows manager to change stock prices
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

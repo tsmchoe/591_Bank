@@ -1,4 +1,4 @@
-
+//Form allowing customer to update their profile
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

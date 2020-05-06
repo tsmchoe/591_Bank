@@ -1,3 +1,4 @@
+//Allows manager to see specific customer transactions
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import javax.swing.*;
 public class ManagerSearch extends JDialog {
 
     private static final long serialVersionUID = 1L;
-//add search bar functionality
     private JPanel amount = new JPanel(new GridBagLayout());
     private JLabel script;
     private JTextField entry;

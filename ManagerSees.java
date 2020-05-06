@@ -1,4 +1,4 @@
-
+//Allows manager to see all transactions made by customers
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
