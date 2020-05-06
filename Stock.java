@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//Represents stock in the stock market
 public class Stock {
     private int stockid;
     private String name;
@@ -75,10 +75,7 @@ public class Stock {
 
     //Get all security accounts who bought the stock
     private ArrayList<SecurityAccount> getAllSubscribers() {
-        ArrayList<SecurityAccount> ret = null;
-        /// query database using this.stockid, 
-        // add new SecurityAccount()
-        ///
+        ArrayList<SecurityAccount> ret = db.getSecurityAccountByStockID(stockid);
         return ret;
     }   
 

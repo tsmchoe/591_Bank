@@ -1,3 +1,4 @@
+//Based class shared by Savings, Checking, and Security accounts
 public abstract class Account {
     protected int accountID;
     protected double balance;
@@ -11,7 +12,7 @@ public abstract class Account {
         this.currency = currency;
     }
 
-    //required methods
+    //required methods for subclasses
     public abstract void deposit(double amt, Currency currency);
 
     public abstract void withdraw(double amt, Currency currency);

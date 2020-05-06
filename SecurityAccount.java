@@ -8,30 +8,32 @@ import java.util.Map;
 public class SecurityAccount extends Account {
     private double unrealized_profit;
     private double cash;
-
+    DBConnector db;
 
     public SecurityAccount(int accountID, double balance, int userID, Currency currency) {
         super(accountID, balance, userID, currency);
+        db = new DBConnector();
     }
 
 
     // customer buys share of a stock with each costing cost
     public void buyStock(int stockId, double cost, int share) {
-        // Stock market_stock = select stock by stockid
-        // if(market_stock.gettTotalShare() <= share) {
-            // double total_cost = cost*share;
-            // if(total_cost <= balance) {
-                // if(BoughtStock exists) {
-                //     Select BoughtStock in database,
-                //     boughtStock.buyMore(cost, share);
-                // } else {
-                    //Create new BoughtStock(int stockid, String name, double currentPrice, int share, double cost);
-                // }
-                // stock.setShare(market_stock.getTotalShare()-share);
-                // this.balance -= total_cost;
-                // updateAccount();
+        Stock market_stock = db.getAvailableStockByID(stockId);
+        int shares_in_market = market_stock.getTotal_share();
+        if(shares_in_market <= share) {
+            double total_cost = cost*share;
+            if(total_cost <= balance) {
+            //     if(BoughtStock exists) {
+            //         Select BoughtStock in database,
+            //         boughtStock.buyMore(cost, share);
+            //     } else {
+            //         Create new BoughtStock(int stockid, String name, double currentPrice, int share, double cost);
+            //     }
+            //     stock.setShare(market_stock.getTotalShare()-share);
+            //     this.balance -= total_cost;
+            //     updateAccount();
             // }
-        // }
+        }
 
     }
 
@@ -82,8 +84,7 @@ public class SecurityAccount extends Account {
  
 
     public ArrayList<BoughtStock> getAllStocks() {
-        ArrayList<BoughtStock> ret = null;
-        //query the database to get all BoughtStock owned by accountid
+        ArrayList<BoughtStock> ret = db.getStockByAccountID(accountID);
         return ret;
 
     }
