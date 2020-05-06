@@ -573,6 +573,37 @@ public class DBConnector{
         }
     }
 
+    public void updateStockInStock_Market(int stock_id, double new_price, int avail_shares){
+        try{
+            String query = "UPDATE Stock_Market set available_shares= ?, current_price =? WHERE stockID=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,avail_shares);
+            this.preparedStatement.setDouble(2,new_price);
+            this.preparedStatement.setInt(3,stock_id);
+            this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("updateStockInStock_Market complete");
+        }
+    }
+
+    public void insertNewCustomer(Customer cust){
+        try{
+            String query = "INSERT INTO Users(userID,username,password,userType)" + 
+            "VALUES(?,?,?,?)";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,cust.getUserID());
+            this.preparedStatement.setString(2,cust.getUsername());
+            this.preparedStatement.setString(3, cust.getPassword());
+            this.preparedStatement.setString(4, "customer");
+            this.preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("inserNewCustomer query complete");
+        }
+    }
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         dbc.readDataBase();
@@ -591,11 +622,13 @@ public class DBConnector{
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
         //dbc.getAllStocks();
-        dbc.getAvailableStockByID(57);
-        Stock stockTest = new Stock(45, "dkfjlakds", 200.0, 30);
-        dbc.addStockToStockMarket(stockTest);
-
-        dbc.getAvailableStockByID(45);
+        //dbc.getAvailableStockByID(57);
+        //Stock stockTest = new Stock(45, "dkfjlakds", 200.0, 30);
+        //dbc.addStockToStockMarket(stockTest);
+        //dbc.getAvailableStockByID(45);
+        //dbc.updateStockInStock_Market(58, 2800, 19);
+        Customer cust = new Customer(58, "Fred", "Winkle", "fwinkle", "fwinkle!", 0);
+        dbc.insertNewCustomer(cust);
         
 
     }

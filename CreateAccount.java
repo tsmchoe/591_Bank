@@ -54,7 +54,10 @@ public class CreateAccount extends JDialog {
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     //Create Custo
-                    customer = new Customer(Integer.parseInt(user.getText()), firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
+                    //customer = new Customer(Integer.parseInt(user.getText()), firster.getText(), laster.getText(), addresser.getText(), passworder.getText(), Double.parseDouble(amounter.getText()));
+                    //Customer.createNewCustomer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText());
+                    customer = new Customer(firster.getText(), laster.getText(), addresser.getText(), passworder.getText(),0);
+
                     customer.createNewCheckings(Double.parseDouble(amounter.getText()), Integer.parseInt(user.getText()), new Currency("USD"));
                     CustCheckAccount dep = new CustCheckAccount(panel);
                     setVisible(false);

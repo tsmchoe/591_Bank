@@ -1,12 +1,30 @@
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 public class Customer extends User {
 	DBConnector db;
 
 
-	public Customer(int userID, String fistName, String lastName, String username, String password, double balance) {
-		super(userID, fistName, lastName, username, password, balance);
+	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
+		super(userID, firstName, lastName, username, password, balance);
 		db = new DBConnector();
 	}
+
+	public Customer(String firstName, String lastName, String username, String password, double balance) {
+		super(Func.generate_id(), firstName, lastName, username, password, balance);
+		db = new DBConnector();
+		db.insertNewCustomer(this);
+	}
+
+	/* public static Customer createNewCustomer(String firstName, String lastName, String username, String password) {
+		Customer newCustomer = new Customer(Func.generate_id(), firstName, lastName, username, password);
+		
+		DBConnector db1 = new DBConnector();
+		db1.insertNewCustomer(newCustomer);
+		return newCustomer;
+	} */
+
+	//public Customer(int userID, String firstName, String lastName, String username, String)
 
 	//Get all the transactions made by this user
 	public ArrayList<Transaction> getTransactionsByDate(String date) {
@@ -24,18 +42,23 @@ public class Customer extends User {
 	public void createNewSavings(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SAVINGS_MINIMUM_BALANCE) {
 			//store savings account in database, include interest rate as a field, can use Fees.SAVINGS_INTEREST
+			SavingsAccount newSavings = new SavingsAccount(Func.generate_id(), initial_deposit, userID, currency, Fees.SAVINGS_INTEREST);
+			db.insertNewAccount(newSavings);
 		}
 
 	}
 
 	public void createNewSecurity(double initial_deposit, int userID, Currency currency) {
 		if(initial_deposit >= Fees.SECURITY_OPEN_LIMIT) {
-			//store security account int database table
+			SecurityAccount newSecurity = new SecurityAccount(Func.generate_id(), initial_deposit, userID, currency);
+			db.insertNewAccount(newSecurity);
 		}
 	}
 
-	public void createNewLoan(String userId, double amount, String collateral, String loan_date, String payment_date) {
-		// Loan newLoan = new Loan(userId, amount, collateral, loan_date, payment_date);
+	public void createNewLoan(int userId, double amount, String collateral) {
+		// DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+		// LocalDateTime now = LocalDateTime.now(); 
+		// Loan newLoan = new Loan(Func.generate_id(), amount, collateral, now.toString(), );
 		// DBConnector.insertNewLoan(newLoan);
 	}
 
