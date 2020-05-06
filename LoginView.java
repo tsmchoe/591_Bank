@@ -69,7 +69,8 @@ public class LoginView extends JDialog implements ActionListener{
         checkSave.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    choice = (String)checkSave.getSelectedItem();
+                    JComboBox combo = (JComboBox<String>) e.getSource();
+                    choice = (String) combo.getSelectedItem();
                 }
             }
         );

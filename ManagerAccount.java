@@ -2,6 +2,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -64,20 +66,12 @@ public class ManagerAccount extends JDialog {
         m2.add(update);
         mb.add(m3);
         m3.add(report);
-        JLabel user = new JLabel("Welcome:");
-        JLabel balance = new JLabel("Here are all your customers:");
-        String[] listCat = {};
-        JTable customerList = new JTable();        
-        JScrollPane scrollPane = new JScrollPane();
-        Dimension d = customerList.getPreferredSize();
-        scrollPane.setPreferredSize(new Dimension(d.width, customerList.getRowHeight()*6+1));
-        //add fucntionality to table
+        JLabel user = new JLabel("Welcome back Manager!");
+
         balanceCheck.setLayout(new BoxLayout(balanceCheck, BoxLayout.PAGE_AXIS));
         Box account = Box.createVerticalBox();
         balanceCheck.add(account);
         account.add(user);
-        account.add(balance);
-        account.add(scrollPane);
         getContentPane().add(BorderLayout.PAGE_START, mb);
         getContentPane().add(BorderLayout.CENTER,balanceCheck);
 
