@@ -12,7 +12,7 @@ public class Customer extends User {
 
 	public void createNewCustomer(String fistName, String lastName, String username, String password) {
 		Customer newCustomer = new Customer(Func.generate_id(), firstName, lastName, username, password, 0);
-		//store newCustomer in the database;
+		db.insertNewCustomer(newCustomer);
 	}
 
 	//Get all the transactions made by this user
