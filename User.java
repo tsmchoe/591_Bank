@@ -17,7 +17,6 @@ public abstract class User {
 		setBalance(balance);
 	}
 
-
 	public abstract double getBalance();
 
 	public void setBalance(double balance) {
