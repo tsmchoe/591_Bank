@@ -860,6 +860,44 @@ public class DBConnector{
         return ret;
     }
 
+    public BoughtStock getBoughtStockByStockIDAccountID(int stock_ID, int account_ID){
+        BoughtStock ret = new BoughtStock(0, 0, 0, "null", 0);
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stocks WHERE (stockID=" + stock_ID + " AND accountID=" +account_ID+")");
+
+            while(this.resultSet.next()){
+                int stockID = this.resultSet.getInt("stockID");
+                String name = this.resultSet.getString("name");
+                double current_price = this.resultSet.getDouble("current_price");
+                int shares = this.resultSet.getInt("shares");
+                int accountID = this.resultSet.getInt("accountID");
+
+                ret = new BoughtStock(stockID, current_price, shares, name, accountID);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getBoughtStockByStockIDAccountID query complete");
+        }
+        System.out.println(ret.getName());
+        return ret;
+    } 
+
+    public void updateBalanceSecurity(int accountID, double newBalance){
+        try{
+            String query = "UPDATE SecurityAccount SET balance=? WHERE accountID=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1,newBalance);
+            this.preparedStatement.setInt(2,accountID);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("updateSecurityBalance query complete");
+        }
+    }
+
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
@@ -898,6 +936,8 @@ public class DBConnector{
         //Transfer transferTest = new Transfer(4, 12, 58, 200, "USD", "2020-05-06", 67);
         //dbc.insertTransaction(transferTest);
         //dbc.getCheckingsAccountByAccountID(1);
+        //dbc.getBoughtStockByStockIDAccountID(58, 54);
+        dbc.updateBalanceSecurity(54, 700);
 
 
         
