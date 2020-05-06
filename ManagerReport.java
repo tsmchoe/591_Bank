@@ -33,6 +33,14 @@ public class ManagerReport extends JDialog {
         cs.gridy = 2;
         cs.gridwidth = 1;
         amount.add(submit, cs);
+        submit.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    DateReport man = new DateReport(entry.getText());
+                    man.setVisible(true);
+                }
+            }
+        );
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);

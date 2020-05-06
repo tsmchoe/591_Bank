@@ -88,8 +88,6 @@ public class CustWithdraw extends JDialog{
                         JOptionPane.showMessageDialog(null,"Nothing to withdraw from");
                     }
                     //Create Deposit
-                   //Account acc = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), choice, date);
-                    setVisible(false);
                 }
             }
         );

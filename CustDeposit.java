@@ -86,8 +86,7 @@ public class CustDeposit extends JDialog{
                         JOptionPane.showMessageDialog(null,"Nothing to deposit to");
                     }
                     //Create Deposit
-                   //Account acc = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), choice, date);
-                    setVisible(false);
+                
                 }
             }
         );
