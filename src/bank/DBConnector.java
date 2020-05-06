@@ -147,6 +147,54 @@ public class DBConnector{
         System.out.println(ret);
         return ret;
     }
+
+    public ArrayList<Transaction> getTransactions_Date(String date){
+        ArrayList<Transaction> ret = new ArrayList<Transaction>();
+        try{
+            
+            this.statement = this.connect.createStatement();
+            Date transactionDate = Date.valueOf(date);
+            this.resultSet = this.statement.executeQuery("Select * FROM `CS591-bank`.Transactions WHERE (Transactions.transaction_date='" + transactionDate +"')");
+
+            while(this.resultSet.next()){
+                int transactionID  = this.resultSet.getInt("transactionID");
+                int userID = this.resultSet.getInt("userID");
+                int accountID = this.resultSet.getInt("accountID");
+                Date transaction_date = this.resultSet.getDate("transaction_date");
+                double amount = this.resultSet.getDouble("amount");
+                String currency = this.resultSet.getString("currency");
+                String transactionType = this.resultSet.getString("transactionType");
+                int transferAccountID = this.resultSet.getInt("transferAccountID");
+                
+                System.err.println(transactionID);
+                Transaction userTransactionByDate;
+                if(transactionType.equals("deposit")){
+                    userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("withdrawl")){
+                    userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString());
+                    ret.add(userTransactionByDate);
+                }
+                else if(transactionType.equals("transfer")){
+                    userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
+                    transaction_date.toString(), transferAccountID);
+                    ret.add(userTransactionByDate);
+                }
+
+            }
+        } 
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            System.out.println("done");
+        }
+        System.out.println(ret);
+        return ret;
+    }
     
     public boolean checkUserByUsername(String user_name){
         boolean ret = false;
@@ -218,8 +266,6 @@ public class DBConnector{
         return ret;
     }
 
-<<<<<<< HEAD
-=======
     public void updateBalanceCheckings(int accountID, double newBalance){
         try{
             String query = "UPDATE CheckingsAccount set balance= ? WHERE accountID= ?";
@@ -311,7 +357,6 @@ public class DBConnector{
     }
 
 
->>>>>>> queries2
     private void readDataBase(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -353,9 +398,6 @@ public class DBConnector{
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         //dbc.checkUserByUsername("firstUser");
-<<<<<<< HEAD
-        //dbc.getTransactionsByUser(12);
-=======
         //dbc.updateBalanceCheckings(1,1500);
         //dbc.updateBalanceSavings(42,7200);
         //CheckingsAccount newCheckingsTest = new CheckingsAccount(34, 500, 12, new Currency("USD"));
@@ -366,7 +408,6 @@ public class DBConnector{
         //dbc.insertNewAccount(newSecurityTest);
         
 
->>>>>>> queries2
     }
 
 

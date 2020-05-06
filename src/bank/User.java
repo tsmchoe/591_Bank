@@ -1,4 +1,7 @@
 package src.bank;
+
+import java.util.ArrayList;
+
 public abstract class User {
 	protected int userID;
 	protected String firstName;
@@ -15,6 +18,7 @@ public abstract class User {
 		setPassword(password);
 		setBalance(balance);
 	}
+
 
 	public abstract double getBalance();
 

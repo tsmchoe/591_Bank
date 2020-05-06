@@ -67,7 +67,7 @@ public class Stock {
     private void updatePriceChange(double newPrice) {
         ArrayList<SecurityAccount> subscribers = getAllSubscribers();
         for(SecurityAccount account: subscribers) {
-            account.receive_updatePrice(this, newPrice);
+            // account.receive_updatePrice(this, newPrice);
         }
     }
 

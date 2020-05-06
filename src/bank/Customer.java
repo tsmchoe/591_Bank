@@ -2,15 +2,24 @@ package src.bank;
 import java.util.ArrayList;
 
 public class Customer extends User {
+	DBConnector db;
 
 
 	public Customer(int userID, String fistName, String lastName, String username, String password, double balance) {
 		super(userID, fistName, lastName, username, password, balance);
+		db = new DBConnector();
 	}
 
-	// CREATE
-	public void createNewCheckings(double initial_deposit, String userID, Currency currency) {
-		//store checking account in database
+	//Get all the transactions made by this user
+	public ArrayList<Transaction> getTransactionsByDate(String date) {
+		return db.getUserTransactions_Date(userID, date);
+	}
+	
+
+	//creates a new checking account
+	public void createNewCheckings(double initial_deposit, int userID, Currency currency) {
+		CheckingsAccount newCheckings = new CheckingsAccount(Func.generate_id(), initial_deposit, userID, currency);
+		db.insertNewAccount(newCheckings);
 
 	}
 
@@ -28,7 +37,8 @@ public class Customer extends User {
 	}
 
 	public void createNewLoan(String userId, double amount, String collateral, String loan_date, String payment_date) {
-		//store loan in database, need to communicate with front on on input format of the date
+		// Loan newLoan = new Loan(userId, amount, collateral, loan_date, payment_date);
+		// DBConnector.insertNewLoan(newLoan);
 	}
 
 
