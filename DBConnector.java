@@ -713,6 +713,33 @@ public class DBConnector{
             System.out.println("updateBoughtStock query complete");
         }
     }
+
+    public Customer getCustomerByUserID(int user_ID){
+        Customer ret = new Customer(0,"","","","",0);
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Users WHERE userID=" + user_ID + " AND userType='customer'");
+            
+            while(this.resultSet.next()){
+                int userID = this.resultSet.getInt("userID");
+                String username = this.resultSet.getString("username");
+                String password =this.resultSet.getString("password");
+                String firstname =this.resultSet.getString("firstName");
+                String lastname = this.resultSet.getString("lastName");
+                double balance = this.resultSet.getDouble("balance");
+
+                Customer customerDB = new Customer(userID, firstname, lastname, username, password, balance);
+
+                ret = customerDB;
+            }
+        }catch(SQLException e){
+                e.printStackTrace();
+        }finally{
+                System.out.println("getCustomerbyUserID query complete");
+            }
+            return ret;
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         //dbc.readDataBase();
@@ -743,7 +770,8 @@ public class DBConnector{
         //dbc.deleteStockByAccountStock(60, 3);
         //BoughtStock testBoughtStock = new BoughtStock(53, 250, 1, "kdfjkd", 52);
         //dbc.insertNewBoughtStock(testBoughtStock);
-        dbc.updateBoughtStock(53,1000);
+        //dbc.updateBoughtStock(53,1000);
+        //dbc.getCustomerByUserID(58);
 
 
         

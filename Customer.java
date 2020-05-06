@@ -6,7 +6,7 @@ public class Customer extends User {
 
 
 
-
+	//for DB user;
 	public Customer(int userID,String firstName, String lastName, String username, String password, double balance) {
 		super(userID, firstName, lastName, username, password, balance);
 		db = new DBConnector();
