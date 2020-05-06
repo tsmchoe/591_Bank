@@ -2,6 +2,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
  
 public class BuyStocks extends JDialog{
@@ -10,8 +11,9 @@ public class BuyStocks extends JDialog{
     private JLabel script;
     private JTextField entry;
     private JButton submit;
+    private DBConnector db = new DBConnector();
 
-    public BuyStocks(){
+    public BuyStocks(Customer cust){
         super();
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
@@ -32,6 +34,19 @@ public class BuyStocks extends JDialog{
         cs.gridy = 2;
         cs.gridwidth = 1;
         amount.add(submit, cs);
+
+        submit.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    ArrayList<Stock> newer = db.getAllAvailableStocks();
+                    for (int i=0; i < newer.size(); i++){
+                        if(newer.get(i).getId() == (Integer.parseInt(entry.getText()))){
+                            cust.getAllSecurities().get(0).buyStock(newer.get(i).getId(), newer.get(i).getCurrentPrice(), newer.get(i).getTotal_share());
+                        }
+                    }  
+                }
+            }
+        );
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);

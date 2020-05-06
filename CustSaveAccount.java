@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 
 public class CustSaveAccount extends JDialog {
 
@@ -74,7 +73,7 @@ public class CustSaveAccount extends JDialog {
                 public void actionPerformed(ActionEvent e){
                     ArrayList<SecurityAccount> secCust = cust.getAllSecurities();
                     if(secCust.size() > 0){
-                        StockViewCust st = new StockViewCust();
+                        StockViewCust st = new StockViewCust(cust);
                         st.setVisible(true);
                     }
                     else{

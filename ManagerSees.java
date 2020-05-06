@@ -6,20 +6,18 @@ import javax.swing.table.*;
 
 import java.util.*;
 
-public class CustTransactions extends JDialog {
+public class ManagerSees extends JDialog {
 
     private static final long serialVersionUID = 1L;
     private JTable transactionList;
     private String[] columns = new String[]{
         "Transaction ID", "User ID", "Account ID", "Amount", "Currency", "Date"
     };
-    private DBConnector trans = new DBConnector();
     private DefaultTableModel tableModel = new DefaultTableModel(columns,0);
 
     JPanel stockaccount = new JPanel();
-    public CustTransactions(Customer cust){
+    public ManagerSees(ArrayList<Transaction> newer){
         super();
-        ArrayList<Transaction> newer = trans.getTransactionsByUser(cust.getUserID());
         for(int i=0; i < newer.size(); i++){
             Transaction intro = newer.get(i);
             int newId = intro.transactionID;
@@ -34,7 +32,7 @@ public class CustTransactions extends JDialog {
         transactionList = new JTable(tableModel);
         getContentPane().add(transactionList);
         setSize(400,400);
-        setTitle("Transactions");
+        setTitle("Customer Transactions");
 
     }
 }

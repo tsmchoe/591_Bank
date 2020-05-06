@@ -58,7 +58,7 @@ public class ManagerLogin extends JDialog implements ActionListener {
             page.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(null, "ERROR.getMessage()");
+            JOptionPane.showMessageDialog(null, "Not the Manager");
         }
     }
 }

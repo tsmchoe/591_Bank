@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class ManagerSearch extends JDialog {
@@ -10,6 +12,8 @@ public class ManagerSearch extends JDialog {
     private JLabel script;
     private JTextField entry;
     private JButton submit;
+    private DBConnector db = new DBConnector();
+
 
     public ManagerSearch(){
         super();
@@ -32,6 +36,16 @@ public class ManagerSearch extends JDialog {
         cs.gridy = 2;
         cs.gridwidth = 1;
         amount.add(submit, cs);
+
+        submit.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    ArrayList<Transaction> newer = db.getTransactionsByUser(Integer.parseInt(entry.getText()));
+                    ManagerSees man = new ManagerSees(newer);
+                    man.setVisible(true);  
+                }
+            }
+        );
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);

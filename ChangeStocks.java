@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
  
 public class ChangeStocks extends JDialog{
@@ -9,6 +10,7 @@ public class ChangeStocks extends JDialog{
     private JLabel script, amounter;
     private JTextField entry, entitiy;
     private JButton submit;
+    private DBConnector db = new DBConnector();
     public ChangeStocks(){
         super();
         GridBagConstraints cs = new GridBagConstraints();
@@ -42,6 +44,19 @@ public class ChangeStocks extends JDialog{
         cs.gridy = 2;
         cs.gridwidth = 1;
         amount.add(submit, cs);
+
+        submit.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    ArrayList<Stock> newer = db.getAllAvailableStocks();
+                    for (int i=0; i < newer.size(); i++){
+                        if(newer.get(i).getId() == (Integer.parseInt(entry.getText()))){
+                            newer.get(i).updateStockPrice(Double.parseDouble(entitiy.getText()));
+                        }
+                    }  
+                }
+            }
+        );
 
         getContentPane().add(amount, BorderLayout.CENTER);
         setSize(400,400);
