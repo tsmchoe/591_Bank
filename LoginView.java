@@ -10,6 +10,11 @@ public class LoginView extends JDialog implements ActionListener{
     private JLabel script = new JLabel("Sign in Valued Customer!");
     private JButton Submit = new JButton("Submit");
     protected JTextField text1, text2, text3;
+    private String[] accountType = {"Checking", "Savings"};
+    private JComboBox checkSave;
+    private String choice;
+    //private var.get(0)
+
 
     public LoginView() {
         super();
@@ -55,6 +60,23 @@ public class LoginView extends JDialog implements ActionListener{
         Login.add(text2, cs);
 
 
+        checkSave.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    checkSave = (JComboBox)e.getSource();
+                    choice = (String)checkSave.getSelectedItem();
+                }
+            }
+        );
+
+        checkSave = new JComboBox(accountType);
+        cs.gridx = 1;
+        cs.gridy = 3;
+        cs.gridwidth = 2;
+        Login.add(checkSave, cs);
+
+
+
         JPanel panel = new JPanel();
         Submit.addActionListener(this);
         panel.add(Submit);
@@ -79,21 +101,18 @@ public class LoginView extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        //DBConnector dbc = new DBConnector();
-		//dbc.readDataBase();
-        if (value1.equals("hi")) {
-            CustSaveAccount page=new CustSaveAccount(Login);
-            /*System.out.println("Logged in");
-            Customer c = new Customer("userID", "fistName", "lastName", value1, value2, 0.0);
-            if (c.getAllCheckings() == null){
+        DBConnector dbc = new DBConnector();
+		boolean x = dbc.checkUserByUsername(value1);
+        if (x == true) {
+            System.out.println("Logged in");
+            if (choice.equals("Savings")){
                 CustSaveAccount page=new CustSaveAccount(Login);
                 page.setVisible(true);
             }
-            else if(c.getAllSavings() == null){
+            else if(choice.equals("Checking")){
                 CustCheckAccount page=new CustCheckAccount(Login);
                 page.setVisible(true);
-            }*/
-            page.setVisible(true);
+            }
             Login.setVisible(false);
         }
         else{

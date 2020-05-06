@@ -31,7 +31,7 @@ public class CustDeposit extends JDialog{
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 2;
-        amount.add(script, cs);
+        amount.add(Currency, cs);
 
         entry = new JTextField(40);
         cs.gridx = 1;
@@ -49,7 +49,7 @@ public class CustDeposit extends JDialog{
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     //Create Deposit
-                    Deposit depos = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), currency, date);
+                    Account acc = new Deposit(transactionID, Login.getUserId(), accountId, Double.parseDouble(entry.getText()), currency, date);
                     setVisible(false);
                 }
             }

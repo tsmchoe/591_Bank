@@ -481,7 +481,7 @@ public class DBConnector{
         return ret;
     }
 
-    public ArrayList<SecurityAccount> getSecutrityAccountByUser(int user_id){
+    public ArrayList<SecurityAccount> getSecurityAccountByUser(int user_id){
         ArrayList<SecurityAccount> ret = new ArrayList<SecurityAccount>();
         try{
             this.statement = this.connect.createStatement();

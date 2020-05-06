@@ -85,7 +85,7 @@ public class CreateAccount extends JDialog {
 
         getContentPane().add(panel);
         getContentPane().add(buttons, BorderLayout.PAGE_END);
-        setSize(400,400);
+        setSize(500,500);
         setTitle("Create Account");
 
 
