@@ -49,10 +49,6 @@ public class CreateAccount extends JDialog {
         panel.add(password);
         passworder.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(passworder);
-        user.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(user);
-        userid.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(userid);
 
         bu1.addActionListener(
             new ActionListener(){

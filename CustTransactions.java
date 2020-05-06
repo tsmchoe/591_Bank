@@ -10,7 +10,7 @@ public class CustTransactions extends JDialog {
     private static final long serialVersionUID = 1L;
     private JTable transactionList;
     private DBConnector trans = new DBConnector();
-    private Transaction[] data;
+    private Transaction[][] data = new Transaction[][];
     private LoginView Login = new LoginView();
 
     JPanel stockaccount = new JPanel();
@@ -21,7 +21,7 @@ public class CustTransactions extends JDialog {
         };
         ArrayList<Transaction> newer = trans.getTransactionsByUser(Login.getUserId());
         for(int i=0; i < newer.size(); i++){
-            data.add(newer.get(i));
+            data. newer.get(i);
         }
         transactionList = new JTable(columns,newer);
 

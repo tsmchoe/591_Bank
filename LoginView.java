@@ -71,8 +71,8 @@ public class LoginView extends JDialog implements ActionListener{
     public String getPassword(){
         return text2.getText();
     }
-    public String getUserId(){
-        return text3.getText();
+    public int getUserId(){
+        return Integer.parseInt(text3.getText());
     }
 
 

@@ -36,9 +36,8 @@ public class CustDeposit extends JDialog{
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     //Create Deposit
-                    CustCheckAccount dep = new CustCheckAccount(parent);
+                    Deposit depos = new Deposit(transactionID, userid, accountId, Double.parseDouble(entry.getText()), currency, date);
                     setVisible(false);
-                    dep.setVisible(true);
                 }
             }
         );
