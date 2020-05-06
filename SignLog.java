@@ -10,7 +10,7 @@ public class SignLog {
     final static JFrame frame = new JFrame("Bank Demo");
     final static JLabel welcome = new JLabel("Welcome to the Bank App");
     
-    public static void main(String arg[]) {
+    public SignLog(){
         try {
             final JButton log = new JButton("Login");
             final JButton create = new JButton("Create Account");
@@ -48,4 +48,4 @@ public class SignLog {
             JOptionPane.showMessageDialog(null, e.getMessage());}
         }
 
-}
+    }
