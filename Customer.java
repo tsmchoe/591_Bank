@@ -71,7 +71,7 @@ public class Customer extends User {
 	}
 
 	public ArrayList<SecurityAccount> getAllSecurities() {
-		ArrayList<SecurityAccount> securityAccounts = db.getSecutrityAccountByUser(this.userID);
+		ArrayList<SecurityAccount> securityAccounts = db.getSecurityAccountByUser(this.userID);
 		return securityAccounts;
 	}
 

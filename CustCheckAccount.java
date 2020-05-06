@@ -22,7 +22,7 @@ public class CustCheckAccount extends JDialog {
         deposit.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustDeposit dep = new CustDeposit(parent);
+                    CustDeposit dep = new CustDeposit();
                     setVisible(false);
                     dep.setVisible(true);
                 }

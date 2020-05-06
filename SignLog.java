@@ -19,7 +19,7 @@ public class SignLog {
             log.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                    LoginDemo logger = new LoginDemo(frame);
+                    CustDeposit logger = new CustDeposit();
                     logger.setVisible(true);
                     frame.setVisible(false);
                     }
