@@ -18,8 +18,21 @@ public class BoughtStock {
         this.equity += cost * share;
         this.share += share;
         this.avgCost = this.equity/this.share;
-        updateTotalValue();;
+        this.totalValue = this.currentPrice * this.share;
+    }
+
+	public void updatePrice(double newPrice) {
+        this.currentPrice = newPrice;
 	}
+
+	public double getProfit(int shareToSell) {
+        return currentPrice * shareToSell;
+    }
+    
+    // public void updateBoughtStock() {
+
+    // }
+
 
     //Getters and Setters
     public double getAvgCost() {
@@ -58,19 +71,6 @@ public class BoughtStock {
 		return this.totalValue;
 	}
 
-	public void updateTotalValue() {
-        this.totalValue = this.currentPrice * this.share;
-	}
-
-	public void updatePrice(double newPrice) {
-        this.currentPrice = newPrice;
-	}
-
-	public double getProfit(int shareToSell) {
-        
-        return currentPrice * shareToSell;
-
-	}
 
 
 }
