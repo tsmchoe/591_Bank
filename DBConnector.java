@@ -655,8 +655,9 @@ public class DBConnector{
                 double purchasedPrice = this.resultSet.getDouble("purchasedPrice");
                 String name = this.resultSet.getString("name");
                 int accountID = this.resultSet.getInt("accountID");
+                int shares = this.resultSet.getInt("shares")
 
-                BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice, 1,name,accountID);
+                BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice,shares,name,accountID);
                 ret.add(stockDB);
             }
         }catch(SQLException e){
@@ -683,14 +684,15 @@ public class DBConnector{
 
     public void insertNewBoughtStock(BoughtStock stock){
         try{
-            String query = "INSERT INTO Stocks(stockID,name,current_price,accountID,purchasedPrice)" + 
-            "VALUES(?,?,?,?,?)";
+            String query = "INSERT INTO Stocks(stockID,name,current_price,accountID,purchasedPrice,shares)" + 
+            "VALUES(?,?,?,?,?,?)";
             this.preparedStatement = this.connect.prepareStatement(query);
             this.preparedStatement.setInt(1,stock.getID());
             this.preparedStatement.setString(2,stock.getName());
             this.preparedStatement.setDouble(3,stock.getCurrrent_price());
             this.preparedStatement.setInt(4,stock.getAccount());
             this.preparedStatement.setDouble(5, stock.getAvgCost());
+            this.preparedStatement.setInt(6,stock.getShare());
 
             this.preparedStatement.execute();
         }catch(SQLException e){
