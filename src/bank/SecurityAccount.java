@@ -60,7 +60,7 @@ public class SecurityAccount extends Account {
         return unrealized_profit;
     }
 
-    private void setUnrealized_profit(double unrealized_profit) {
+    public void setUnrealized_profit(double unrealized_profit) {
         this.unrealized_profit = unrealized_profit;
     }
 
@@ -68,7 +68,7 @@ public class SecurityAccount extends Account {
         return cash;
     }
 
-    private void setCash(double cash) {
+    public void setCash(double cash) {
         this.cash = cash;
     }
 
