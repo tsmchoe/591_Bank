@@ -1,6 +1,10 @@
+
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.*;
+
 
 public class ManagerAccount extends JDialog {
 
@@ -30,7 +34,7 @@ public class ManagerAccount extends JDialog {
         list.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustomerList cust = new CustomerList();
+                    StockViewManager cust = new StockViewManager();
                     cust.setVisible(true);
                 }
             }
@@ -38,7 +42,7 @@ public class ManagerAccount extends JDialog {
         update.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    StockViewManager stk = new StockViewManager();
+                    ChangeStocks stk = new ChangeStocks();
                     stk.setVisible(true);
                 }
             }

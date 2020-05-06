@@ -1,7 +1,10 @@
+
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
-//import src.bank.control.*;
+
  
 public class SignLog {
     final static JFrame frame = new JFrame("Bank Demo");
@@ -24,7 +27,7 @@ public class SignLog {
             );
             log.setBounds(50,300,150,40);
             create.setBounds(200,300,150,40);
-            /* create.addActionListener(
+            create.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                     CreateAccount cAcc = new CreateAccount(frame);
@@ -32,7 +35,7 @@ public class SignLog {
                     cAcc.setVisible(true);
                     }
                 }
-            ); */
+            );
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(400, 400);
             frame.setLayout(null);

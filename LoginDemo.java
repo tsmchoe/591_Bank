@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -27,13 +28,13 @@ public class LoginDemo extends JDialog{
         customer.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    LoginView login = new LoginView(panel);
-                    panel.setVisible(false);
+                    LoginView login = new LoginView();
                     login.setVisible(true);
+                    panel.setVisible(false);
                     }
                 }
             );
-       /*  manager.addActionListener(
+        manager.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     ManagerLogin mLog = new ManagerLogin(panel);
@@ -41,7 +42,7 @@ public class LoginDemo extends JDialog{
                     mLog.setVisible(true);
                     }
                 }
-            ); */
+            );
 
     }
 
