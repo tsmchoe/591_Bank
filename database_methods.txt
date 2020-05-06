@@ -10,3 +10,4 @@ void insertNewLoan(Loan loan)// adds a loan to the database
 ArrayList<Transaction> getUserTransaction_Date(int userID, String date)// returns the transactions for a user on a particular date
 
 boolean checkUserByUsername(String user_name)// returns a boolean indicating whether or not the username is in the Users table.
+
