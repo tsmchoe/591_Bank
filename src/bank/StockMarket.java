@@ -29,13 +29,14 @@ public class StockMarket {
         //
         //
         //
-        setTotal_stock_num(getTotal_stock_num() + 1);
+        total_stock_num++;
     }
 
     public void updateStockPrice(int stockId, double newPrice) {
         //Stock seletec = getStockwithid(stockId);
         //selected.setCurrenPrice(newPrice)
-        //
+        //get all secuirty accounts who owns the stock
+        //securityaccount.receiveUpdate(stockid, newPrice)
     }
 
     public void updateShare(int stockId, int newShare) {
@@ -44,24 +45,14 @@ public class StockMarket {
         //
     }
 
-    public void customer_buyStock(int accountId, Stock stock, int share, double cost) {
-        //select the account with accountid
-        // account.buyStock(stock, cost, share);
-        // selected.setShare(selected.getShare()-share);
-    }
-
-    public void customer_sellStock(int accountId, Stock stock, int share) {
-        //select the account with accountid
-        // account.sellStock(stock, share);
-        // selected.setShare(selected.getShare()-share);
-    }
 
 
     public int getTotal_stock_num() {
         return total_stock_num;
     }
 
-    public void setTotal_stock_num(int total_stock_num) {
-        this.total_stock_num = total_stock_num;
-    }
+
+
+
+
 }

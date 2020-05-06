@@ -7,73 +7,75 @@ import java.util.Map;
 
 
 public class SecurityAccount extends Account {
-    private HashMap<Stock, BoughtStock> allStocks = new HashMap<>();
-    private double cash;
     private double unrealized_profit;
+
 
     public SecurityAccount(int accountID, double balance, int userID, Currency currency) {
         super(accountID, balance, userID, currency);
     }
 
-    public void buyStock(Stock stock, double cost, int share) {
-        if (this.allStocks.containsKey(stock)) {
-            this.allStocks.get(stock).buyMore(cost, share);
 
-        } else {
-            this.allStocks.put(stock, new BoughtStock(1, cost, share));
-        }
-
-    }
-
-    public void sellStock(Stock stock, int share) {
-        BoughtStock currStock = allStocks.get(stock);
-        if(share <= currStock.getShare()) {
-            if(share == currStock.getShare()) {
-                allStocks.remove(stock);
-            }
-            this.setCash(this.cash + currStock.getProfit(share));
-            this.reset_unrealized_profit();
-        } else {
-            System.out.println("Do not have enough shares to sell!");
-        }
-
+    // customer buys share of a stock with each costing cost
+    public void buyStock(int stockId, double cost, int share) {
+        // Stock market_stock = select stock by stockid
+        // if(market_stock.gettTotalShare() <= share) {
+            // double total_cost = cost*share;
+            // if(total_cost <= balance) {
+                // if(BoughtStock exists) {
+                //     Select BoughtStock in database,
+                //     boughtStock.buyMore(cost, share);
+                // } else {
+                    //Create new BoughtStock(int stockid, String name, double currentPrice, int share, double cost);
+                // }
+                // stock.setShare(market_stock.getTotalShare()-share);
+                // this.balance -= total_cost;
+                // updateAccount();
+            // }
+        // }
 
     }
 
-	public void receive_updatePrice(Stock stock, double newPrice) {
-        this.allStocks.get(stock).updatePrice(newPrice);
-        this.reset_unrealized_profit();
+    public void sellStock(int stockId, int share) {
+        // BoughtStock stock = select Boughtstock by stockid
+        // int shareOwned = stock.getShare();
+        // if(sharedOwned >= share) {
+            // double totalProfit = stock.getProfit(share);
+            // Stock marketStock = select Stock by stockid
+            // marketStock.setShare(marketStock.getTotalShare() + share);
+            // this.balance += totalProfit;
+            // if(share < stock.getShare()) {
+            //     stock.setShare(stock.getShare() - share);
+            // } else if(share == stock.getShare()) {
+            //     // remove BoughtStock with stockId in database
+            // } 
+            // updateAccount();
+
+        // }
+    }
+
+	public void receive_updatePrice(int stockId, double newPrice) {
+        //Select the boughtStock with stockid
+        //boughtStock.setPrice(newPrice);
 	}
 
-    private void reset_unrealized_profit() {
-        double accu = 0;
-        Iterator<Map.Entry<Stock, BoughtStock>> iter = allStocks.entrySet().iterator();
-        while(iter.hasNext()) {
-            Map.Entry<Stock, BoughtStock> stock = (Map.Entry<Stock, BoughtStock>) iter.next();
-            accu += ((BoughtStock) stock.getValue()).getTotalValue();
-        }
-        setUnrealized_profit(accu + cash);
-    }
 
 
     public double getUnrealized_profit() {
-        return unrealized_profit;
+        double ret = balance;
+        ArrayList<BoughtStock> ownedStock = getAllStocks();
+        for(BoughtStock stock: ownedStock) {
+            ret += stock.getProfit(stock.getShare());
+        }
+        return ret;
     }
 
-    private void setUnrealized_profit(double unrealized_profit) {
-        this.unrealized_profit = unrealized_profit;
-    }
-
-    public double getCash() {
-        return cash;
-    }
-
-    private void setCash(double cash) {
-        this.cash = cash;
-    }
+ 
 
     public ArrayList<BoughtStock> getAllStocks() {
-        return new ArrayList<>(allStocks.values());
+        ArrayList<BoughtStock> ret = null;
+        //query the database to get all BoughtStock owned by accountid
+        return ret;
+
     }
 
     /* In real life, there would be restrictions on how many times a security account can transfer/withdraw, but since it's not
