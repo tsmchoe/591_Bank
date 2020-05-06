@@ -46,6 +46,22 @@ public class CustCheckAccount extends JDialog {
                 }
             }
         );
+        view.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    CustTransactions st = new CustTransactions(cust);
+                    st.setVisible(true);
+                }
+            }
+        );
+        update.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    CustProfile up = new CustProfile(cust);
+                    up.setVisible(true);
+                }
+            }
+        );
 
         mb.add(m1);
         m1.add(update);
@@ -55,6 +71,7 @@ public class CustCheckAccount extends JDialog {
         mb.add(m4);
         m4.add(deposit);
         m4.add(withdrawl);
+        m4.add(view);
         m4.add(view);
         JLabel user = new JLabel("Welcome: " + cust.firstName);
         JLabel balance = new JLabel("Here is your current balance: $" + String.valueOf(cust.balance));
