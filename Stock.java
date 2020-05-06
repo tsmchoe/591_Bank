@@ -5,12 +5,14 @@ public class Stock {
     private String name;
     private double currentPrice;
     private int total_share;
+    DBConnector db;
 
     public Stock(int stockid, String name, double currentPrice, int init_share) {
         this.stockid = stockid;
         this.name = name;
         this.currentPrice = currentPrice;
         this.total_share = init_share;
+        this.db = new DBConnector();
     }
 
     public int getTotal_share() {
@@ -51,7 +53,7 @@ public class Stock {
 
     //Called after a field is updated, need to update the database
     private void UpdateStock() {
-        //update the stock in the database with Stock(stockid, name currentPrice, total_share)
+        db.updateStockInStock_Market(stockid, currentPrice, total_share);
     }
 
 
@@ -66,7 +68,7 @@ public class Stock {
     private void updatePriceChange(double newPrice) {
         ArrayList<SecurityAccount> subscribers = getAllSubscribers();
         for(SecurityAccount account: subscribers) {
-            // account.receive_updatePrice(this, newPrice);
+            account.receive_updatePrice(this.stockid, newPrice);
         }
     }
 
