@@ -25,7 +25,6 @@ public class CustCheckAccount extends JDialog {
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     CustDeposit dep = new CustDeposit(cust);
-                    setVisible(false);
                     dep.setVisible(true);
                 }
             }
@@ -34,7 +33,6 @@ public class CustCheckAccount extends JDialog {
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     CustWithdraw with = new CustWithdraw(cust);
-                    setVisible(false);
                     with.setVisible(true);
                 }
             }

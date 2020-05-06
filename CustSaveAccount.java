@@ -86,7 +86,7 @@ public class CustSaveAccount extends JDialog {
         view.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    CustTransactions st = new CustTransactions();
+                    CustTransactions st = new CustTransactions(cust);
                     st.setVisible(true);
                 }
             }
