@@ -12,6 +12,7 @@ public class LoanReq extends JDialog{
     private JTextField entry;
     private JButton submit;
     private DBConnector db = new DBConnector();
+    private Customer cust;
     private LoginView login = new LoginView();
     
     public LoanReq(JPanel parent){
@@ -49,7 +50,6 @@ public class LoanReq extends JDialog{
                 public void actionPerformed(ActionEvent e){
                     String x = entry.getText();
                     Double loanAmount = Double.parseDouble(x);
-                    Loan low = new Loan((int) Math.random(), login.getUserId(), loanAmount, kac.getText(), this.date, this.paymentDate);
                     db.insertNewLoan(low);
                     setVisible(false);
                 }
