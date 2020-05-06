@@ -17,7 +17,7 @@ public class Bank_Manager extends User {
 
 	@Override
 	public double getBalance() {
-		return this.balance;
+		return db.getBankBalance();
 	}
 
 }

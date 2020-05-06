@@ -16,6 +16,7 @@ public class CheckingsAccount extends Account {
         //add the amt to balance in account in database
         db.updateBalanceCheckings(accountID, newBalance);
         db.insertTransaction(new Deposit(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "DEPOSIT");
+        db.increaseBankBalance(Fees.TRANSACTION_FEE);
     }
 
     @Override
@@ -26,6 +27,7 @@ public class CheckingsAccount extends Account {
         if(newBalance >= 0) {
             db.updateBalanceCheckings(accountID, newBalance);
             db.insertTransaction(new Withdraw(Func.generate_id(), userID, accountID, amtConverted, currency.toString()), "WITHDRAW");
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
     }
 
@@ -41,6 +43,7 @@ public class CheckingsAccount extends Account {
             target.deposit(amt, currency);
             Transfer t = new Transfer(Func.generate_id(), userID, this.accountID, amtConverted, currency.toString(), accountID);
             db.insertTransaction(t);
+            db.increaseBankBalance(Fees.TRANSACTION_FEE);
         }
 
 

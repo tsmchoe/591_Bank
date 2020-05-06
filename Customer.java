@@ -28,6 +28,7 @@ public class Customer extends User {
 	public void createNewCheckings(double initial_deposit, int userID, Currency currency) {
 		CheckingsAccount newCheckings = new CheckingsAccount(Func.generate_id(), initial_deposit, userID, currency);
 		db.insertNewAccount(newCheckings);
+		db.increaseBankBalance(Fees.OPENNING_FEE);
 
 	}
 
@@ -37,6 +38,7 @@ public class Customer extends User {
 			//store savings account in database, include interest rate as a field, can use Fees.SAVINGS_INTEREST
 			SavingsAccount newSavings = new SavingsAccount(Func.generate_id(), initial_deposit, userID, currency, Fees.SAVINGS_INTEREST);
 			db.insertNewAccount(newSavings);
+			db.increaseBankBalance(Fees.OPENNING_FEE);
 		}
 
 	}
@@ -46,6 +48,7 @@ public class Customer extends User {
 		if(initial_deposit >= Fees.SECURITY_OPEN_LIMIT) {
 			SecurityAccount newSecurity = new SecurityAccount(Func.generate_id(), initial_deposit, userID, currency);
 			db.insertNewAccount(newSecurity);
+			db.increaseBankBalance(Fees.OPENNING_FEE);
 		}
 	}
 	
