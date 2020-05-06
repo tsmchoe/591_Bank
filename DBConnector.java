@@ -702,12 +702,13 @@ public class DBConnector{
         }
     }
 
-    public void updateBoughtStock(int stockID, int currentPrice){
+    public void updateBoughtStock(int stockID, int currentPrice, int newShares){
         try{
-            String query = "UPDATE Stocks set current_price=? WHERE stockID=?";
+            String query = "UPDATE Stocks set current_price=?, shares=? WHERE stockID=?";
             this.preparedStatement = this.connect.prepareStatement(query);
             this.preparedStatement.setDouble(1,currentPrice);
-            this.preparedStatement.setInt(2,stockID);
+            this.preparedStatement.setInt(2, newShares);
+            this.preparedStatement.setInt(3,stockID);
             this.preparedStatement.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -742,6 +743,124 @@ public class DBConnector{
             return ret;
     }
 
+    public void insertTransaction(Transaction t, String transactionType){
+        try{
+            String query = "INSERT INTO Transactions(transactionID,userID,accountID,transaction_date,amount,currency,transactionType)" +
+            "VALUES(?,?,?,?,?,?,?)";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,t.getTransactionID());
+            this.preparedStatement.setInt(2,t.getUserid());
+            this.preparedStatement.setInt(3,t.getAccountId());
+            Date trans_date = Date.valueOf(t.getDate());
+            this.preparedStatement.setDate(4,trans_date);
+            this.preparedStatement.setDouble(5, t.getAmount());
+            this.preparedStatement.setString(6,t.getCurrency());
+            this.preparedStatement.setString(7,transactionType);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("insertTransaction query for checkins or savings complete");
+        }
+    }
+
+    public void insertTransaction(Transfer t){
+        try{
+            String query = "INSERT INTO Transactions(transactionID,userID,accountID,transaction_date,amount,currency,transactionType,transferAccountID)" +
+            "VALUES(?,?,?,?,?,?,?,?)";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setInt(1,t.getTransactionID());
+            this.preparedStatement.setInt(2,t.getUserid());
+            this.preparedStatement.setInt(3,t.getAccountId());
+            Date trans_date = Date.valueOf(t.getDate());
+            this.preparedStatement.setDate(4,trans_date);
+            this.preparedStatement.setDouble(5, t.getAmount());
+            this.preparedStatement.setString(6,t.getCurrency());
+            this.preparedStatement.setString(7,"transfer");
+            this.preparedStatement.setInt(8,t.getTransferAccountID());
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("insertTransaction query for transfer complete");
+        }
+    }
+
+    public ArrayList<CheckingsAccount> getCheckingsAccountByAccountID(int account_ID){
+        ArrayList<CheckingsAccount> ret = new ArrayList<CheckingsAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM CheckingsAccount WHERE accountID=" + account_ID);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+
+                CheckingsAccount accountDB = new CheckingsAccount(accountID, balance, userID, new Currency(currency));
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getCheckinsAccountByAccountID query complete");
+        }
+        return ret;
+    }
+
+    public ArrayList<SavingsAccount> getSavingsAccountByAccountID(int account_ID){
+        ArrayList<SavingsAccount> ret = new ArrayList<SavingsAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM SavingsAccount WHERE accountID=" + account_ID);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                Double ir = this.resultSet.getDouble("interestRate");
+
+                SavingsAccount accountDB = new SavingsAccount(accountID, balance, userID, new Currency(currency),ir);
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getSavingsAccountByAccountID query complete");
+        }
+        return ret;
+    }
+
+    public ArrayList<SecurityAccount> getSecurityAccountByAccountID(int account_ID){
+        ArrayList<SecurityAccount> ret = new ArrayList<SecurityAccount>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM SecurityAccount WHERE accountID=" + account_ID);
+
+            while(this.resultSet.next()){
+                int accountID = this.resultSet.getInt("accountID");
+                double balance = this.resultSet.getDouble("balance");
+                int userID = this.resultSet.getInt("userID");
+                String currency = this.resultSet.getString("currency");
+                double cash = this.resultSet.getDouble("cash");
+                double unrealized = this.resultSet.getDouble("unrealized_profit");
+
+                SecurityAccount accountDB = new SecurityAccount(accountID, balance, userID, new Currency(currency));
+                accountDB.setCash(cash);
+                accountDB.setUnrealized_profits(unrealized);
+                ret.add(accountDB);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getCheckinsAccountByAccountID query complete");
+        }
+        return ret;
+    }
+
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         //dbc.readDataBase();
@@ -774,6 +893,11 @@ public class DBConnector{
         //dbc.insertNewBoughtStock(testBoughtStock);
         //dbc.updateBoughtStock(53,1000);
         //dbc.getCustomerByUserID(58);
+        //Deposit depositTest = new Deposit(3, 12, 58, 200, "USD", "2020-05-06");
+        //dbc.insertTransaction(depositTest, "deposit");
+        //Transfer transferTest = new Transfer(4, 12, 58, 200, "USD", "2020-05-06", 67);
+        //dbc.insertTransaction(transferTest);
+        //dbc.getCheckingsAccountByAccountID(1);
 
 
         
