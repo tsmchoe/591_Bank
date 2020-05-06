@@ -19,16 +19,6 @@ public class Customer extends User {
 		db.insertNewCustomer(this);
 	}
 
-	/* public static Customer createNewCustomer(String firstName, String lastName, String username, String password) {
-		Customer newCustomer = new Customer(Func.generate_id(), firstName, lastName, username, password);
-		
-		DBConnector db1 = new DBConnector();
-		db1.insertNewCustomer(newCustomer);
-		return newCustomer;
-	} */
-
-	//public Customer(int userID, String firstName, String lastName, String username, String)
-
 	//Get all the transactions made by this user
 	public ArrayList<Transaction> getTransactionsByDate(String date) {
 		return db.getUserTransactions_Date(userID, date);

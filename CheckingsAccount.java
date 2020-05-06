@@ -1,7 +1,9 @@
 public class CheckingsAccount extends Account {
+    DBConnector db;
 
     public CheckingsAccount(int accountID, double initial_deposit, int userID, Currency currency) {
         super(accountID, initial_deposit, userID, currency);
+        db = new DBConnector();
     }
 
 
@@ -12,8 +14,10 @@ public class CheckingsAccount extends Account {
         double amtConverted = this.currency.convert(currency, amt);
         double newBalance = getBalance() + amtConverted;
         //add the amt to balance in account in database
+        db.updateBalanceCheckings(accountID, newBalance);
 
         //Add the new Deposit() to trasaction table in dabatase
+
 
     }
 
@@ -23,7 +27,7 @@ public class CheckingsAccount extends Account {
         double amtConverted = this.currency.convert(currency, amt);
         double newBalance = getBalance() - amtConverted;
         if(newBalance >= 0) {
-            //update
+            db.updateBalanceCheckings(accountID, newBalance);
             //Add the new Withdraw() to trasaction table in dabatase
         }
 
@@ -36,10 +40,10 @@ public class CheckingsAccount extends Account {
         double amtConverted = this.currency.convert(currency, amt);
         double newBalance = getBalance() - amtConverted;
         if(newBalance >= 0) {
-            //decrease this amount in user's balance in database
+            db.updateBalanceCheckings(accountID, newBalance);
             //increase this amount in target's balance in database
-            // double amtConvertedTarget = TARGETUSER.getCurrency().convert(currency, amt)
 
+            // TARGETUSER.deposit(amt, currency);
             //Add the new Transer() to trasaction table in dabatase
         }
 

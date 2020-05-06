@@ -58,6 +58,9 @@ public class SecurityAccount extends Account {
         //boughtStock.setPrice(newPrice);
 	}
 
+    public void receiveUpdateShare(int stockid, double newShare) {
+
+    }
 
     public void setUnrealized_profits(double unrealized){
         this.unrealized_profit = unrealized;
