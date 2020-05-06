@@ -11,10 +11,11 @@ public abstract class Transaction {
     protected int transferedToAccountID;
 
     public Transaction(int transactionID, int userid, int accountId, double amount, String currency) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//Getting current date
         Calendar cal = Calendar.getInstance();
         String date = sdf.format(cal.getTime());
+        System.out.println(date);
         setTransactionID(transactionID);
         setUserid(userid);
         setAccountId(accountId);

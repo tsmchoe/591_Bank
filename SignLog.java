@@ -11,7 +11,7 @@ public class SignLog {
     final static JLabel welcome = new JLabel("Welcome to the Bank App");
     static Customer cust = new Customer(0, "Tim", "Choe", "tchoe", "kcc", 100.00);
     
-    public static void main(String arg[]) {
+    public SignLog(){
         try {
             final JButton log = new JButton("Login");
             final JButton create = new JButton("Create Account");
@@ -49,4 +49,4 @@ public class SignLog {
             JOptionPane.showMessageDialog(null, e.getMessage());}
         }
 
-}
+    }

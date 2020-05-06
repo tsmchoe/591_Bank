@@ -31,7 +31,7 @@ public class DBConnector{
         }catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
         } finally {
-            System.out.println("done");
+            System.out.println("connection found");
         }
         return myConnection;
     }
@@ -67,7 +67,7 @@ public class DBConnector{
             e.printStackTrace();
         }
         finally{
-            System.out.println("done");
+            System.out.println("getAllUserLoans query complete");
         }
 
         return ret;
@@ -95,7 +95,7 @@ public class DBConnector{
             e.printStackTrace();
         }
         finally{
-            System.out.println("done");
+            System.out.println("insertNewLoan query complete");
         }
     } 
 
@@ -141,7 +141,7 @@ public class DBConnector{
             e.printStackTrace();
         }
         finally{
-            System.out.println("done");
+            System.out.println("getUserTransaction_date query complete");
         }
         System.out.println(ret);
         return ret;
@@ -189,7 +189,7 @@ public class DBConnector{
             e.printStackTrace();
         }
         finally{
-            System.out.println("done");
+            System.out.println("getTransactionByDate query complete");
         }
         System.out.println(ret);
         return ret;
@@ -259,7 +259,7 @@ public class DBConnector{
             e.printStackTrace();
         }
         finally{
-            System.out.println("done");
+            System.out.println("getTransactionbyUser complete");
         }
         System.out.println(ret);
         return ret;
@@ -372,7 +372,7 @@ public class DBConnector{
         catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
         } finally {
-            System.out.println("done");
+            System.out.println("readDatabase query complete");
         }
 
     }
@@ -590,13 +590,16 @@ public class DBConnector{
 
     public void insertNewCustomer(Customer cust){
         try{
-            String query = "INSERT INTO Users(userID,username,password,userType)" + 
-            "VALUES(?,?,?,?)";
+            String query = "INSERT INTO Users(userID,username,password,userType,firstname,lastname,balance)" + 
+            "VALUES(?,?,?,?,?,?,?)";
             this.preparedStatement = this.connect.prepareStatement(query);
             this.preparedStatement.setInt(1,cust.getUserID());
             this.preparedStatement.setString(2,cust.getUsername());
             this.preparedStatement.setString(3, cust.getPassword());
             this.preparedStatement.setString(4, "customer");
+            this.preparedStatement.setString(5, cust.getFirstName());
+            this.preparedStatement.setString(6, cust.getLastName());
+            this.preparedStatement.setDouble(7, cust.getBalance());
             this.preparedStatement.execute();
         }catch(SQLException e){
             e.printStackTrace();
@@ -937,7 +940,7 @@ public class DBConnector{
         //dbc.insertTransaction(transferTest);
         //dbc.getCheckingsAccountByAccountID(1);
         //dbc.getBoughtStockByStockIDAccountID(58, 54);
-        dbc.updateBalanceSecurity(54, 700);
+        //dbc.updateBalanceSecurity(54, 700);
 
 
         
