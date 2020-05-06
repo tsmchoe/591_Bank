@@ -108,11 +108,11 @@ public class LoginView extends JDialog implements ActionListener{
         //ArrayList<SecurityAccount> custSec = cust.getAllSecurities(); 
         if (x == true) {
             System.out.println("Logged in");
-            if (choice.equals("Savings")){ //& custSave.size() > 0){
+            if (choice.equals("Savings")){// && custSave.size() > 0){
                 CustSaveAccount page=new CustSaveAccount(cust);
                 page.setVisible(true);
             }
-            else if(choice.equals("Checking")){ //&& custCheck.size() > 0){
+            else if(choice.equals("Checking")){//custCheck.size() > 0){
                 CustCheckAccount page=new CustCheckAccount(cust);
                 page.setVisible(true);
             }

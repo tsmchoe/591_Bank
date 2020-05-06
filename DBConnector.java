@@ -658,7 +658,7 @@ public class DBConnector{
                 double purchasedPrice = this.resultSet.getDouble("purchasedPrice");
                 String name = this.resultSet.getString("name");
                 int accountID = this.resultSet.getInt("accountID");
-                int shares = this.resultSet.getInt("shares")
+                int shares = this.resultSet.getInt("shares");
 
                 BoughtStock stockDB = new BoughtStock(stockID, purchasedPrice,shares,name,accountID);
                 ret.add(stockDB);
