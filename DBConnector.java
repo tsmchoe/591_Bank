@@ -898,6 +898,53 @@ public class DBConnector{
         }
     }
 
+    public double getBankBalance(){
+        double ret = 0;
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM BankProfit");
+
+            this.resultSet.next();
+            double bank_balance = this.resultSet.getDouble("bank_balance");
+            ret = bank_balance;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("getBankBalance query complete");
+        }
+        return ret;
+    }
+
+    public void increaseBankBalance(double amt){
+        double curBalance = this.getBankBalance();
+        double newBalance = curBalance+amt;
+        try{
+            String query = "UPDATE BankProfit SET bank_balance=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1, newBalance);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("increaseBankBalance query complete");
+        }
+    }
+
+    public void decreaseBankBalance(double amt){
+        double curBalance = this.getBankBalance();
+        double newBalance = curBalance-amt;
+        try{
+            String query = "UPDATE BankProfit SET bank_balance=?";
+            this.preparedStatement = this.connect.prepareStatement(query);
+            this.preparedStatement.setDouble(1, newBalance);
+            this.preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("decreaseBankBalance query complete");
+        }
+    }
+
 
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
@@ -938,6 +985,8 @@ public class DBConnector{
         //dbc.getCheckingsAccountByAccountID(1);
         //dbc.getBoughtStockByStockIDAccountID(58, 54);
         //dbc.updateBalanceSecurity(54, 700);
+        //dbc.increaseBankBalance(1250);
+        dbc.decreaseBankBalance(1250);
 
 
         
