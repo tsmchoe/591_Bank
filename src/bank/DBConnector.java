@@ -152,6 +152,7 @@ public class DBConnector{
     
     public boolean checkUserByUsername(String user_name){
         boolean ret = false;
+        System.err.print("user_name: " + user_name);
 
         int userID = -1;
 
@@ -175,7 +176,7 @@ public class DBConnector{
         return ret;
     }
 
-    private void readDataBase(){
+    public void readDataBase(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -207,7 +208,7 @@ public class DBConnector{
         }
     }
 
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         //dbc.readDataBase();
         //dbc.getAllUserLoans(12);
@@ -216,7 +217,7 @@ public class DBConnector{
         //dbc.getAllUserLoans(12);
         //dbc.getUserTransactions_Date(12,"2020-05-04");
         dbc.checkUserByUsername("firstUser");
-    }*/
+    }
 
 
 }

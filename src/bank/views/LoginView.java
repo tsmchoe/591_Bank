@@ -11,7 +11,7 @@ public class LoginView extends JDialog implements ActionListener{
     private JPanel Login = new JPanel(new GridBagLayout());
     private JLabel script = new JLabel("Sign in Valued Customer!");
     private JButton Submit = new JButton("Submit");
-    protected JTextField text1, text2;
+    protected JTextField text1, text2, text3;
 
     public LoginView() {
         super();
@@ -31,16 +31,28 @@ public class LoginView extends JDialog implements ActionListener{
         cs.gridwidth = 2;
         Login.add(text1, cs);
 
+        JLabel label3 = new JLabel("User ID: ");
+        cs.gridx = 0;
+        cs.gridy = 1;
+        cs.gridwidth = 1;
+        Login.add(label3, cs);
+
+        text3 = new JTextField(15);
+        cs.gridx = 1;
+        cs.gridy = 1;
+        cs.gridwidth = 2;
+        Login.add(text3, cs);
+
 
         JLabel label2 = new JLabel("Password: ");
         cs.gridx = 0;
-        cs.gridy = 1;
+        cs.gridy = 2;
         cs.gridwidth = 1;
         Login.add(label2, cs);
 
         text2 = new JTextField(15);
         cs.gridx = 1;
-        cs.gridy = 1;
+        cs.gridy = 2;
         cs.gridwidth = 2;
         Login.add(text2, cs);
 
@@ -55,28 +67,36 @@ public class LoginView extends JDialog implements ActionListener{
         setTitle("Login");
 
     }
-
-    /*public JButton getLogButton(){
-        return Submit;
-    }
     public String getUsername(){
         return text1.getText();
     }
     public String getPassword(){
         return text2.getText();
-    }*/
+    }
+    public String getUserId(){
+        return text3.getText();
+    }
 
 
     public void actionPerformed(ActionEvent ae){
         String value1=text1.getText();
         String value2=text2.getText();
-        DBConnector dbc = new DBConnector();
-		Boolean x =	dbc.checkUserByUsername(value1);
-        if (x == true) {
-            System.out.println("Logged in");
+        //DBConnector dbc = new DBConnector();
+		//dbc.readDataBase();
+        if (value1.equals("hi")) {
             CustSaveAccount page=new CustSaveAccount(Login);
-            Login.setVisible(false);
+            /*System.out.println("Logged in");
+            Customer c = new Customer("userID", "fistName", "lastName", value1, value2, 0.0);
+            if (c.getAllCheckings() == null){
+                CustSaveAccount page=new CustSaveAccount(Login);
+                page.setVisible(true);
+            }
+            else if(c.getAllSavings() == null){
+                CustCheckAccount page=new CustCheckAccount(Login);
+                page.setVisible(true);
+            }*/
             page.setVisible(true);
+            Login.setVisible(false);
         }
         else{
             System.out.println("Failed");

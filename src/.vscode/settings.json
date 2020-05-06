@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "CS591-bank",
+            "dialect": "MySQL",
+            "name": "jdbc:mysql://cs591-bank.c6rbpssqfeyd.us-east-2.rds.amazonaws.com:",
+            "password": "adminbank",
+            "port": 3305,
+            "server": "cs591-bank.c6rbpssqfeyd.us-east-2.rds.amazonaws.com",
+            "username": "admin"
+        }
+    ]
+}
