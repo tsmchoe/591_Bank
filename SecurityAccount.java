@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 
-public class SecurityAccount extends Account implements Observer{
+public class SecurityAccount extends Account{// implements Observer{
     private double unrealized_profit;
     private double cash;
     DBConnector db;
@@ -69,14 +69,14 @@ public class SecurityAccount extends Account implements Observer{
         }
     }
 
-    @Override
+    //@Override
     //After a stock in the market price change, user's boughtStock receives update
 	public void receive_updatePrice(int stockId, double newPrice) {
         BoughtStock boughtStock = db.getBoughtStockByStockIDAccountID(stockId, accountID);
         boughtStock.updatePrice(newPrice);
 	}
 
-    @Override
+    //@Override
     //After a stock in the market share change, user's boughtStock receives update
     public void receiveUpdateShare(int stockid, int newShare) {
         BoughtStock boughtStock = db.getBoughtStockByStockIDAccountID(stockid, accountID);

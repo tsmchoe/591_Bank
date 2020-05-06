@@ -119,17 +119,17 @@ public class DBConnector{
                 
                 System.err.println(transactionID);
                 Transaction userTransactionByDate;
-                if(transactionType.equals("deposit")){
+                if(transactionType.equals("DEPOSIT")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("withdrawl")){
+                else if(transactionType.equals("WITHDRAW")){
                     userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("transfer")){
+                else if(transactionType.equals("TRANSFER")){
                     userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString(), transferAccountID);
                     ret.add(userTransactionByDate);
@@ -167,17 +167,17 @@ public class DBConnector{
                 
                 System.err.println(transactionID);
                 Transaction userTransactionByDate;
-                if(transactionType.equals("deposit")){
+                if(transactionType.equals("DEPOSIT")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("withdrawl")){
+                else if(transactionType.equals("WITHDRAW")){
                     userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("transfer")){
+                else if(transactionType.equals("TRANSFER")){
                     userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString(), transferAccountID);
                     ret.add(userTransactionByDate);
@@ -237,17 +237,17 @@ public class DBConnector{
                 int transferAccountID = this.resultSet.getInt("transferAccountID");
                 
                 Transaction userTransactionByDate;
-                if(transactionType.equals("deposit")){
+                if(transactionType.equals("DEPOSIT")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("withdrawl")){
+                else if(transactionType.equals("WITHDRAW")){
                     userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("transfer")){
+                else if(transactionType.equals("TRANSFER")){
                     userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString(), transferAccountID);
                     ret.add(userTransactionByDate);
@@ -405,17 +405,17 @@ public class DBConnector{
                 String transactionType = this.resultSet.getString("transactionType");
                 int transferAccountID = this.resultSet.getInt("transferAccountID");
                 Transaction userTransactionByDate;
-                if(transactionType.equals("deposit")){
+                if(transactionType.equals("DEPOSIT")){
                     userTransactionByDate = new Deposit(transactionID, userID, accountID, amount, currency,
                     transaction_date);
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("withdrawl")){
+                else if(transactionType.equals("WITHDRAW")){
                     userTransactionByDate = new Withdraw(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString());
                     ret.add(userTransactionByDate);
                 }
-                else if(transactionType.equals("transfer")){
+                else if(transactionType.equals("TRANSFER")){
                     userTransactionByDate = new Transfer(transactionID, userID, accountID, amount, currency,
                     transaction_date.toString(), transferAccountID);
                     ret.add(userTransactionByDate);
@@ -751,6 +751,7 @@ public class DBConnector{
             this.preparedStatement.setInt(1,t.getTransactionID());
             this.preparedStatement.setInt(2,t.getUserid());
             this.preparedStatement.setInt(3,t.getAccountId());
+            System.out.println(t.getDate());
             Date trans_date = Date.valueOf(t.getDate());
             this.preparedStatement.setDate(4,trans_date);
             this.preparedStatement.setDouble(5, t.getAmount());
@@ -986,7 +987,9 @@ public class DBConnector{
         //dbc.getBoughtStockByStockIDAccountID(58, 54);
         //dbc.updateBalanceSecurity(54, 700);
         //dbc.increaseBankBalance(1250);
-        dbc.decreaseBankBalance(1250);
+        //dbc.decreaseBankBalance(1250);
+        Transaction testTransaction = new Deposit(1, 72, 72, 200, "USD");
+        dbc.insertTransaction(testTransaction, "deposit");
 
 
         

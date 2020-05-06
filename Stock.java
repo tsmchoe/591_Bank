@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 //Represents stock in the stock market
-public class Stock implements Subject {
+public class Stock{// implements Subject {
     private int stockid;
     private String name;
     private double currentPrice;
@@ -65,7 +65,7 @@ public class Stock implements Subject {
     }
 
     //update the subscribers of price change
-    @Override
+    //@Override
     public void updatePriceChange(double newPrice) {
         ArrayList<SecurityAccount> subscribers = getAllSubscribers();
         for(SecurityAccount account: subscribers) {
@@ -74,7 +74,7 @@ public class Stock implements Subject {
     }
 
     //update the subscribers of share change
-    @Override
+    //@Override
     public void updateShareChange(int newShare) {
         ArrayList<SecurityAccount> subscribers = getAllSubscribers();
         for(SecurityAccount account: subscribers) {
