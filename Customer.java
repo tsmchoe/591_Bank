@@ -126,5 +126,13 @@ public class Customer extends User {
 		balance -= amt;
 	}
 
+	public String getFirstName(){
+		return this.firstName;
+	}
+
+	public String getLastName(){
+		return this.lastName;
+	}
+
 
 }
