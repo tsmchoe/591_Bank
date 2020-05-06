@@ -461,6 +461,30 @@ public class DBConnector{
         return ret;
     }
 
+    public ArrayList<Stock> getAllStocks(){
+        ArrayList<Stock> ret = new ArrayList<Stock>();
+        try{
+            this.statement = this.connect.createStatement();
+            this.resultSet = this.statement.executeQuery("SELECT * FROM Stock_Market");
+
+            while(this.resultSet.next()){
+                int stockID = this.resultSet.getInt("stockID");
+                String name = this.resultSet.getString("name");
+                double current_price = this.resultSet.getDouble("current_price");
+                int available_shares = this.resultSet.getInt("available_shares");
+
+                Stock dbStock = new Stock(stockID, name, current_price, available_shares);
+                ret.add(dbStock);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            System.out.println("Found all current stocks in the stock market");
+        }
+        System.out.println(ret);
+        return ret;
+    }
+
     public static void main(String[] args){
         DBConnector dbc = new DBConnector();
         dbc.readDataBase();
@@ -478,6 +502,7 @@ public class DBConnector{
         //dbc.insertNewAccount(newSavingsTest);
         //SecurityAccount newSecurityTest = new SecurityAccount(54, 5000, 12, new Currency("USD"));
         //dbc.insertNewAccount(newSecurityTest);
+        //dbc.getAllStocks();
         
 
     }
