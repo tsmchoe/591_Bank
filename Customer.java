@@ -128,7 +128,7 @@ public class Customer extends User {
 	}
 
 	//Check all the loans that the user have, it is payment day, user pays loan interest
-	public void pay_loan_increase() throws ParseException {
+	public void pay_loan_interest() throws ParseException {
 		for(Loan l: getAllLoans()) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String strloanDate = l.getLoanDate();
