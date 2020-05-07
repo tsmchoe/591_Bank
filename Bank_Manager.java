@@ -15,9 +15,21 @@ public class Bank_Manager extends User {
 		return transactions;
 	}
 
+	//Gets all the pending request from the bank
+	public ArrayList<Request> SeeAllPendingRequest() {
+		return bank.getAllRequest();
+	}
+
+	//Approves a request
+	public void ApproveRequest(Request r) {
+		r.approveRequest();
+	}
+
+
+	//Sees the balance in bank
 	@Override
 	public double getBalance() {
-		return db.getBankBalance();
+		return bank.getBalance();
 	}
 
 }

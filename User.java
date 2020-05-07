@@ -7,6 +7,7 @@ public abstract class User {
 	protected String username;
 	protected String password;
 	protected double balance;
+	protected static Bank bank;
 
 	public User(int userID, String fistName, String lastName, String username, String password, double balance) {
 		setUserID(userID);
@@ -15,6 +16,9 @@ public abstract class User {
 		setUsername(username);
 		setPassword(password);
 		setBalance(balance);
+		if(bank == null) {
+			bank = new Bank();
+		}
 	}
 
 	public abstract double getBalance();

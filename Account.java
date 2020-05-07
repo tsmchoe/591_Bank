@@ -5,6 +5,7 @@ public abstract class Account {
     protected int userID;
     protected Currency currency;
 
+
     public Account(int accountID, double balance, int userID, Currency currency) {
         this.accountID = accountID;
         this.balance = balance;
